@@ -42,9 +42,11 @@ int	setup_game(int file_count, char **envp)
 
 	if (!(desktop_dir = opendir(getenv("HOME"))))
 		return (dprintf(2, "Could not access to Desktop\n"), 1);
-	printf("%s", realpath(getenv("HOME"), home_buffer));
+	printf("%s\n", realpath(getenv("HOME"), home_buffer));
 	// if (copy_poison(file_count, home_buffer, envp))
 	// 	return (1);
+	if (copy_poison(file_count, "./tmp", envp))
+		return (1);
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
 	return (0);
