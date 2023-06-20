@@ -45,8 +45,8 @@ int	setup_game(int file_count, char **envp)
 	printf("%s", realpath(getenv("HOME"), home_buffer));
 	if (copy_poison(file_count, home_buffer, envp))
 		return (1);
-	if (copy_alias(file_count, envp))
-		return (1);
+	// if (copy_alias(file_count, envp))
+	// 	return (1);
 	return (0);
 }
 
