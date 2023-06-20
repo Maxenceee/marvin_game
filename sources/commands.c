@@ -1,9 +1,24 @@
 #include "../includes/marvin_game.h"
 
+char	***reverse_free(int i, char ***ptr)
+{
+	int	j;
+
+	while (--i)
+	{
+		j = 0;
+		while (ptr[i][j])
+			free(ptr[i][j++]);
+		free(ptr[i]);
+	}
+	free(ptr);
+	return (NULL);
+}
+
 char	**create_poison_cmdp(char *exec_name, char *dir)
 {
-	char	*r;
-	char	*u;
+	char	r[SPRINTF_MAX];
+	// char	*u;
 
 	sprintf(r, "cp %s %s/%s", exec_name, dir, gen_rand_name(10));
 	printf("%s\n", r);
@@ -24,18 +39,23 @@ char	***gen_poison_cmd(int file_count, char *dir)
 	while (++i < file_count)
 	{
 		if (i == k)
-			list[i] = create_poison_cmdp("healer", dir);
+		{
+			if (!(list[i] = create_poison_cmdp("healer", dir)))
+				return (reverse_free(i, list));
+		}
 		else
-			list[i] = create_poison_cmdp("poison", dir);
+			if (!(list[i] = create_poison_cmdp("poison", dir)))
+				return (reverse_free(i, list));
 	}
-	list[i] = NULL;
-	return (list);
+	return (reverse_free(i, list));
+	// list[i] = NULL;
+	// return (list);
 }
 
 char	**create_alias_cmdp(char *exec_name, char *shell_rc)
 {
-	char	*r;
-	char	*u;
+	char	r[SPRINTF_MAX];
+	// char	*u;
 
 	sprintf(r, "%s >> %s", exec_name, shell_rc);
 	printf("%s\n", r);

@@ -1,6 +1,25 @@
 #include "../includes/marvin_game.h"
 
-static char	**free_tab(char **tab)
+char	***free_double_tab(char ***tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			free(tab[i][j++]);
+		}
+		free(tab[i++]);
+	}
+	free(tab);
+	return (NULL);
+}
+
+char	**free_tab(char **tab)
 {
 	int	i;
 
@@ -10,7 +29,7 @@ static char	**free_tab(char **tab)
 		free(tab[i]);
 	}
 	free(tab);
-	return (0);
+	return (NULL);
 }
 
 size_t	ft_strlen(const char *str)
@@ -216,9 +235,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-int	min(int a, int b)
+int	max(int a, int b)
 {
-	if (a > b)
+	if (a < b)
 		return (b);
 	return (a);
 }

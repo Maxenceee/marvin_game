@@ -13,7 +13,7 @@ HEADERS_DIR		=	includes/
 HEADERS			=	$(addprefix $(HEADERS_DIR), $(HEADER_SRCS))
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-g3#-Wall -Wextra -Werror
+CFLAGS			=	-g3 # -Wall -Wextra -Werror
 LIBS			=	-lpthread 
 NAME			=	marvin_game
 

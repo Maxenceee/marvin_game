@@ -15,7 +15,8 @@
 # include <signal.h>
 # include <fcntl.h>
 
-# define PATH_MAX 4096 
+# define PATH_MAX 4096
+# define SPRINTF_MAX 4096
 
 # define PIPE_ERROR "Pipe error"
 # define EXEVE_ERROR "Could not execute execve"
@@ -32,13 +33,15 @@ char	***gend_alias_cmd(void);
 
 char	*gen_rand_name(int lenght);
 
+char	***free_double_tab(char ***tab);
+char	**free_tab(char **tab);
 void	process_child(char **command, char **envp);
 char	**ft_split(const char *str, char charset);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strjoin_arr(int size, char **strs, char *sep);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
-int		min(int a, int b);
+int		max(int a, int b);
 
 
 #endif /* MARVIN_GAME_H */

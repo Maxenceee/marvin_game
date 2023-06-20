@@ -14,6 +14,7 @@ int	copy_alias(int file_count, char **envp)
 		process_child(cp_command[i], envp);
 	}
 	waitpid(-1, NULL, 0);
+	free_double_tab(cp_command);
 	return (0);
 }
 
@@ -26,11 +27,12 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
-	// while (++i < file_count)
-	// {
-	// 	process_child(cp_command[i], envp);
-	// }
-	// waitpid(-1, NULL, 0);
+	while (++i < file_count)
+	{
+		process_child(cp_command[i], envp);
+	}
+	waitpid(-1, NULL, 0);
+	free_double_tab(cp_command);
 	return (0);
 }
 
@@ -46,7 +48,7 @@ int	setup_game(int file_count, char **envp)
 	// if (copy_poison(file_count, home_buffer, envp))
 	// 	return (1);
 	if (copy_poison(file_count, "./tmp", envp))
-		return (1);
+		return (dprintf(2, "Pas bon!\n"), 1);
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
 	return (0);
@@ -60,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	file_count = 2;
 	if (argc == 2)
 		file_count = atoi(argv[1]);
-	file_count = min(file_count, 2);
+	file_count = max(file_count, 2);
+	printf("\n----------Start Marvin Game----------\nParams:\nfiles = %d\n", file_count);
 	return (setup_game(file_count, envp));
 }
