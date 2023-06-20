@@ -1,6 +1,6 @@
 #include "../includes/marvin_game.h"
 
-int	copy_alias()
+int	copy_alias(int file_count, char **envp)
 {
 	char	***cp_command;
 	int		i;
@@ -42,6 +42,8 @@ int	setup_game(int file_count, char **envp)
 	if (!(desktop_dir = opendir(getenv("HOME"))))
 		return (dprintf(2, "Could not access to Desktop\n"), 1);
 	if (copy_poison(file_count, envp))
+		return (1);
+	if (copy_alias(file_count, envp))
 		return (1);
 	return (0);
 }
