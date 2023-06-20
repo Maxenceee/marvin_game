@@ -54,7 +54,7 @@ char	***gen_poison_cmd(int file_count, char *dir)
 			
 		// }
 		list[i] = create_poison_cmdp("poison", dir);
-		if (i == 3)
+		if (i == 4)
 			free(list[i]), list[i] = NULL;
 		printf("%p\n", list[i]);
 		if (!list[i])
