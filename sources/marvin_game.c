@@ -41,9 +41,8 @@ int	setup_game(t_data *data, char **envp)
 	printf("Start copy...\n");
 	if (copy_poison(data->file_count, data->active_dir, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
-	// if (copy_alias(file_count, envp))
-	// 	return (1);
-	// free(active_dir);
+	if (copy_alias(data->file_count, envp))
+		return (1);
 	return (0);
 }
 
