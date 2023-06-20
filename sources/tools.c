@@ -10,9 +10,7 @@ char	***free_double_tab(char ***tab)
 	{
 		j = 0;
 		while (tab[i][j])
-		{
 			free(tab[i][j++]);
-		}
 		free(tab[i++]);
 	}
 	free(tab);

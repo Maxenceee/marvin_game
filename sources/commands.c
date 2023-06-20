@@ -6,11 +6,11 @@ char	***reverse_free(int i, char ***ptr)
 
 	while (--i >= 0)
 	{
-		printf("%d\n", i);
 		j = 0;
 		while (ptr[i][j])
 			free(ptr[i][j++]);
 		free(ptr[i]);
+		printf("%d\n", i);
 	}
 	free(ptr);
 	return (NULL);
