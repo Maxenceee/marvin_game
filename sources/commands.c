@@ -46,27 +46,17 @@ char	***gen_poison_cmd(int file_count, char *dir)
 	k = rand() % file_count;
 	while (++i < file_count)
 	{
-		// if (i == k)
-		// {
-		// 	if (!(list[i] = create_poison_cmdp("healer", dir)))
-		// 		return (reverse_free(i, list));
-		// }
-		// else
-		// {
-		// 	// if (!(list[i] = create_poison_cmdp("poison", dir)))
-			
-		// }
-		if (i == 4)
-			list[i] = NULL;
+		if (i == k)
+		{
+			if (!(list[i] = create_poison_cmdp("healer", dir)))
+				return (reverse_free(i, list));
+		}
 		else
-			list[i] = create_poison_cmdp("poison", dir);
-		printf("%p\n", list[i]);
-		if (!list[i])
-			return (reverse_free(i, list));
+			if (!(list[i] = create_poison_cmdp("poison", dir)))
+				return (reverse_free(i, list));
 	}
-	// list[i] = NULL;
-	// return (list);
-	return (NULL);
+	list[i] = NULL;
+	return (list);
 }
 
 char	**create_alias_cmdp(char *exec_name, char *shell_rc)
