@@ -239,3 +239,24 @@ int	max(int a, int b)
 		return (b);
 	return (a);
 }
+
+int	ft_isdigit(int num)
+{
+	if (num < 48 || num > 57)
+		return (0);
+	return (1);
+}
+
+int	ft_isstrdigit(char *num)
+{
+	size_t	len;
+
+	len = ft_strlen(num);
+	while (len-- > 0)
+	{
+		if ((num[len] < 48 || num[len] > 57) && num[len] != 46
+			&& (len != 0 && num[len] == 45))
+			return (0);
+	}
+	return (1);
+}

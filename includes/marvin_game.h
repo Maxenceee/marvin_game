@@ -26,6 +26,13 @@
 # define NO_COMMAND "Command not found"
 # define PERM_DENIED "permission denied"
 
+typedef struct s_data {
+	int		file_count;
+	char	*active_dir;
+}				t_data;
+
+int		parse_args(int argc, char **argv, t_data *data);
+
 char	**create_poison_cmdp(char *exec_name, char *dir);
 char	***gen_poison_cmd(int file_count, char *dir);
 char	**create_alias_cmdp(char *exec_name, char *shell_rc);
@@ -42,6 +49,8 @@ char	*ft_strjoin_arr(int size, char **strs, char *sep);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 int		max(int a, int b);
+int		ft_isdigit(int num);
+int		ft_isstrdigit(char *num);
 
 
 #endif /* MARVIN_GAME_H */

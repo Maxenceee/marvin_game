@@ -36,44 +36,29 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	return (0);
 }
 
-int	setup_game(int file_count, char **envp)
+int	setup_game(t_data *data, char **envp)
 {
-	DIR		*desktop_dir;
-	char	home_buffer[PATH_MAX];
-	char	*desktop_path;
-	// char	*cp_command[] = {"cp", "poison", "./tmp", NULL};
-
-	if (!(desktop_dir = opendir(getenv("HOME"))))
-		return (dprintf(2, "Could not access to User\n"), 1);
-
-	desktop_path = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
-	if (!desktop_path)
-		return (dprintf(2, "Cannot get Desktop paht\n"), 1);
-	printf("%s\n", desktop_path);
-	#if __APPLE__
-		printf("Copy in dir%s\n", "./tmp");
-		if (copy_poison(file_count, "./tmp", envp))
-			return (dprintf(2, "Something went wrong :(\n"), 1);
-	#else
-		printf("Copy in dir%s\n", desktop_path);
-		if (copy_poison(file_count, desktop_path, envp))
-			return (dprintf(2, "Something went wrong :(\n"), 1);
-	#endif
+	printf("Start copy...\n");
+	if (copy_poison(data->file_count, data->active_dir, envp))
+		return (dprintf(2, "Something went wrong :(\n"), 1);
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
-	free(desktop_path);
+	// free(active_dir);
 	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	file_count;
+	t_data	data;
+	int		t;
 
 	srand(time(NULL));
-	file_count = 2;
-	if (argc == 2)
-		file_count = atoi(argv[1]);
-	file_count = max(file_count, 2);
-	printf("----------Start Marvin Game----------\nParams:\nfiles = %d\n--------------------\n", file_count);
-	return (setup_game(file_count, envp));
+	bzero(&data, sizeof(t_data));
+	if (parse_args(argc, argv, &data))
+		return (1);
+	printf("----------Start Marvin Game----------\n");
+	printf("Params:\nFile count = %d\nActive dir = %s\n--------------------\n", data.file_count, data.active_dir);
+	t = setup_game(&data, envp);
+	free(data.active_dir);
+	return (t);
 }

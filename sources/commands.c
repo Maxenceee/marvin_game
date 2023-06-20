@@ -24,7 +24,7 @@ char	**create_poison_cmdp(char *exec_name, char *dir)
 	char	r[SPRINTF_MAX];
 	char	*u;
 
-	u = gen_rand_name(10);
+	u = gen_rand_name(15);
 	if (!u)
 		return (NULL);
 	sprintf(r, "cp %s %s/%s", exec_name, dir, u);
