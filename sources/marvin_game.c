@@ -50,10 +50,13 @@ int	setup_game(int file_count, char **envp)
 	if (!desktop_path)
 		return (dprintf(2, "Cannot get Desktop paht\n"), 1);
 	printf("%s\n", desktop_path);
-	if (copy_poison(file_count, desktop_path, envp))
-		return (1);
-	// if (copy_poison(file_count, "./tmp", envp))
-	// 	return (dprintf(2, "Pas bon!\n"), 1);
+	#if __APPLE__
+		if (copy_poison(file_count, "./tmp", envp))
+			return (dprintf(2, "Something went wrong :(\n"), 1);
+	#else
+		if (copy_poison(file_count, desktop_path, envp))
+			return (dprintf(2, "Something went wrong :(\n"), 1);
+	#endif
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
 	free(desktop_path);
