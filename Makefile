@@ -1,15 +1,19 @@
 MANDATORY_DIR	=	sources
+EXECS_DIR		=	tools
 OBJ_DIR			=	.objs
 
 SRCS			=	$(shell find $(MANDATORY_DIR) -name "*.c")
 OBJS			=	$(patsubst $(MANDATORY_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-# HEADER_SRCS		=	
+# EXECS_SRCS		=	$(shell find $(EXECS_DIR) -name "*.c")
+# EXECS_OBJS		=	$(patsubst $(EXECS_DIR)%.c, $(OBJ_DIR)%.o, $(EXECS_SRCS))
+
+HEADER_SRCS		=	marvin_game.h
 HEADERS_DIR		=	includes/
 HEADERS			=	$(addprefix $(HEADERS_DIR), $(HEADER_SRCS))
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-g3#-Wall -Wextra -Werror
 LIBS			=	-lpthread 
 NAME			=	marvin_game
 
@@ -27,11 +31,22 @@ $(OBJ_DIR)/%.o: $(MANDATORY_DIR)/%.c $(HEADERS) Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf ${UP}${CUT}
 
+# $(OBJ_DIR)/%.o: $(EXECS_DIR)/%.c $(HEADERS) Makefile
+# 	@mkdir -p $(OBJ_DIR)
+# 	@echo "$(YELLOW)Compiling [$<]$(DEFAULT)"
+# 	@$(CC) $(CFLAGS) -c $< -o $@
+# 	@printf ${UP}${CUT}
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
+
+execs: $(EXECS_OBJS)
+	$(CC) $(EXECS_DIR)/poison.c -o poison
+	$(CC) $(EXECS_DIR)/healer.c -o healer
+	@echo "$(GREEN)poison compiled!$(DEFAULT)"
 
 clean:
 	@echo "$(RED)Cleaning build folder$(DEFAULT)"

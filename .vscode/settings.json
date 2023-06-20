@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"*.ejs": "html",
+		"marvin_game.h": "c"
+	}
+}
