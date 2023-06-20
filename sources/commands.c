@@ -6,11 +6,14 @@ char	***reverse_free(int i, char ***ptr)
 
 	while (--i >= 0)
 	{
+		printf("i = %d\n", i);
 		j = 0;
 		while (ptr[i][j])
+		{
+			printf("\tj = %d\n", j);
 			free(ptr[i][j++]);
+		}
 		free(ptr[i]);
-		printf("%d\n", i);
 	}
 	free(ptr);
 	return (NULL);
@@ -53,9 +56,10 @@ char	***gen_poison_cmd(int file_count, char *dir)
 		// 	// if (!(list[i] = create_poison_cmdp("poison", dir)))
 			
 		// }
-		list[i] = create_poison_cmdp("poison", dir);
 		if (i == 4)
-			free(list[i]), list[i] = NULL;
+			list[i] = NULL;
+		else
+			list[i] = create_poison_cmdp("poison", dir);
 		printf("%p\n", list[i]);
 		if (!list[i])
 			return (reverse_free(i, list));
