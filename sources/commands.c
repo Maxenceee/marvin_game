@@ -1,16 +1,16 @@
 #include "../includes/marvin_game.h"
 
-char	**create_poison_cmdp(char *exec_name)
+char	**create_poison_cmdp(char *exec_name, char *dir)
 {
 	char	*r;
 	char	*u;
 
-	sprintf(r, "cp %s ./tmp/%s", exec_name, gen_rand_name(10));
+	sprintf(r, "cp %s %s/%s", exec_name, dir, gen_rand_name(10));
 	printf("%s\n", r);
 	return (ft_split(r, ' '));
 }
 
-char	***gen_poison_cmd(int file_count)
+char	***gen_poison_cmd(int file_count, char *dir)
 {
 	char	***list;
 	int		i;
@@ -24,9 +24,9 @@ char	***gen_poison_cmd(int file_count)
 	while (++i < file_count)
 	{
 		if (i == k)
-			list[i] = create_poison_cmdp("healer");
+			list[i] = create_poison_cmdp("healer", dir);
 		else
-			list[i] = create_poison_cmdp("poison");
+			list[i] = create_poison_cmdp("poison", dir);
 	}
 	list[i] = NULL;
 	return (list);

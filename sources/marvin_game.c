@@ -17,13 +17,13 @@ int	copy_alias(int file_count, char **envp)
 	return (0);
 }
 
-int	copy_poison(int file_count, char **envp)
+int	copy_poison(int file_count, char *dir, char **envp)
 {
 	char	***cp_command;
 	int		i;
 
 	i = -1;
-	cp_command = gen_poison_cmd(file_count);
+	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
 	while (++i < file_count)
@@ -37,12 +37,14 @@ int	copy_poison(int file_count, char **envp)
 int	setup_game(int file_count, char **envp)
 {
 	DIR		*desktop_dir;
+	char	home_buffer[PATH_MAX];
 	// char	*cp_command[] = {"cp", "poison", "./tmp", NULL};
 
 	if (!(desktop_dir = opendir(getenv("HOME"))))
 		return (dprintf(2, "Could not access to Desktop\n"), 1);
-	// if (copy_poison(file_count, envp))
-	// 	return (1);
+	printf("%s", realpath(getenv("HOME"), home_buffer));
+	if (copy_poison(file_count, envp))
+		return (1);
 	if (copy_alias(file_count, envp))
 		return (1);
 	return (0);
