@@ -2,13 +2,14 @@
 
 int	parse_args(int argc, char **argv, t_data *data)
 {
-	// DIR		*desktop_dir;
+	DIR		*desktop_dir;
 	char	home_buffer[PATH_MAX];
 	char	*active_dir;
 	int		i;
 
 	i = argc;
 	data->file_count = 2;
+	desktop_dir = NULL;
 	while (i-- > 0)
 	{
 		if (0 == ft_strcmp(argv[i], "-c") && argc - 1 >= i + 1
@@ -30,7 +31,8 @@ int	parse_args(int argc, char **argv, t_data *data)
 			data->active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
 		#endif
 	}
-	if (!data->active_dir || !opendir(data->active_dir))
-		return (dprintf(2, "Cannot get active dir\n"), 1);
+	if (!data->active_dir || !(desktop_dir = opendir(data->active_dir)))
+		return (desktop_dir && (free(desktop_dir), 1), dprintf(2, "Cannot get active dir\n"), 1);
+	free(desktop_dir);
 	return (0);
 }
