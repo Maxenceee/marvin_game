@@ -29,8 +29,8 @@ int	parse_args(int argc, char **argv, t_data *data)
 		#else
 			data->active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
 		#endif
-		if (!data->active_dir || !opendir(data->active_dir))
-			return (dprintf(2, "Cannot get active dir\n"), 1);
 	}
+	if (!data->active_dir || !opendir(data->active_dir))
+		return (dprintf(2, "Cannot get active dir\n"), 1);
 	return (0);
 }
