@@ -76,7 +76,7 @@ char	***gend_alias_cmd(void)
 	list = (char ***)calloc(2 + 1, sizeof(char **));
 	if (!list)
 		return (NULL);
-	list[0] = create_alias_cmdp("print 'curl parrot.live'", ".zshrc");
-	list[1] = create_alias_cmdp("print 'curl parrot.live'", ".bashrc");
+	list[0] = create_alias_cmdp("print 'curl parrot.live'", "~/.zshrc");
+	list[1] = create_alias_cmdp("print 'curl parrot.live'", "~/.bashrc");
 	return (list);
 }

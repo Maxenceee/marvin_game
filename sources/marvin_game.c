@@ -45,7 +45,7 @@ int	setup_game(t_data *data, char **envp)
 		if (copy_alias(data->file_count, envp))
 			return (1);
 	#else
-		printf("Avoiding shell rc corruption");
+		printf("Avoiding shell rc corruption :)\n");
 	#endif
 	return (0);
 }
