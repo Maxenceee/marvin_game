@@ -18,10 +18,14 @@ char	***reverse_free(int i, char ***ptr)
 char	**create_poison_cmdp(char *exec_name, char *dir)
 {
 	char	r[SPRINTF_MAX];
-	// char	*u;
+	char	*u;
 
-	sprintf(r, "cp %s %s/%s", exec_name, dir, gen_rand_name(10));
+	u = gen_rand_name(10);
+	if (!u)
+		return (NULL);
+	sprintf(r, "cp %s %s/%s", exec_name, dir, u);
 	printf("%s\n", r);
+	free(u);
 	return (ft_split(r, ' '));
 }
 
