@@ -18,7 +18,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 		}
 		else if (0 == ft_strcmp(argv[i], "-p") && argc - 1 >= i + 1)
 		{
-			data->active_dir = argv[i + 1];
+			data->active_dir = strdup(argv[i + 1]);
 		}
 	}
 	data->file_count = max(data->file_count, 2);

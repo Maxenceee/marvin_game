@@ -59,6 +59,6 @@ int	main(int argc, char **argv, char **envp)
 	printf("----------Start Marvin Game----------\n");
 	printf("Params:\nFile count = %d\nActive dir = %s\n--------------------\n", data.file_count, data.active_dir);
 	t = setup_game(&data, envp);
-	// free(data.active_dir);
+	free(data.active_dir);
 	return (t);
 }
