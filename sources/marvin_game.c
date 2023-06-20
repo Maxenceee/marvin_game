@@ -26,11 +26,11 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
-	while (++i < file_count)
-	{
-		process_child(cp_command[i], envp);
-	}
-	waitpid(-1, NULL, 0);
+	// while (++i < file_count)
+	// {
+	// 	process_child(cp_command[i], envp);
+	// }
+	// waitpid(-1, NULL, 0);
 	return (0);
 }
 
