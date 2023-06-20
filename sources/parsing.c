@@ -32,7 +32,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 		#endif
 	}
 	if (!data->active_dir || !(desktop_dir = opendir(data->active_dir)))
-		return (desktop_dir && (free(desktop_dir), 1), dprintf(2, "Cannot get active dir\n"), 1);
+		return (dprintf(2, "Cannot get active dir\n"), 1);
 	free(desktop_dir);
 	return (0);
 }
