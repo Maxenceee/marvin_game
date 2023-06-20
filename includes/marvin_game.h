@@ -10,6 +10,10 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <time.h>
+# include <sys/wait.h>
+# include <sys/errno.h>
+# include <signal.h>
+# include <fcntl.h>
 
 # define PIPE_ERROR "Pipe error"
 # define EXEVE_ERROR "Could not execute execve"
