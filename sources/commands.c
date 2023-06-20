@@ -4,7 +4,7 @@ char	***reverse_free(int i, char ***ptr)
 {
 	int	j;
 
-	while (--i)
+	while (--i >= 0)
 	{
 		j = 0;
 		while (ptr[i][j])
