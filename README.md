@@ -1,7 +1,7 @@
 # Marvin Game
 
 ## Game
-Create a bunch of files on the Desktop, preventing you from using your Terminal with the parrot, until you find the right file that fixes the mess. 😈
+Create a bunch of files on the Desktop, preventing you from using your Terminal with the parrot, until you find the right file that fixes the mess. For those who does not lock their session 😈
 
 ## Usage
 
