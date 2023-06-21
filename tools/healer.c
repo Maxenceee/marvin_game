@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:54:44 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:55:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	replace_line(char *path, char *pattern)
 
 	fptr = fopen(path, "r");
 	ftemp = fopen(".replace.tmp", "w");
-	// if (fptr == NULL || ftemp == NULL)
-		return (dprintf(2, "Unable to open file %s\n", path), remove(".replace.tmp"), 1);
+	if (fptr == NULL || ftemp == NULL)
+		return (dprintf(2, "Unable to open file %s\n", path), close_and_rm_file(fptr, ftemp), remove(".replace.tmp"), 1);
 	i = 0;
 	while ((fgets(buffer, BUFFER_SIZE, fptr)) != NULL)
 	{
@@ -69,8 +69,9 @@ int	rm_file(char *home_buffer, char **envp)
 		return (1);
 	printf("%s\n", commands);
 	find_cmd = ft_split(commands, ' ');
+	free(commands);
 	if (!find_cmd)
-		return (free(commands), 1);
+		return (1);
 	printf("\nRemoving all .mxga files...\n");
 	pipe(fds);
 	process_child_fout(find_cmd, envp, fds[1]);
@@ -79,7 +80,6 @@ int	rm_file(char *home_buffer, char **envp)
 	i = read(fds[0], rm_buffer, BUFFER_SIZE);
 	close(fds[0]);
 	free_tab(find_cmd);
-	free(commands);
 	if (i < 0)
 		return (dprintf(2, "Could not read from pipe\n"), 1);
 	rm_buffer[i] = '\0';
