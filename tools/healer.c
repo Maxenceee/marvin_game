@@ -140,7 +140,7 @@ int	clear_file(int fd, char *path)
 	{
 		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
-			printf("here\n%s\n", line);
+			printf("here line %d\n", i);
 			replace_line(path, i);
 		}
 		free(line);
