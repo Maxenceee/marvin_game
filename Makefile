@@ -55,7 +55,7 @@ fclean: clean
 
 re:				fclean all execs
 
-gen:			all execs 
+gen:			re 
 				./marvin_game $(GVAR)
 
 .PHONY:			all clean fclean re execs gen
