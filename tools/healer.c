@@ -103,7 +103,8 @@ int	clear_file(int fd)
 
 	while ((line = get_next_line(fd)))
 	{
-		if (strncmp(line, "curl parrot.live", 17) == 0)
+		printf("> %s\n", line);
+		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
 			printf("here\n%s\n", line);
 		}
@@ -133,7 +134,7 @@ int	main(int ac, char **av, char **envp)
 			return (1);
 		printf("opening %s\n", path);
 		fd = open(path, O_RDONLY);
-		printf("on fd %d\n", fd);
+		// printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
 		if (clear_file(fd))
