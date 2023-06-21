@@ -8,8 +8,10 @@
 #include <sys/errno.h>
 
 #include "poison_utils.c"
-#include "healer_utils.c"
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1024
+#endif
 #define PATH_MAX 4096
 #define FORK_ERROR "Fork"
 #define NO_COMMAND "Command not found"
@@ -113,7 +115,6 @@ int	replace_line(char *path, char *pattern)
     }
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
-		printf("line %s\n", buffer);
         if (strncmp(buffer, "curl parrot.live", 16) == 0)
 		{
 			printf("replacing line %s\n", buffer);
@@ -129,26 +130,6 @@ int	replace_line(char *path, char *pattern)
     printf("\nSuccessfully replaced line\n");
     return (0);
 }
-
-int	clear_file(int fd, char *path)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		if (strncmp(line, "curl parrot.live", 16) == 0)
-		{
-			printf("here line %d\n", i);
-			// replace_line(path, i);
-		}
-		free(line);
-		i++;
-	}
-	return (0);
-}
-
 
 int	main(int ac, char **av, char **envp)
 {
