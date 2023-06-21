@@ -20,9 +20,9 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
 	close(fd);
+	printf("opening consignes.txt\n");
 	t_cmd = ft_strjoin("open ", path);
 	free(path);
-	printf("%s\n", t_cmd);
 	if (!t_cmd)
 		return (1);
 	cmd = ft_split(t_cmd, ' ');
