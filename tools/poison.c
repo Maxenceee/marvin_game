@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/wait.h>
+#include <sys/errno.h>
 
 #include "poison_utils.c"
 
