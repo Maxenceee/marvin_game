@@ -116,8 +116,9 @@ int	main(int ac, char **av, char **envp)
 	#else
 		system("gnome-terminal");
 	#endif
-	process_child(cmd, envp);
-	waitpid(-1, NULL, 0);
+	// process_child(cmd, envp);
+	remove(home_buffer);
+	// waitpid(-1, NULL, 0);
 	free(commands);
 	free_tab(cmd);
 	return (0);
