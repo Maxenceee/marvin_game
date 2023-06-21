@@ -5,9 +5,6 @@ OBJ_DIR			=	.objs
 SRCS			=	$(shell find $(MANDATORY_DIR) -name "*.c")
 OBJS			=	$(patsubst $(MANDATORY_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-# EXECS_SRCS		=	$(shell find $(EXECS_DIR) -name "*.c")
-# EXECS_OBJS		=	$(patsubst $(EXECS_DIR)%.c, $(OBJ_DIR)%.o, $(EXECS_SRCS))
-
 HEADER_SRCS		=	marvin_game.h
 HEADERS_DIR		=	includes/
 HEADERS			=	$(addprefix $(HEADERS_DIR), $(HEADER_SRCS))
@@ -16,6 +13,8 @@ RM				=	rm -f
 CFLAGS			=	-g3 # -Wall -Wextra -Werror
 LIBS			=	-lpthread 
 NAME			=	marvin_game
+POISON_NAME		=	poison
+HEALER_NAME		=	healer
 
 GREEN			=	\033[1;32m
 BLUE			=	\033[1;34m
@@ -31,12 +30,6 @@ $(OBJ_DIR)/%.o: $(MANDATORY_DIR)/%.c $(HEADERS) Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf ${UP}${CUT}
 
-# $(OBJ_DIR)/%.o: $(EXECS_DIR)/%.c $(HEADERS) Makefile
-# 	@mkdir -p $(OBJ_DIR)
-# 	@echo "$(YELLOW)Compiling [$<]$(DEFAULT)"
-# 	@$(CC) $(CFLAGS) -c $< -o $@
-# 	@printf ${UP}${CUT}
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -44,8 +37,8 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 
 execs: $(EXECS_OBJS)
-	$(CC) $(EXECS_DIR)/poison.c -o poison
-	$(CC) $(EXECS_DIR)/healer.c -o healer
+	$(CC) $(EXECS_DIR)/poison.c -o $(POISON_NAME)
+	$(CC) $(EXECS_DIR)/healer.c -o $(HEALER_NAME)
 	@echo "$(GREEN)poison compiled!$(DEFAULT)"
 
 clean:
@@ -55,7 +48,14 @@ clean:
 fclean: clean
 	@echo "$(RED)Cleaning $(NAME)$(DEFAULT)"
 	@$(RM) $(NAME)
+	@echo "$(RED)Cleaning $(POISON_NAME)$(DEFAULT)"
+	@$(RM) $(POISON_NAME)
+	@echo "$(RED)Cleaning $(HEALER_NAME)$(DEFAULT)"
+	@$(RM) $(HEALER_NAME)
 
 re:				fclean all execs
 
-.PHONY:			all clean fclean re bonus
+gen:			all execs 
+				./marvin_game $(GVAR)
+
+.PHONY:			all clean fclean re execs gen
