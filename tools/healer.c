@@ -123,7 +123,7 @@ int	replace_line(char *path, char *pattern)
 	int		i;
 
     fPtr  = fopen(path, "r");
-    fTemp = fopen("replace.tmp", "w"); 
+    fTemp = fopen(".replace.tmp", "w"); 
     if (fPtr == NULL || fTemp == NULL)
     {
         printf("Unable to open file %s\n", path);
@@ -144,7 +144,7 @@ int	replace_line(char *path, char *pattern)
     fclose(fPtr);
     fclose(fTemp);
     remove(path);
-    rename("replace.tmp", path);
+    rename(".replace.tmp", path);
     return (0);
 }
 
@@ -165,7 +165,7 @@ int	rm_file(char* home_buffer, char **envp)
 	#endif
 	if (!commands)
 		return (1);
-	printf("find cmd: %s\n", commands);
+	printf("%s\n", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
