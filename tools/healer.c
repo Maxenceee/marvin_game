@@ -168,7 +168,7 @@ int	rm_file(char* home_buffer, char **envp)
 	waitpid(-1, NULL, 0);
 	read(fds[0], rm_buffer, BUFFER_SIZE);
 	rm_file_list = ft_split(rm_buffer, '\n');
-	if (!rm_buffer)
+	if (!rm_file_list)
 		return (1);
 	i = -1;
 	while (rm_file_list[++i])
