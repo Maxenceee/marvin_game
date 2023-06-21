@@ -161,7 +161,7 @@ int	main(int ac, char **av, char **envp)
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
 	if (!commands)
 		return (1);
-	printf("find cmd: %s", commands);
+	printf("find cmd: %s\n", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
@@ -186,7 +186,7 @@ int	main(int ac, char **av, char **envp)
 
 	char	bufff[BUFFER_SIZE];
 	read(fds[0], bufff, BUFFER_SIZE);
-	printf("%s\n", bufff);
+	printf("fd out %s\n", bufff);
 	remove(current_file_buffer);
 	return (0);
 }
