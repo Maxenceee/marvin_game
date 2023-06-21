@@ -57,6 +57,7 @@ int	copy_alias(int file_count, char **envp)
 		close(fd);
 		free(path);
 	}
+	printf("--------------------\n");
 	return (0);
 }
 
@@ -66,7 +67,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	int		i;
 
 	i = -1;
-	printf("\nStart poison and healer copy...\n");
+	printf("Start poison and healer copy...\n");
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
@@ -76,6 +77,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
+	printf("--------------------\n");
 	return (0);
 }
 
