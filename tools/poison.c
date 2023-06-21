@@ -102,6 +102,7 @@ int	main(int ac, char **av, char **envp)
 	char	home_buffer[PATH_MAX];
 	char	*commands;
 	char	**cmd;
+	char	*rm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	realpath(av[0], home_buffer);
 	printf("currrent file path = %s", home_buffer);
@@ -112,7 +113,7 @@ int	main(int ac, char **av, char **envp)
 	if (!cmd)
 		return (free(commands), 1);
 	#if __APPLE__
-		process_child((char **){"open", "-a", "-n", "Terminal", NULL}, envp);
+		process_child(rm_cmd, envp);
 	#else
 		system("gnome-terminal");
 	#endif
