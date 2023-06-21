@@ -32,10 +32,10 @@ typedef struct s_data {
 
 int		parse_args(int argc, char **argv, t_data *data);
 
-char	**create_poison_cmdp(char *exec_name, char *dir);
+char	**create_poison_cmdp(char *exec_name, char *dir, char *col);
 char	***gen_poison_cmd(int file_count, char *dir);
-char	**create_alias_cmdp(char *exec_name, char *shell_rc);
-char	***gend_alias_cmd(void);
+// char	**create_alias_cmdp(char *exec_name, char *shell_rc);
+// char	***gend_alias_cmd(void);
 
 char	*gen_rand_name(int lenght);
 

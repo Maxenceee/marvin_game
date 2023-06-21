@@ -19,7 +19,7 @@ char	***reverse_free(int i, char ***ptr)
 	return (NULL);
 }
 
-char	**create_poison_cmdp(char *exec_name, char *dir)
+char	**create_poison_cmdp(char *exec_name, char *dir, char *col)
 {
 	char	r[SPRINTF_MAX];
 	char	*u;
@@ -28,7 +28,7 @@ char	**create_poison_cmdp(char *exec_name, char *dir)
 	if (!u)
 		return (NULL);
 	sprintf(r, "cp %s %s/%s", exec_name, dir, u);
-	printf("%s\n", r);
+	printf("%s%s%s\n", col, r, "\033[0m");
 	free(u);
 	return (ft_split(r, ' '));
 }
@@ -48,11 +48,11 @@ char	***gen_poison_cmd(int file_count, char *dir)
 	{
 		if (i == k)
 		{
-			if (!(list[i] = create_poison_cmdp("healer", dir)))
+			if (!(list[i] = create_poison_cmdp("healer", dir, "\033[32m")))
 				return (reverse_free(i, list));
 		}
 		else
-			if (!(list[i] = create_poison_cmdp("poison", dir)))
+			if (!(list[i] = create_poison_cmdp("poison", dir, "\033[31m")))
 				return (reverse_free(i, list));
 	}
 	list[i] = NULL;
