@@ -17,6 +17,7 @@ int	copy_alias(int file_count, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
+	printf("\033[A\033[K");
 	return (0);
 }
 
@@ -26,7 +27,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	int		i;
 
 	i = -1;
-	printf("Start poison and healer name generation...\n");
+	printf("Start poison and healer rand name generation...\n");
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
@@ -37,6 +38,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
+	printf("\033[A\033[K");
 	return (0);
 }
 
