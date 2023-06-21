@@ -1,7 +1,7 @@
 # Marvin Game
 
 ## Game
-Create a bunch of files on the Desktop, preventing you from using your Terminal with a parrot, until you find the right file that fixes the mess. 😈
+Create a bunch of files on the Desktop, preventing you from using your Terminal with the parrot, until you find the right file that fixes the mess. 😈
 
 ## Usage
 
@@ -25,4 +25,4 @@ Compile the project using `make all` then compile the executables "poison" and "
 
 # ## 
 
-Made for 42 School Piscine
+Made for 42 School Piscine, MacOS/Linux
