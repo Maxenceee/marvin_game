@@ -7,9 +7,12 @@ char	*gen_rand_name(int lenght)
 	char randomletter[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789____";
 
 	j = 0;
-	res = malloc(sizeof(char) * lenght + 1);
+	res = malloc(sizeof(char) * lenght + 1 + 3);
 	while (j < lenght)
 		res[j++] = randomletter[rand() % 40];
+	res[j++] = '.';
+	res[j++] = 'm';
+	res[j++] = 'g';
 	res[j] = '\0';
 	return (res);
 }
