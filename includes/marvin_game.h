@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:29:07 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:30:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ typedef struct s_data {
 	char	current_dir[PATH_MAX];
 }				t_data;
 
+/* parsing */
 int		parse_args(int argc, char **argv, t_data *data);
 
+/* commands */
 char	**create_poison_cmdp(char *exec_name, t_data *data, char *col);
 char	***gen_poison_cmd(t_data *data);
 
+/* strings */
 char	*gen_rand_name(int lenght);
 
 #endif /* MARVIN_GAME_H */
