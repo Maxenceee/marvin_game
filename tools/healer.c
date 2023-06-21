@@ -97,13 +97,12 @@ void	process_child(char **command, char **envp)
 	}
 }
 
-int	replace_line(char *path, int line)
+int	replace_line(char *path, char *pattern)
 {
     FILE	*fPtr;
     FILE	*fTemp;
     char	buffer[BUFFER_SIZE];
     char	newline[] = "";
-    int		count;
 
     fPtr  = fopen(path, "r");
     fTemp = fopen("replace.tmp", "w"); 
@@ -114,11 +113,9 @@ int	replace_line(char *path, int line)
         exit(EXIT_SUCCESS);
     }
 	
-    count = 0;
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
-        count++;
-        if (count == line)
+        if (strncmp(buffer, "curl parrot.live", ft_strlen(buffer)) == 0)
             fputs(newline, fTemp);
         else
             fputs(buffer, fTemp);
@@ -127,7 +124,7 @@ int	replace_line(char *path, int line)
     fclose(fTemp);
     remove(path);
     rename("replace.tmp", path);
-    printf("\nSuccessfully replaced '%d' line with '%s'\n", line, newline);
+    printf("\nSuccessfully replaced line\n");
     return (0);
 }
 
@@ -142,7 +139,7 @@ int	clear_file(int fd, char *path)
 		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
 			printf("here line %d\n", i);
-			replace_line(path, i);
+			// replace_line(path, i);
 		}
 		free(line);
 		i++;
@@ -172,11 +169,11 @@ int	main(int ac, char **av, char **envp)
 		if (!path)
 			return (1);
 		printf("opening %s\n", path);
-		fd = open(path, O_RDONLY);
+		// fd = open(path, O_RDONLY);
 		// printf("on fd %d\n", fd);
-		if (fd < 0)
-			return (1);
-		if (clear_file(fd, path))
+		// if (fd < 0)
+		// 	return (1);
+		if (replace_line(path, "curl parrot.live"))
 			return (1);
 		close(fd);
 		free(path);
