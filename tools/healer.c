@@ -186,7 +186,7 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
-	printf("Removing all .mg file...");
+	printf("Removing all .mg file...\n");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1], STDOUT_FILENO, fds[0]);
 	process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
