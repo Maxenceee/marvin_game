@@ -127,7 +127,7 @@ int	replace_line(char *path, int line)
     fclose(fTemp);
     remove(path);
     rename("replace.tmp", path);
-    printf("\nSuccessfully replaced '%d' line with '%s'.", line, newline);
+    printf("\nSuccessfully replaced '%d' line with '%s'\n", line, newline);
     return (0);
 }
 
@@ -136,14 +136,16 @@ int	clear_file(int fd, char *path)
 	char	*line;
 	int		i;
 
+	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
 			printf("here line %d\n", i);
-			replace_line(path, i);
+			// replace_line(path, i);
 		}
 		free(line);
+		i++;
 	}
 	return (0);
 }
