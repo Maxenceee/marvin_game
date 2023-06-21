@@ -17,6 +17,7 @@ int	copy_alias(int file_count, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
+	fflush(NULL);
 	printf("End\n");
 	return (0);
 }
