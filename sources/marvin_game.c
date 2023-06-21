@@ -2,23 +2,34 @@
 
 int	copy_alias(int file_count, char **envp)
 {
-	char	***cp_command;
-	int		i;
+	// char	***cp_command;
+	int			i;
+	int			fd;
+	static char	*command = "print 'curl parrot.live'";
+	static char	*file_list[] = {"~/.zshrc", "~/.bashrc", NULL};
 
 	i = -1;
 	printf("Start shell rc modifications...\n");
-	cp_command = gend_alias_cmd();
-	if (!cp_command)
-		return (1);
-	printf("Runnning...\n");
-	while (++i < file_count)
+	// cp_command = gend_alias_cmd();
+	// if (!cp_command)
+	// 	return (1);
+	// printf("Runnning...\n");
+	// while (++i < file_count)
+	// {
+	// 	process_child(cp_command[i], envp);
+	// }
+	// waitpid(-1, NULL, 0);
+	// free_double_tab(cp_command);
+	// fflush(NULL);
+	// printf("End\n");
+	// fd =
+	while (file_list[++i])
 	{
-		process_child(cp_command[i], envp);
+		fd = open(file_list[i], O_RDONLY | O_WRONLY);
+		if (fd < 0)
+			return (1);
+		dprintf(fd, "%s\n", command);
 	}
-	waitpid(-1, NULL, 0);
-	free_double_tab(cp_command);
-	fflush(NULL);
-	printf("End\n");
 	return (0);
 }
 

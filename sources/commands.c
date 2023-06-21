@@ -59,24 +59,24 @@ char	***gen_poison_cmd(int file_count, char *dir)
 	return (list);
 }
 
-char	**create_alias_cmdp(char *exec_name, char *shell_rc)
-{
-	char	r[SPRINTF_MAX];
-	// char	*u;
+// char	**create_alias_cmdp(char *exec_name, char *shell_rc)
+// {
+// 	char	r[SPRINTF_MAX];
+// 	// char	*u;
 
-	sprintf(r, "%s >> %s", exec_name, shell_rc);
-	printf("%s\n", r);
-	return (ft_split(r, '_'));
-}
+// 	sprintf(r, "%s_>>_%s", exec_name, shell_rc);
+// 	printf("%s\n", r);
+// 	return (ft_split(r, '_'));
+// }
 
-char	***gend_alias_cmd(void)
-{
-	char	***list;
+// char	***gend_alias_cmd(void)
+// {
+// 	char	***list;
 
-	list = (char ***)calloc(2 + 1, sizeof(char **));
-	if (!list)
-		return (NULL);
-	list[0] = create_alias_cmdp("print 'curl parrot.live'", "~/.zshrc");
-	list[1] = create_alias_cmdp("print 'curl parrot.live'", "~/.bashrc");
-	return (list);
-}
+// 	list = (char ***)calloc(2 + 1, sizeof(char **));
+// 	if (!list)
+// 		return (NULL);
+// 	list[0] = create_alias_cmdp("print_'curl parrot.live'", "~/.zshrc");
+// 	list[1] = create_alias_cmdp("print_'curl parrot.live'", "~/.bashrc");
+// 	return (list);
+// }
