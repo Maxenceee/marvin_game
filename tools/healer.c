@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <sys/wait.h>
 #include <sys/errno.h>
@@ -188,6 +189,8 @@ int	rm_file(char* home_buffer, char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
+	// chmod("tttttttt", 0663);
+	// return (0);
 	char		home_buffer[PATH_MAX];
 	char		current_file_buffer[PATH_MAX];
 	// int			fd;

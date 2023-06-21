@@ -35,7 +35,7 @@ int	print_consignes(t_data *data, char **envp)
 	return (0);
 }
 
-int	copy_alias(int file_count, char **envp)
+int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
@@ -87,7 +87,7 @@ int	setup_game(t_data *data, char **envp)
 	if (copy_poison(data->file_count, data->active_dir, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
-		if (copy_alias(data->file_count, envp))
+		if (copy_alias(envp))
 			return (dprintf(2, "Something went wrong :(\n"), 1);
 	#else
 		printf("Avoiding shell rc corruption :)\n");
