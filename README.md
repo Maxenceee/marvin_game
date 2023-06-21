@@ -9,7 +9,7 @@ Params:
 ```
 
 ### Overview
-Run `make gen` to compile and start the program. You can use params with make gen using the argument `GVAR`.
+Run `make gen` to compile and start the program. You can use params using the argument `GVAR`.
 
 Example: 
 ```sh
