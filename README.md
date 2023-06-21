@@ -4,7 +4,7 @@
 
 Params:
 ```
--c	specify the number of generated files (minimun is 2)
+-c	specify the number of generated files (minimun is 2, default is 50)
 -p	change active directory (default is Desktop)
 ```
 
