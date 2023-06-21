@@ -152,6 +152,7 @@ int	main(int ac, char **av, char **envp)
 	char		*commands;
 	char		**find_cmd;
 	int			fds[2];
+	char		*rm_cmd[] = {"rm", NULL};
 	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
@@ -183,10 +184,8 @@ int	main(int ac, char **av, char **envp)
 	// }
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1], STDOUT_FILENO);
-
-	char	bufff[BUFFER_SIZE];
-	read(fds[0], bufff, BUFFER_SIZE);
-	printf("fd out [%s]\n", bufff);
+	process_child(rm_cmd, envp, fds[0], STDIN_FILENO);
+	waitpid(-1, NULL, 0);
 	remove(current_file_buffer);
 	return (0);
 }
