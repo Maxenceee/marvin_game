@@ -13,9 +13,9 @@ Run `make gen` to compile and start the program. You can use params using the ar
 
 Example: 
 ```sh
-make gen GVAR="-c 200 -p /Users/maxencegama/Doduments"
+make gen GVAR="-c 200 -p /Users/maxencegama/Documents"
 ```
 
 ### Details
 
-Compile the project using `make all` then compile the executable poison and healer with `make execs`. Once done start the program as follow `./marvin_game`.
+Compile the project using `make all` then compile the executables 'poison' and 'healer' with `make execs`. Once done start the program as follow `./marvin_game`.
