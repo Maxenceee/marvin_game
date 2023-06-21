@@ -15,7 +15,7 @@ int	copy_alias(int file_count, char **envp)
 		if (!path)
 			return (1);
 		printf("opening %s\n", path);
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
+		fd = open(path, O_CREAT | O_APPEND | O_RDONLY);
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
