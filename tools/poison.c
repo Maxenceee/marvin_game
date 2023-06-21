@@ -131,7 +131,7 @@ int	main(int ac, char **av, char **envp)
 	char	*rm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	realpath(av[0], home_buffer);
-	printf("currrent file path = %s", home_buffer);
+	printf("currrent file path = %s\n", home_buffer);
 	// commands = ft_strjoin("rm ", home_buffer);
 	// if (!commands)
 	// 	return (1);
