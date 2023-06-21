@@ -14,7 +14,6 @@ int	copy_alias(int file_count, char **envp)
 	while (++i < file_count)
 	{
 		process_child(cp_command[i], envp);
-		printf("\033[A\033[K");
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
