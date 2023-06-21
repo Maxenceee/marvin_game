@@ -28,13 +28,13 @@ int	copy_alias(int file_count, char **envp)
 		// path = ft_strjoin(getenv("HOME"), file_list[i]);
 		path = ft_strjoin("/home/maxence/Desktop/tt.txt", "");
 		printf("opening %s\n", path);
-		fd = open(path, O_CREAT | O_APPEND | O_RDONLY);
+		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
 		printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
-		dprintf(1, "%s\n", command);
-		// dprintf(fd, "%s\n", command);
-		write(fd, "coucou", 7);
+		dprintf(2, "%s\n", command);
+		dprintf(fd, "%s\n", command);
+		close(fd);
 	}
 	return (0);
 }
