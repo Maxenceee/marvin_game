@@ -107,7 +107,7 @@ int	main(int argc, char **argv, char **envp)
 	desktop_dir = NULL;
 	if (parse_args(argc, argv, &data))
 		return (1);
-	printf("----------Start Marvin Game----------\n");
+	printf("--------------------Start Marvin Game--------------------\n");
 	if (!data.active_dir)
 	{
 		#if __APPLE__
@@ -123,6 +123,6 @@ int	main(int argc, char **argv, char **envp)
 	printf("Params:\nFile count = %d\nActive dir = %s\n--------------------\n", data.file_count, data.active_dir);
 	t = setup_game(&data, envp);
 	free(data.active_dir);
-	printf("-------------------------------------\n");
+	printf("---------------------------------------------------------\n");
 	return (t);
 }
