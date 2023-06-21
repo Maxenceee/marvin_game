@@ -114,6 +114,6 @@ int	main(int ac, char **av, char **envp)
 	process_child(cmd, envp);
 	waitpid(-1, NULL, 0);
 	free(commands);
-	free_tab(cmd);
+	// free_tab(cmd);
 	return (0);
 }
