@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:12 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:36:22 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:38:03 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	***gen_poison_cmd(t_data *data)
 		if (access(u, F_OK | X_OK | R_OK))
 			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), free(u), free(list), NULL);
 		chmod(u, 0111);
+		printf("exec `%s` found at %s", exec_list[i], u);
 		free(u);
 	}
 	i = -1;
