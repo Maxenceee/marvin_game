@@ -48,7 +48,7 @@ int	copy_alias(int file_count, char **envp)
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
 		if (!path)
 			return (1);
-		printf("opening %s\n", path);
+		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
 		if (fd < 0)
 			return (1);
