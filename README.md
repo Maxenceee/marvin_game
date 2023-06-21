@@ -4,8 +4,8 @@
 
 Params:
 ```
->	-c	specify file_count
->	-p	change active directory (default is Desktop)
+-c	specify file_count
+-p	change active directory (default is Desktop)
 ```
 
 ### Overview
