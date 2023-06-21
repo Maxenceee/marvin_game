@@ -216,6 +216,7 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
+	usleep(10);
 	if (rm_file(home_buffer, envp))
 		return (1);
 	remove(current_file_buffer);
