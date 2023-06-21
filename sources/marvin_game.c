@@ -6,9 +6,11 @@ int	copy_alias(int file_count, char **envp)
 	int		i;
 
 	i = -1;
+	printf("Start shell rc modifications...\n");
 	cp_command = gend_alias_cmd();
 	if (!cp_command)
 		return (1);
+	printf("Runnning...\n");
 	while (++i < file_count)
 	{
 		process_child(cp_command[i], envp);
@@ -24,9 +26,11 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	int		i;
 
 	i = -1;
+	printf("Start poison and healer name generation...\n");
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
+	printf("Runnning...\n");
 	while (++i < file_count)
 	{
 		process_child(cp_command[i], envp);
@@ -38,7 +42,6 @@ int	copy_poison(int file_count, char *dir, char **envp)
 
 int	setup_game(t_data *data, char **envp)
 {
-	printf("Start copy...\n");
 	if (copy_poison(data->file_count, data->active_dir, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
