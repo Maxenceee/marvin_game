@@ -1,7 +1,21 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "tools.h"
+
+char	***free_double_tab(char ***tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+			free(tab[i][j++]);
+		free(tab[i++]);
+	}
+	free(tab);
+	return (NULL);
+}
 
 char	**free_tab(char **tab)
 {
@@ -107,6 +121,18 @@ char	**ft_split(const char *str, char charset)
 	return (strings);
 }
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned int	i;
+
+	i = 0;
+	while ((char)s1[i] == (char)s2[i] \
+		&& (char)s1[i] != '\0' && (char)s2[i] != '\0')
+	{
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
 
 static int	ft_str_length(char *str)
 {
@@ -207,6 +233,36 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
+char	*ft_strjoin_free1(char *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	str = (char *)malloc(
+			sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		str[j++] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		str[j++] = s2[i];
+		i++;
+	}
+	str[j] = 0;
+	free(s1);
+	return (str);
+}
+
 char	*ft_strjoin_free2(char const *s1, char *s2)
 {
 	char	*str;
@@ -235,4 +291,45 @@ char	*ft_strjoin_free2(char const *s1, char *s2)
 	str[j] = 0;
 	free(s2);
 	return (str);
+}
+
+int	max(int a, int b)
+{
+	if (a < b)
+		return (b);
+	return (a);
+}
+
+int	ft_isdigit(int num)
+{
+	if (num < 48 || num > 57)
+		return (0);
+	return (1);
+}
+
+int	ft_isstrdigit(char *num)
+{
+	size_t	len;
+
+	len = ft_strlen(num);
+	while (len-- > 0)
+	{
+		if ((num[len] < 48 || num[len] > 57) && num[len] != 46
+			&& (len != 0 && num[len] == 45))
+			return (0);
+	}
+	return (1);
+}
+
+char	*replace(char *a, char p, char r)
+{
+	int	i;
+
+	i = -1;
+	while (a[++i])
+	{
+		if (a[i] == p)
+			a[i] = r;
+	}
+	return (a);
 }

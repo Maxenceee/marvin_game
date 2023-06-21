@@ -1,9 +1,18 @@
-#include "../includes/marvin_game.h"
+#include "process.h"
 
 void	exit_error_with_msg(char *msg)
 {
 	perror(msg);
 	exit(1);
+}
+
+int	dup2_fdinout(int fdin, int fdout)
+{
+	if (dup2(fdin, STDIN_FILENO) < 0)
+		return (3);
+	if (dup2(fdout, STDOUT_FILENO) < 0)
+		return (3);
+	return (0);
 }
 
 static char	*get_path(char *envp[])
@@ -53,7 +62,7 @@ static int	execcmd(char **command, char *envp[])
 	if (command[0] == NULL)
 		return (5);
 	cmd = parse_env(envp, command[0]);
-	if (!cmd || ft_strcmp(command[0], "") == 0)
+	if (!cmd || strcmp(command[0], "") == 0)
 		return (2);
 	if (execve(cmd, command, envp) == -1)
 	{
@@ -73,6 +82,26 @@ void	process_child(char **command, char **envp)
 		exit_error_with_msg(FORK_ERROR);
 	if (pid == 0)
 	{
+		res = execcmd(command, envp);
+		if (res == 5)
+			exit_error_with_msg(PERM_DENIED);
+		else if (res == 2)
+			dprintf(2, "%s : %s\n" , command[0], NO_COMMAND);
+		exit(1);
+	}
+}
+
+void	process_child_fout(char **command, char **envp, int fdout)
+{
+	pid_t	pid;
+	int		res;
+
+	pid = fork();
+	if (pid == -1)
+		exit_error_with_msg(FORK_ERROR);
+	if (pid == 0)
+	{
+		dup2(fdout, STDOUT_FILENO);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
