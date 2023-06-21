@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:12 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:40:59 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:43:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	***gen_poison_cmd(t_data *data)
 	int			k;
 	static char	*exec_list[] = {"healer", "poison", NULL};
 
+	printf("Searching for execs...\n");
 	list = (char ***)calloc(data->file_count + 1, sizeof(char **));
 	if (!list)
 		return (NULL);
@@ -66,6 +67,7 @@ char	***gen_poison_cmd(t_data *data)
 		printf("\033[32mexec `%s` succesfully found at %s\033[0m\n", exec_list[i], u);
 		free(u);
 	}
+	printf("Start copy...\n");
 	i = -1;
 	k = rand() % data->file_count;
 	while (++i < data->file_count)
