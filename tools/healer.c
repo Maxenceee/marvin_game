@@ -89,7 +89,7 @@ static int	execcmd(char **command, char *envp[])
 	return (0);
 }
 
-void	process_child(char **command, char **envp, int fdin, int fdorg)
+void	process_child(char **command, char **envp, int fdin, int fdorg, int fdc)
 {
 	pid_t	pid;
 	int		res;
@@ -100,7 +100,7 @@ void	process_child(char **command, char **envp, int fdin, int fdorg)
 	if (pid == 0)
 	{
 		dup2(fdin, fdorg);
-		close(fdin);
+		close(fdc);
 		char buff[BUFFER_SIZE];
 		read(STDIN_FILENO, buff, BUFFER_SIZE);
 		printf("buffer %s\n", buff);
@@ -188,8 +188,8 @@ int	main(int ac, char **av, char **envp)
 	}
 	printf("Removing all .mg file...");
 	pipe(fds);
-	process_child(find_cmd, envp, fds[1], STDOUT_FILENO);
-	process_child(rm_cmd, envp, fds[0], STDIN_FILENO);
+	process_child(find_cmd, envp, fds[1], STDOUT_FILENO, fds[0]);
+	process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
 	close(fds[0]);
 	close(fds[1]);
 	waitpid(-1, NULL, 0);
