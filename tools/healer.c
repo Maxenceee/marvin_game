@@ -166,10 +166,10 @@ int	rm_file(char* home_buffer, char **envp)
 	printf("\nRemoving all .mxga file...\n");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1]);
-	close(fds[0]);
 	close(fds[1]);
 	waitpid(-1, NULL, 0);
 	i = read(fds[0], rm_buffer, BUFFER_SIZE);
+	close(fds[0]);
 	rm_buffer[i] = '\0';
 	printf("rm %s", rm_buffer);
 	rm_file_list = ft_split(rm_buffer, '\n');
