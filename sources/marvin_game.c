@@ -3,7 +3,7 @@
 int	copy_alias(int file_count, char **envp)
 {
 	// char	***cp_command;
-	// int			i;
+	int			i;
 	int			fd;
 	static char	*command = "print 'curl parrot.live'";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
