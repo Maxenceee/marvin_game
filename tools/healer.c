@@ -124,14 +124,14 @@ int	replace_line(char *path, char *pattern)
     fTemp = fopen("replace.tmp", "w"); 
     if (fPtr == NULL || fTemp == NULL)
     {
-        printf("\nUnable to open file.\n");
+        printf("Unable to open file %s\n", path);
 		return (1);
     }
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
         if (strncmp(buffer, "curl parrot.live", 16) == 0)
 		{
-			printf("replacing line %s\n", buffer);
+			printf("replacing line %s", buffer);
             fputs(newline, fTemp);
 		}
         else
@@ -157,7 +157,7 @@ int	rm_file(char* home_buffer, char **envp)
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
 	if (!commands)
 		return (1);
-	printf("find cmd: %s\n", commands);
+	// printf("find cmd: %s\n", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
@@ -166,9 +166,7 @@ int	rm_file(char* home_buffer, char **envp)
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1]);
 	waitpid(-1, NULL, 0);
-
 	read(fds[0], rm_buffer, BUFFER_SIZE);
-	printf("[%s]\n", rm_buffer);
 	rm_file_list = ft_split(rm_buffer, '\n');
 	if (!rm_buffer)
 		return (1);
@@ -180,9 +178,10 @@ int	rm_file(char* home_buffer, char **envp)
 	}
 	free_tab(rm_file_list);
 	free_tab(find_cmd);
+	free(commands);
 	// process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
-	// close(fds[0]);
-	// close(fds[1]);
+	close(fds[0]);
+	close(fds[1]);
 	return (0);
 }
 
