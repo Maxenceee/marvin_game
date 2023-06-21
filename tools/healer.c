@@ -162,7 +162,7 @@ int	rm_file(char* home_buffer, char **envp)
 	if (!find_cmd)
 		return (free(commands), 1);
 
-	printf("Removing all .mg file...\n");
+	printf("\nRemoving all .mg file...\n");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1]);
 	waitpid(-1, NULL, 0);

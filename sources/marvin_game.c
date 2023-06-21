@@ -20,7 +20,7 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
 	close(fd);
-	printf("opening consignes.txt\n");
+	printf("\nCreating consignes.txt\n");
 	t_cmd = ft_strjoin("open ", path);
 	free(path);
 	if (!t_cmd)
@@ -42,7 +42,7 @@ int	copy_alias(int file_count, char **envp)
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
 
-	printf("Start shell rc modifications...\n");
+	printf("\nStart shell rc modifications...\n");
 	i = -1;
 	while (file_list[++i])
 	{
@@ -66,7 +66,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	int		i;
 
 	i = -1;
-	printf("Start poison and healer copy...\n");
+	printf("\nStart poison and healer copy...\n");
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
