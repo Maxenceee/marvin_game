@@ -165,7 +165,7 @@ int	rm_file(char* home_buffer, char **envp)
 	#endif
 	if (!commands)
 		return (1);
-	// printf("find cmd: %s\n", commands);
+	printf("find cmd: %s\n", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
