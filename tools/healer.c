@@ -146,6 +146,7 @@ int	main(int ac, char **av, char **envp)
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
 	process_child(find_cmd, envp);
+	return (1);
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
