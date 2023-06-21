@@ -26,7 +26,7 @@ int	copy_alias(int file_count, char **envp)
 	while (file_list[++i])
 	{
 		// path = ft_strjoin(getenv("HOME"), file_list[i]);
-		path = ft_strjoin("/home/maxence/Desktop/tt.txt", file_list[i]);
+		path = ft_strjoin("/home/maxence/Desktop/tt.txt", "");
 		printf("opening %s\n", path);
 		fd = open(path, O_CREAT | O_APPEND);
 		printf("on fd %d\n", fd);
