@@ -16,7 +16,7 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "----------The Marvin Game----------\n\n");
 	dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
 	dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
-	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu va devoir jouer à notre petit jeu. Une version de où est Charlie, version 42.\n");
+	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu vas devoir jouer à notre petit jeu. Une version de 'Où est Charlie', version 42.\n");
 	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
 	close(fd);

@@ -10,7 +10,7 @@
 #include "poison_utils.c"
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE INT16_MAX
 #endif
 #define PATH_MAX 4096
 #define FORK_ERROR "Fork"
