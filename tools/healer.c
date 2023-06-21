@@ -100,7 +100,7 @@ void	process_child(char **command, char **envp, int fdin, int fdout)
 	if (pid == 0)
 	{
 		dup2(fdin, fdout);
-		close(fdout);
+		// close(fdout);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
