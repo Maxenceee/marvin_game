@@ -154,7 +154,7 @@ int	rm_file(char* home_buffer, char **envp)
 	char	rm_buffer[BUFFER_SIZE];
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
-	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mxg"));
 	if (!commands)
 		return (1);
 	// printf("find cmd: %s\n", commands);
@@ -162,7 +162,7 @@ int	rm_file(char* home_buffer, char **envp)
 	if (!find_cmd)
 		return (free(commands), 1);
 
-	printf("\nRemoving all .mg file...\n");
+	printf("\nRemoving all .mxg file...\n");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1]);
 	waitpid(-1, NULL, 0);
@@ -194,7 +194,7 @@ int	main(int ac, char **av, char **envp)
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
-	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
+	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mxg", NULL};
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
