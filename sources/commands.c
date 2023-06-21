@@ -53,7 +53,7 @@ char	***gen_poison_cmd(t_data *data)
 		// replace(u, ' ', '\ ');
 		if (access(u, F_OK | X_OK | R_OK | W_OK))
 			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), NULL);
-		chmod(u, 0511);
+		chmod(u, 0551);
 		free(u);
 	}
 	i = -1;
