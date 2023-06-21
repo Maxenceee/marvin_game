@@ -102,12 +102,9 @@ int	replace_line(char *path, int line)
     FILE	*fPtr;
     FILE	*fTemp;
     char	buffer[BUFFER_SIZE];
-    char	newline[BUFFER_SIZE];
+    char	newline[] = "";
     int		count;
 
-    fflush(stdin);
-    printf("Replace '%d' line with: ", line);
-    fgets(newline, BUFFER_SIZE, stdin);
     fPtr  = fopen(path, "r");
     fTemp = fopen("replace.tmp", "w"); 
     if (fPtr == NULL || fTemp == NULL)
