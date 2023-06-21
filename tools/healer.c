@@ -139,7 +139,7 @@ int	main(int ac, char **av, char **envp)
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
-	char		*find_cmd[] = {"find", "/*", "-type", "f", "-name", "*.mg", NULL};
+	char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
