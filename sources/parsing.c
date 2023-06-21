@@ -2,7 +2,6 @@
 
 int	parse_args(int argc, char **argv, t_data *data)
 {
-	char	*active_dir;
 	int		i;
 
 	i = argc;

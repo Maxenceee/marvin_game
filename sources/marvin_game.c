@@ -43,6 +43,7 @@ int	copy_alias(char **envp)
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
 
+	(void)(envp);
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
 	i = -1;
 	while (file_list[++i])
@@ -102,7 +103,9 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	DIR		*desktop_dir;
 	int		t;
+	#ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
+	#endif
 
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
