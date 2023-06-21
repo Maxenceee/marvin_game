@@ -33,7 +33,8 @@ int	copy_alias(int file_count, char **envp)
 		if (fd < 0)
 			return (1);
 		dprintf(1, "%s\n", command);
-		dprintf(fd, "%s\n", command);
+		// dprintf(fd, "%s\n", command);
+		write(fd, "coucou", 7);
 	}
 	return (0);
 }
