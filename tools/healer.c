@@ -97,15 +97,55 @@ void	process_child(char **command, char **envp)
 	}
 }
 
-int	clear_file(int fd)
+int	replace_line(char *path, int line)
+{
+    FILE	*fPtr;
+    FILE	*fTemp;
+    char	path[4096];    
+    char	buffer[BUFFER_SIZE];
+    char	newline[BUFFER_SIZE];
+    int		line, count;
+
+    fflush(stdin);
+    printf("Replace '%d' line with: ", line);
+    fgets(newline, BUFFER_SIZE, stdin);
+    fPtr  = fopen(path, "r");
+    fTemp = fopen("replace.tmp", "w"); 
+    if (fPtr == NULL || fTemp == NULL)
+    {
+        printf("\nUnable to open file.\n");
+        printf("Please check whether file exists and you have read/write privilege.\n");
+        exit(EXIT_SUCCESS);
+    }
+	
+    count = 0;
+    while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
+    {
+        count++;
+        if (count == line)
+            fputs(newline, fTemp);
+        else
+            fputs(buffer, fTemp);
+    }
+    fclose(fPtr);
+    fclose(fTemp);
+    remove(path);
+    rename("replace.tmp", path);
+    printf("\nSuccessfully replaced '%d' line with '%s'.", line, newline);
+    return (0);
+}
+
+int	clear_file(int fd, char *path)
 {
 	char	*line;
+	int		i;
 
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
 			printf("here\n%s\n", line);
+			replace_line(path, i);
 		}
 		free(line);
 	}
@@ -136,7 +176,7 @@ int	main(int ac, char **av, char **envp)
 		// printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
-		if (clear_file(fd))
+		if (clear_file(fd, path))
 			return (1);
 		close(fd);
 		free(path);
