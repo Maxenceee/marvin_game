@@ -151,7 +151,7 @@ int	rm_file(char* home_buffer, char **envp)
 	char	**find_cmd;
 	char	**rm_file_list;
 	int		fds[2];
-	char	rm_buffer[PATH_MAX];
+	char	rm_buffer[BUFFER_SIZE];
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
