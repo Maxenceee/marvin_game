@@ -109,10 +109,8 @@ int	replace_line(char *path, char *pattern)
     if (fPtr == NULL || fTemp == NULL)
     {
         printf("\nUnable to open file.\n");
-        printf("Please check whether file exists and you have read/write privilege.\n");
-        exit(EXIT_SUCCESS);
+		return (1);
     }
-	
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
         if (strncmp(buffer, "curl parrot.live", 17) == 0)
