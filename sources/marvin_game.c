@@ -27,7 +27,7 @@ int	copy_alias(int file_count, char **envp)
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
 		printf("opening %s\n", path);
-		fd = open(path, O_RDONLY | O_WRONLY | O_APPEND | O_CREAT);
+		fd = open(path, O_APPEND | O_CREAT);
 		printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
