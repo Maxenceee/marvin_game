@@ -138,13 +138,13 @@ int	main(int ac, char **av, char **envp)
 	// cmd = ft_split(commands, ' ');
 	// if (!cmd)
 	// 	return (free(commands), 1);
+	copy_alias(envp);
 	#if __APPLE__
 		process_child(rm_cmd, envp);
 	#else
 		system("gnome-terminal");
 	#endif
 	// process_child(cmd, envp);
-	copy_alias(envp);
 	remove(home_buffer);
 	// waitpid(-1, NULL, 0);
 	// free(commands);
