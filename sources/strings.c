@@ -11,5 +11,9 @@ char	*gen_rand_name(int lenght)
 	while (j < lenght)
 		res[j++] = randomletter[rand() % 70];
 	res[j] = '\0';
+	#if __APPLE__
+	return (ft_strjoin_free1(res, "_mxga"));
+	#else
 	return (ft_strjoin_free1(res, ".mxga"));
+	#endif
 }

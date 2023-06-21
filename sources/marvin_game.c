@@ -7,7 +7,7 @@ int	print_consignes(t_data *data, char **envp)
 	char	*t_cmd;
 	char	**cmd;
 
-	path = ft_strjoin(data->active_dir, "/consignes.txt");
+	path = ft_strjoin(data->active_dir, "/consignes.mxga.txt");
 	if (!path)
 		return (1);
 	fd = open(path, O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -20,7 +20,7 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
 	close(fd);
-	printf("\033[36mCreating consignes.txt...\033[0m\n");
+	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
 	t_cmd = ft_strjoin("open ", path);
 	printf("created at %s\n", path);
 	free(path);

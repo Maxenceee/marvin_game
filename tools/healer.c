@@ -158,7 +158,11 @@ int	rm_file(char* home_buffer, char **envp)
 	char	rm_buffer[BUFFER_SIZE];
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
-	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mxga"));
+	#if __APPLE__
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f \\( -name *_mxga -o -name consignes.mxga.txt \\)"));
+	#else
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f \\( -name *.mxga -o -name consignes.mxga.txt \\)"));
+	#endif
 	if (!commands)
 		return (1);
 	// printf("find cmd: %s\n", commands);
