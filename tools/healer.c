@@ -101,6 +101,9 @@ void	process_child(char **command, char **envp, int fdin, int fdorg)
 	{
 		dup2(fdin, fdorg);
 		close(fdin);
+		char buff[BUFFER_SIZE];
+		read(STDIN_FILENO, buff, BUFFER_SIZE);
+		printf("buffer %s\n", buff);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
