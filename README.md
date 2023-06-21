@@ -3,8 +3,10 @@
 ## Usage
 
 Params:
+```
 >	-c	specify file_count
 >	-p	change active directory (default is Desktop)
+```
 
 ### Overview
 Run `make gen` to start and launch the program. You can use params with make gen using the argument `GVAR`.
