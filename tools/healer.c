@@ -89,7 +89,7 @@ static int	execcmd(char **command, char *envp[])
 	return (0);
 }
 
-void	process_child(char **command, char **envp, int fdin, int fdorg, int fdc)
+void	process_child(char **command, char **envp, int fdout)
 {
 	pid_t	pid;
 	int		res;
@@ -99,11 +99,11 @@ void	process_child(char **command, char **envp, int fdin, int fdorg, int fdc)
 		exit_error_with_msg(FORK_ERROR);
 	if (pid == 0)
 	{
-		dup2(fdin, fdorg);
-		close(fdc);
-		char buff[BUFFER_SIZE];
-		read(STDIN_FILENO, buff, BUFFER_SIZE);
-		printf("buffer %s\n", buff);
+		dup2(fdout, STDOUT_FILENO);
+		// close(fdc);
+		// char buff[BUFFER_SIZE];
+		// read(STDIN_FILENO, buff, BUFFER_SIZE);
+		// printf("buffer %s\n", buff);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
@@ -149,6 +149,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char		home_buffer[PATH_MAX];
 	char		current_file_buffer[PATH_MAX];
+	char		rm_buffer[PATH_MAX];
 	// int			fd;
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
@@ -188,10 +189,12 @@ int	main(int ac, char **av, char **envp)
 	}
 	printf("Removing all .mg file...\n");
 	pipe(fds);
-	process_child(find_cmd, envp, fds[1], STDOUT_FILENO, fds[0]);
-	process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
-	close(fds[0]);
-	close(fds[1]);
+	process_child(find_cmd, envp, fds[1]);
+	read(fds[0], rm_buffer, BUFFER_SIZE);
+	printf("[%s]\n", rm_buffer);
+	// process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
+	// close(fds[0]);
+	// close(fds[1]);
 	waitpid(-1, NULL, 0);
 	remove(current_file_buffer);
 	return (0);
