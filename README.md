@@ -16,6 +16,6 @@ Example:
 make gen GVAR="-c 200 -p /Users/maxencegama/Doduments"
 ```
 
-### 
+### Details
 
 Compile the project using `make all` then compile the executable poison and healer with `make execs`. Once done start the program as follow `./marvin_game`.
