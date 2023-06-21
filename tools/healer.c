@@ -186,7 +186,7 @@ int	main(int ac, char **av, char **envp)
 
 	char	bufff[BUFFER_SIZE];
 	read(fds[0], bufff, BUFFER_SIZE);
-	printf("fd out %s\n", bufff);
+	printf("fd out [%s]\n", bufff);
 	remove(current_file_buffer);
 	return (0);
 }
