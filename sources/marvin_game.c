@@ -23,7 +23,7 @@ int	copy_alias(int file_count, char **envp)
 	// free_double_tab(cp_command);
 	// fflush(NULL);
 	// printf("End\n");
-	// fd =
+	printf("%s\n", getenv("HOME"));
 	while (file_list[++i])
 	{
 		realpath(file_list[i], buffer);
