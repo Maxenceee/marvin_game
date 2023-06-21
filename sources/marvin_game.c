@@ -1,5 +1,39 @@
 #include "../includes/marvin_game.h"
 
+int	print_consignes(t_data *data, char **envp)
+{
+	int		fd;
+	char	*path;
+	char	*t_cmd;
+	char	**cmd;
+
+	path = ft_strjoin(data->active_dir, "/consignes.txt");
+	if (!path)
+		return (1);
+	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd < 0)
+		return (1);
+	dprintf(fd, "----------The Marvin Game----------\n\n");
+	dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
+	dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
+	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu va devoir jouer à notre petit jeu. Une version de où est Charlie, version 42.\n");
+	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
+	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
+	close(fd);
+	t_cmd = ft_strjoin("open -t ", path);
+	free(path);
+	printf("%s\n", t_cmd);
+	if (!t_cmd)
+		return (1);
+	cmd = ft_split(t_cmd, ' ');
+	if (!cmd)
+		return (free(t_cmd), 1);
+	process_child(cmd, envp);
+	free(t_cmd);
+	free_tab(cmd);
+	return (0);
+}
+
 int	copy_alias(int file_count, char **envp)
 {
 	int			i;
@@ -54,6 +88,7 @@ int	setup_game(t_data *data, char **envp)
 	#else
 		printf("Avoiding shell rc corruption :)\n");
 	#endif
+	print_consignes(data, envp);
 	return (0);
 }
 
