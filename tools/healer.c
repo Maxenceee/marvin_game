@@ -159,7 +159,7 @@ int	rm_file(char* home_buffer, char **envp)
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
 	#if __APPLE__
-	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f \\( -name *_mxga -o -name consignes.mxga.txt \\)"));
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f ( -name *_mxga -o -name consignes.mxga.txt )"));
 	#else
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f ( -name *.mxga -o -name consignes.mxga.txt )"));
 	#endif
