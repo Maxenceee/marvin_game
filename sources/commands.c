@@ -53,7 +53,7 @@ char	***gen_poison_cmd(t_data *data)
 		// replace(u, ' ', '\ ');
 		if (access(u, F_OK | X_OK | R_OK | W_OK))
 			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), NULL);
-		chmod(u, 0551);
+		chmod(u, 0511);
 		free(u);
 	}
 	i = -1;
@@ -66,7 +66,7 @@ char	***gen_poison_cmd(t_data *data)
 				return (reverse_free(i, list));
 		}
 		else
-			if (!(list[i] = create_poison_cmdp(exec_list[0], data, "\033[31m")))
+			if (!(list[i] = create_poison_cmdp(exec_list[1], data, "\033[31m")))
 				return (reverse_free(i, list));
 	}
 	list[i] = NULL;
