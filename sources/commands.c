@@ -64,7 +64,7 @@ char	**create_alias_cmdp(char *exec_name, char *shell_rc)
 	char	r[SPRINTF_MAX];
 	// char	*u;
 
-	sprintf(r, "%s_>>_%s", exec_name, shell_rc);
+	sprintf(r, "%s >> %s", exec_name, shell_rc);
 	printf("%s\n", r);
 	return (ft_split(r, '_'));
 }
