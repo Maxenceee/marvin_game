@@ -6,11 +6,19 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:27:56 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:53:57 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils/process.h"
+
+static void	close_and_rm_file(FILE *f1, FILE *f2)
+{
+	if (f1)
+		fclose(f1);
+	if (f2)
+		fclose(f2);
+}
 
 int	replace_line(char *path, char *pattern)
 {
@@ -22,8 +30,8 @@ int	replace_line(char *path, char *pattern)
 
 	fptr = fopen(path, "r");
 	ftemp = fopen(".replace.tmp", "w");
-	if (fptr == NULL || ftemp == NULL)
-		return (dprintf(2, "Unable to open file %s\n", path), 1);
+	// if (fptr == NULL || ftemp == NULL)
+		return (dprintf(2, "Unable to open file %s\n", path), close_and_rm_file(fptr, ftemp), remove(".replace.tmp"), 1);
 	i = 0;
 	while ((fgets(buffer, BUFFER_SIZE, fptr)) != NULL)
 	{
@@ -36,8 +44,7 @@ int	replace_line(char *path, char *pattern)
 		else
 			fputs(buffer, ftemp);
 	}
-	fclose(fptr);
-	fclose(ftemp);
+	close_and_rm_file(fptr, ftemp);
 	remove(path);
 	rename(".replace.tmp", path);
 	return (0);
@@ -110,7 +117,7 @@ int	main(int ac, char **av, char **envp)
 			return (1);
 		printf("\nopening %s\n", path);
 		if (replace_line(path, "curl parrot.live"))
-			return (1);
+			return (free(path), 1);
 		free(path);
 		i++;
 	}

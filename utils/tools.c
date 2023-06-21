@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:44 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:29:45 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:46:20 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,11 +252,11 @@ char	*ft_strjoin_free1(char *s1, char const *s2)
 	size_t	j;
 
 	if (s1 == NULL || s2 == NULL)
-		return (NULL);
+		return (free(s1), NULL);
 	str = (char *)malloc(
 			sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-		return (NULL);
+		return (free(s1), NULL);
 	i = 0;
 	j = 0;
 	while (s1[i])
@@ -282,11 +282,11 @@ char	*ft_strjoin_free2(char const *s1, char *s2)
 	size_t	j;
 
 	if (s1 == NULL || s2 == NULL)
-		return (NULL);
+		return (free(s2), NULL);
 	str = (char *)malloc(
 			sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-		return (NULL);
+		return (free(s2), NULL);
 	i = 0;
 	j = 0;
 	while (s1[i])

