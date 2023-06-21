@@ -56,6 +56,6 @@ fclean: clean
 	@echo "$(RED)Cleaning $(NAME)$(DEFAULT)"
 	@$(RM) $(NAME)
 
-re:				fclean all
+re:				fclean all execs
 
 .PHONY:			all clean fclean re bonus
