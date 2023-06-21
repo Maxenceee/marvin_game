@@ -49,11 +49,11 @@ char	***gen_poison_cmd(t_data *data)
 	{
 		u = ft_strjoin_free2(data->current_dir, ft_strjoin("/", exec_list[i]));
 		if (!u)
-			return (NULL);
+			return (free(list), NULL);
 		// replace(u, ' ', '\ ');
-		if (access(u, F_OK | X_OK | R_OK | W_OK))
-			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), NULL);
-		chmod(u, 0511);
+		if (access(u, F_OK | X_OK | R_OK))
+			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), free(list), NULL);
+		chmod(u, 0111);
 		free(u);
 	}
 	i = -1;
@@ -70,6 +70,17 @@ char	***gen_poison_cmd(t_data *data)
 				return (reverse_free(i, list));
 	}
 	list[i] = NULL;
+	i = -1;
+	while (exec_list[++i])
+	{
+		u = ft_strjoin_free2(data->current_dir, ft_strjoin("/", exec_list[i]));
+		if (!u)
+			return (free_double_tab(list), NULL);
+		if (access(u, F_OK))
+			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), free_double_tab(list), NULL);
+		chmod(u, 0755);
+		free(u);
+	}
 	return (list);
 }
 

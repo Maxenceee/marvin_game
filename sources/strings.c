@@ -7,14 +7,9 @@ char	*gen_rand_name(int lenght)
 	char randomletter[] = "__ABCDEFGHIJKLMNOPQRSTUVWXYZ__0123456789__abcdefghijklmnopqrstuvwxyz__";
 
 	j = 0;
-	res = malloc(sizeof(char) * lenght + 1 + 5);
+	res = malloc(sizeof(char) * lenght + 1);
 	while (j < lenght)
 		res[j++] = randomletter[rand() % 70];
-	res[j++] = '.';
-	res[j++] = 'm';
-	res[j++] = 'x';
-	res[j++] = 'g';
-	res[j++] = 'a';
 	res[j] = '\0';
-	return (res);
+	return (ft_strjoin_free1(res, ".mxga"));
 }
