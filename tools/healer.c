@@ -103,7 +103,7 @@ int	clear_file(int fd)
 
 	while ((line = get_next_line(fd)))
 	{
-		printf("> %s\n", line);
+		// printf("> %s\n", line);
 		if (strncmp(line, "curl parrot.live", 16) == 0)
 		{
 			printf("here\n%s\n", line);
