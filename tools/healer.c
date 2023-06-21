@@ -89,7 +89,7 @@ static int	execcmd(char **command, char *envp[])
 	return (0);
 }
 
-void	process_child(char **command, char **envp, int fdin, int fdout)
+void	process_child(char **command, char **envp, int fdin, int fdorg)
 {
 	pid_t	pid;
 	int		res;
@@ -99,7 +99,7 @@ void	process_child(char **command, char **envp, int fdin, int fdout)
 		exit_error_with_msg(FORK_ERROR);
 	if (pid == 0)
 	{
-		dup2(fdin, fdout);
+		dup2(fdin, fdorg);
 		close(fdin);
 		res = execcmd(command, envp);
 		if (res == 5)
