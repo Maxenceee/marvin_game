@@ -28,12 +28,13 @@
 typedef struct s_data {
 	int		file_count;
 	char	*active_dir;
+	char	current_dir[PATH_MAX];
 }				t_data;
 
 int		parse_args(int argc, char **argv, t_data *data);
 
-char	**create_poison_cmdp(char *exec_name, char *dir, char *col);
-char	***gen_poison_cmd(int file_count, char *dir);
+char	**create_poison_cmdp(char *exec_name, t_data *data, char *col);
+char	***gen_poison_cmd(t_data *data);
 // char	**create_alias_cmdp(char *exec_name, char *shell_rc);
 // char	***gend_alias_cmd(void);
 
@@ -46,10 +47,12 @@ char	**ft_split(const char *str, char charset);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strjoin_arr(int size, char **strs, char *sep);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free2(char const *s1, char *s2);
 size_t	ft_strlen(const char *str);
 int		max(int a, int b);
 int		ft_isdigit(int num);
 int		ft_isstrdigit(char *num);
+char	*replace(char *a, char p, char r);
 
 
 #endif /* MARVIN_GAME_H */

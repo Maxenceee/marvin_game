@@ -63,17 +63,17 @@ int	copy_alias(char **envp)
 	return (0);
 }
 
-int	copy_poison(int file_count, char *dir, char **envp)
+int	copy_poison(t_data *data, char **envp)
 {
 	char	***cp_command;
 	int		i;
 
 	i = -1;
 	printf("\033[36mStart poison and healer copy...\033[0m\n");
-	cp_command = gen_poison_cmd(file_count, dir);
+	cp_command = gen_poison_cmd(data);
 	if (!cp_command)
 		return (1);
-	while (++i < file_count)
+	while (++i < data->file_count)
 	{
 		process_child(cp_command[i], envp);
 	}
@@ -85,7 +85,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 
 int	setup_game(t_data *data, char **envp)
 {
-	if (copy_poison(data->file_count, data->active_dir, envp))
+	if (copy_poison(data, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
 		if (copy_alias(envp))
@@ -103,6 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	DIR		*desktop_dir;
 	int		t;
+	// char	current_buffer[PATH_MAX];
 	#ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
 	#endif
@@ -110,6 +111,11 @@ int	main(int argc, char **argv, char **envp)
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
 	desktop_dir = NULL;
+	// realpath(argv[0], data.current_dir);
+	// char cwd[PATH_MAX];
+   	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
+		return (dprintf(2, "Cannot get current dir\n"), 1);
+	// printf("currrent file path = %s\n", current_buffer);
 	if (parse_args(argc, argv, &data))
 		return (1);
 	printf("--------------------Start Marvin Game--------------------\n");
@@ -125,7 +131,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
-	printf("Params:\nFile count = %d\nActive dir = %s\n--------------------\n", data.file_count, data.active_dir);
+	printf("Params:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
 	t = setup_game(&data, envp);
 	free(data.active_dir);
 	printf("---------------------------------------------------------\n");

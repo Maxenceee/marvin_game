@@ -5,7 +5,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 	int		i;
 
 	i = argc;
-	data->file_count = 4;
+	data->file_count = 50;
 	while (i-- > 0)
 	{
 		if (0 == ft_strcmp(argv[i], "-c") && argc - 1 >= i + 1
