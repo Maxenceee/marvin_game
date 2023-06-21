@@ -111,6 +111,7 @@ int	main(int ac, char **av, char **envp)
 	cmd = ft_split(commands, ' ');
 	if (!cmd)
 		return (free(commands), 1);
+	system("gnome-terminal");
 	process_child(cmd, envp);
 	waitpid(-1, NULL, 0);
 	free(commands);
