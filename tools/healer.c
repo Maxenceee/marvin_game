@@ -23,6 +23,15 @@ void	exit_error_with_msg(char *msg)
 	exit(1);
 }
 
+int	dup2_fdinout(int fdin, int fdout)
+{
+	if (dup2(fdin, STDIN_FILENO) < 0)
+		return (3);
+	if (dup2(fdout, STDOUT_FILENO) < 0)
+		return (3);
+	return (0);
+}
+
 static char	*get_path(char *envp[])
 {
 	int		i;
@@ -80,7 +89,7 @@ static int	execcmd(char **command, char *envp[])
 	return (0);
 }
 
-void	process_child(char **command, char **envp)
+void	process_child(char **command, char **envp, int fdin, int fdout)
 {
 	pid_t	pid;
 	int		res;
@@ -90,6 +99,7 @@ void	process_child(char **command, char **envp)
 		exit_error_with_msg(FORK_ERROR);
 	if (pid == 0)
 	{
+		dup2(fdin, fdout);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
@@ -135,12 +145,13 @@ int	main(int ac, char **av, char **envp)
 {
 	char		home_buffer[PATH_MAX];
 	char		current_file_buffer[PATH_MAX];
-	int			fd;
+	// int			fd;
 	int			i;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 	char		*path;
 	char		*commands;
 	char		**find_cmd;
+	int			fds[2];
 	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
@@ -170,7 +181,12 @@ int	main(int ac, char **av, char **envp)
 	// 	free(path);
 	// 	i++;
 	// }
-	process_child(find_cmd, envp);
+	pipe(fds);
+	process_child(find_cmd, envp, fds[1], STDOUT_FILENO);
+
+	char	bufff[BUFFER_SIZE];
+	read(fds[0], bufff, BUFFER_SIZE);
+	printf("%s\n", bufff);
 	remove(current_file_buffer);
 	return (0);
 }
