@@ -17,7 +17,7 @@ int	copy_alias(int file_count, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
-	printf("\033[A\033[K");
+	printf("End\n");
 	return (0);
 }
 
@@ -38,7 +38,7 @@ int	copy_poison(int file_count, char *dir, char **envp)
 	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
-	printf("\033[A\033[K");
+	printf("End\n");
 	return (0);
 }
 
