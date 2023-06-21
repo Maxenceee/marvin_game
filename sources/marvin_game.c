@@ -26,6 +26,7 @@ int	copy_alias(int file_count, char **envp)
 	while (file_list[++i])
 	{
 		fd = open(file_list[i], O_RDONLY | O_WRONLY);
+		printf("opening fd %d\n", fd);
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
