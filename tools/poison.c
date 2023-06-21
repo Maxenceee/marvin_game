@@ -14,7 +14,6 @@
 #define NO_COMMAND "Command not found"
 #define PERM_DENIED "permission denied"
 
-
 void	exit_error_with_msg(char *msg)
 {
 	perror(msg);

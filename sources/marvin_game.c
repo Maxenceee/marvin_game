@@ -10,7 +10,7 @@ int	print_consignes(t_data *data, char **envp)
 	path = ft_strjoin(data->active_dir, "/consignes.txt");
 	if (!path)
 		return (1);
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd = open(path, O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 		return (1);
 	dprintf(fd, "----------The Marvin Game----------\n\n");
