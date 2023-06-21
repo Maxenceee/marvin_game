@@ -1,5 +1,8 @@
 # Marvin Game
 
+## Game
+Creating a bunch of files on the Desktop, preventing you from using your Terminal with a parrot, until you find the right file that fixes the mess. 😈
+
 ## Usage
 
 Params:
@@ -19,3 +22,7 @@ make gen GVAR="-c 200 -p /Users/maxencegama/Documents"
 ### Details
 
 Compile the project using `make all` then compile the executables "poison" and "healer" with `make execs`. Once done start the program as follow `./marvin_game`.
+
+# ## 
+
+Made for 42 School Piscine
