@@ -120,6 +120,7 @@ int	replace_line(char *path, char *pattern)
     FILE	*fTemp;
     char	buffer[BUFFER_SIZE];
     char	newline[] = "";
+	int		i;
 
     fPtr  = fopen(path, "r");
     fTemp = fopen("replace.tmp", "w"); 
@@ -128,11 +129,13 @@ int	replace_line(char *path, char *pattern)
         printf("Unable to open file %s\n", path);
 		return (1);
     }
+	i = 0;
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
+		i++;
         if (strncmp(buffer, "curl parrot.live", 16) == 0)
 		{
-			printf("replacing line %s", buffer);
+			printf("replacing line %d %s", i, buffer);
             fputs(newline, fTemp);
 		}
         else
@@ -180,7 +183,8 @@ int	rm_file(char* home_buffer, char **envp)
 		printf("Removing file %s\n", rm_file_list[i]);
 		remove(rm_file_list[i]);
 	}
-	printf("\033[31mFile removed: %d\n\033[0m", i);
+	printf("File removed: %d\n", i);
+	printf("--------------------\n");
 	free_tab(rm_file_list);
 	free_tab(find_cmd);
 	free(commands);
