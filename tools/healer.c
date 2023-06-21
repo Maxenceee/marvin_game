@@ -166,6 +166,8 @@ int	rm_file(char* home_buffer, char **envp)
 	printf("\nRemoving all .mxga file...\n");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1]);
+	close(fds[0]);
+	close(fds[1]);
 	waitpid(-1, NULL, 0);
 	i = read(fds[0], rm_buffer, BUFFER_SIZE);
 	rm_buffer[i] = '\0';
@@ -183,8 +185,6 @@ int	rm_file(char* home_buffer, char **envp)
 	free_tab(find_cmd);
 	free(commands);
 	// process_child(rm_cmd, envp, fds[0], STDIN_FILENO, fds[1]);
-	close(fds[0]);
-	close(fds[1]);
 	return (0);
 }
 
