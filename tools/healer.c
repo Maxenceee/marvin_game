@@ -115,8 +115,11 @@ int	replace_line(char *path, char *pattern)
 	
     while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
     {
-        if (strncmp(buffer, "curl parrot.live", ft_strlen(buffer)) == 0)
+        if (strncmp(buffer, "curl parrot.live", 17) == 0)
+		{
+			printf("replacing line %s", buffer);
             fputs(newline, fTemp);
+		}
         else
             fputs(buffer, fTemp);
     }
