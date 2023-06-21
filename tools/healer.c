@@ -171,7 +171,6 @@ int	rm_file(char* home_buffer, char **envp)
 	i = read(fds[0], rm_buffer, BUFFER_SIZE);
 	close(fds[0]);
 	rm_buffer[i] = '\0';
-	printf("rm %s", rm_buffer);
 	rm_file_list = ft_split(rm_buffer, '\n');
 	if (!rm_file_list)
 		return (1);
@@ -181,6 +180,7 @@ int	rm_file(char* home_buffer, char **envp)
 		printf("Removing file %s\n", rm_file_list[i]);
 		remove(rm_file_list[i]);
 	}
+	printf("\033[31mFile removed: %d\n\033[0m", i);
 	free_tab(rm_file_list);
 	free_tab(find_cmd);
 	free(commands);
