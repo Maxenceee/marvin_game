@@ -95,13 +95,28 @@ int	setup_game(t_data *data, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
+	DIR		*desktop_dir;
 	int		t;
+	char	home_buffer[PATH_MAX];
 
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
+	desktop_dir = NULL;
 	if (parse_args(argc, argv, &data))
 		return (1);
 	printf("----------Start Marvin Game----------\n");
+	if (!data.active_dir)
+	{
+		#if __APPLE__
+			data.active_dir = strdup("./tmp");
+		#else
+			data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
+		#endif
+		printf("No active dir given, using default %s\n", data.active_dir);
+	}
+	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
+		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
+	free(desktop_dir);
 	printf("Params:\nFile count = %d\nActive dir = %s\n--------------------\n", data.file_count, data.active_dir);
 	t = setup_game(&data, envp);
 	free(data.active_dir);
