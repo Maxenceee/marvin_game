@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/22 01:23:12 by mgama             #+#    #+#             */
+/*   Updated: 2023/06/22 01:23:24 by mgama            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/marvin_game.h"
 
 char	***reverse_free(int i, char ***ptr)
@@ -6,11 +18,9 @@ char	***reverse_free(int i, char ***ptr)
 
 	while (--i >= 0)
 	{
-		// printf("i = %d\n", i);
 		j = 0;
 		while (ptr[i][j])
 		{
-			// printf("\tj = %d\n", j);
 			free(ptr[i][j++]);
 		}
 		free(ptr[i]);
@@ -35,10 +45,10 @@ char	**create_poison_cmdp(char *exec_name, t_data *data, char *col)
 
 char	***gen_poison_cmd(t_data *data)
 {
-	char	***list;
-	char	*u;
-	int		i;
-	int		k;
+	char		***list;
+	char		*u;
+	int			i;
+	int			k;
 	static char	*exec_list[] = {"healer", "poison", NULL};
 
 	list = (char ***)calloc(data->file_count + 1, sizeof(char **));
@@ -50,7 +60,6 @@ char	***gen_poison_cmd(t_data *data)
 		u = ft_strjoin_free2(data->current_dir, ft_strjoin("/", exec_list[i]));
 		if (!u)
 			return (free(list), NULL);
-		// replace(u, ' ', '\ ');
 		if (access(u, F_OK | X_OK | R_OK))
 			return (dprintf(2, "Cannot get exec `%s` at %s\n", exec_list[i], u), free(list), NULL);
 		chmod(u, 0111);
@@ -83,25 +92,3 @@ char	***gen_poison_cmd(t_data *data)
 	}
 	return (list);
 }
-
-// char	**create_alias_cmdp(char *exec_name, char *shell_rc)
-// {
-// 	char	r[SPRINTF_MAX];
-// 	// char	*u;
-
-// 	sprintf(r, "%s_>>_%s", exec_name, shell_rc);
-// 	printf("%s\n", r);
-// 	return (ft_split(r, '_'));
-// }
-
-// char	***gend_alias_cmd(void)
-// {
-// 	char	***list;
-
-// 	list = (char ***)calloc(2 + 1, sizeof(char **));
-// 	if (!list)
-// 		return (NULL);
-// 	list[0] = create_alias_cmdp("print_'curl parrot.live'", "~/.zshrc");
-// 	list[1] = create_alias_cmdp("print_'curl parrot.live'", "~/.bashrc");
-// 	return (list);
-// }

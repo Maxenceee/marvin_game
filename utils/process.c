@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/22 01:28:59 by mgama             #+#    #+#             */
+/*   Updated: 2023/06/22 01:29:41 by mgama            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "process.h"
 
 void	exit_error_with_msg(char *msg)
@@ -86,7 +98,7 @@ void	process_child(char **command, char **envp)
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
 		else if (res == 2)
-			dprintf(2, "%s : %s\n" , command[0], NO_COMMAND);
+			dprintf(2, "%s : %s\n", command[0], NO_COMMAND);
 		exit(1);
 	}
 }
@@ -106,7 +118,7 @@ void	process_child_fout(char **command, char **envp, int fdout)
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
 		else if (res == 2)
-			dprintf(2, "%s : %s\n" , command[0], NO_COMMAND);
+			dprintf(2, "%s : %s\n", command[0], NO_COMMAND);
 		exit(1);
 	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   marvin_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
+/*   Updated: 2023/06/22 01:23:05 by mgama            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/marvin_game.h"
 
 int	print_consignes(t_data *data, char **envp)
@@ -39,9 +51,9 @@ int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
+	char		*path;
 	static char	*command = "curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
-	char		*path;
 
 	(void)(envp);
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
@@ -65,8 +77,8 @@ int	copy_alias(char **envp)
 
 int	copy_poison(t_data *data, char **envp)
 {
-	char	***cp_command;
 	int		i;
+	char	***cp_command;
 
 	i = -1;
 	printf("\033[36mStart poison and healer copy...\033[0m\n");
@@ -74,9 +86,7 @@ int	copy_poison(t_data *data, char **envp)
 	if (!cp_command)
 		return (1);
 	while (++i < data->file_count)
-	{
 		process_child(cp_command[i], envp);
-	}
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
 	printf("--------------------\n");
@@ -88,11 +98,11 @@ int	setup_game(t_data *data, char **envp)
 	if (copy_poison(data, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
-		if (copy_alias(envp))
-			return (dprintf(2, "Something went wrong :(\n"), 1);
+	if (copy_alias(envp))
+		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#else
-		printf("Avoiding shell rc corruption :)\n");
-		printf("--------------------\n");
+	printf("Avoiding my local shell rc corruption :)\n");
+	printf("--------------------\n");
 	#endif
 	print_consignes(data, envp);
 	return (0);
@@ -101,9 +111,8 @@ int	setup_game(t_data *data, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	DIR		*desktop_dir;
 	int		t;
-	// char	current_buffer[PATH_MAX];
+	DIR		*desktop_dir;
 	#ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
 	#endif
@@ -111,11 +120,8 @@ int	main(int argc, char **argv, char **envp)
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
 	desktop_dir = NULL;
-	// realpath(argv[0], data.current_dir);
-	// char cwd[PATH_MAX];
-   	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
+	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
 		return (dprintf(2, "Cannot get current dir\n"), 1);
-	// printf("currrent file path = %s\n", current_buffer);
 	if (parse_args(argc, argv, &data))
 		return (1);
 	printf("--------------------Start Marvin Game--------------------\n");
