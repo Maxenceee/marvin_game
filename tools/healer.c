@@ -100,7 +100,7 @@ void	process_child(char **command, char **envp, int fdin, int fdout)
 	if (pid == 0)
 	{
 		dup2(fdin, fdout);
-		close(fdin);
+		close(fdout);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);
@@ -138,7 +138,7 @@ int	replace_line(char *path, char *pattern)
     fclose(fTemp);
     remove(path);
     rename("replace.tmp", path);
-    printf("\nSuccessfully replaced line\n");
+    printf("Successfully replaced line\n");
     return (0);
 }
 
@@ -183,6 +183,7 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
+	printf("Removing all .mg file...");
 	pipe(fds);
 	process_child(find_cmd, envp, fds[1], STDOUT_FILENO);
 	process_child(rm_cmd, envp, fds[0], STDIN_FILENO);
