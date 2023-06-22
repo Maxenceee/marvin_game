@@ -3,6 +3,7 @@
 Why Marvin? 42!
 
 ## The Game
+
 Create a bunch of files on the Desktop, preventing you from using your Terminal with the parrot, until you find the right file that fixes the mess. For those who does not lock their session 😈
 
 ## Usage
@@ -14,9 +15,10 @@ Params:
 ```
 
 ### Overview
+
 Run `make gen` to compile and start the program. You can use params using the argument `GVAR`.
 
-Example: 
+Example:
 ```sh
 make gen GVAR="-c 200 -p /Users/maxencegama/Documents"
 ```
