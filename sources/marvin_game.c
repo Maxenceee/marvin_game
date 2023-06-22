@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:47:26 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:47:47 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	copy_alias(char **envp)
 			return (1);
 		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_RDWR | O_APPEND);
-		free(path);
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
@@ -79,6 +78,7 @@ int	copy_alias(char **envp)
 		if (ioctl(fd, EXT2_IOC_SETFLAGS, &flags) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		#endif /* __APPLE__ */
+		free(path);
 		close(fd);
 	}
 	printf("--------------------\n");
