@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 05:20:55 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 05:26:24 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,8 @@ int	main(int argc, char **argv, char **envp)
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
 	printf("\nParams:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
+	printf("Press ENTER to continue...");
+	getchar();
 	t = setup_game(&data, envp);
 	free(data.active_dir);
 	printf("---------------------------------------------------------\n");
