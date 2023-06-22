@@ -16,7 +16,7 @@ Params:
 
 ### Quick start
 
-Run `make gen` to compile and start the program. You can use params using the argument `GVAR`.
+Run `make gen` to compile and start the program. You can add params using the argument `GVAR`.
 
 Example:
 ```sh
