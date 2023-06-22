@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:14 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 02:15:51 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 05:13:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 
 	i = argc;
 	data->file_count = 200;
+	data->has_logs = 1;
 	while (i-- > 0)
 	{
 		if (0 == ft_strcmp(argv[i], "-c") && argc - 1 >= i + 1
@@ -25,11 +26,15 @@ int	parse_args(int argc, char **argv, t_data *data)
 		{
 			data->file_count = atoi(argv[i + 1]);
 			if (data->file_count < 2 || data->file_count > INT16_MAX)
-				printf("File count out of range, file_count will be normalized\n");
+				printf("❗️File count out of range, file_count will be normalized\n");
 		}
 		else if (0 == ft_strcmp(argv[i], "-p") && argc - 1 >= i + 1)
 		{
 			data->active_dir = strdup(argv[i + 1]);
+		}
+		else if (0 == ft_strcmp(argv[i], "--no-log") || 0 == ft_strcmp(argv[i], "-n"))
+		{
+			data->has_logs = 0;
 		}
 	}
 	data->file_count = min(max(data->file_count, 2), INT16_MAX);

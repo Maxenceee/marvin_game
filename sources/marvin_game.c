@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 05:03:55 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 05:20:55 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	print_consignes(t_data *data, char **envp)
 	path = ft_strjoin(data->active_dir, "/consignes.mxga.txt");
 	if (!path)
 		return (1);
-	fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (fd < 0)
-		return (1);
+	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777)) < 0)
+		return (free(path), 1);
 	dprintf(fd, "--------------------Start Marvin Game--------------------\n\n");
 	dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
 	dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
@@ -35,14 +34,17 @@ int	print_consignes(t_data *data, char **envp)
 	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
 	t_cmd = ft_strjoin("open ", path);
 	printf("created at %s\n", path);
-	free(path);
 	if (!t_cmd)
-		return (1);
+		return (free(path), 1);
 	cmd = ft_split(t_cmd, ' ');
 	free(t_cmd);
 	if (!cmd)
-		return (1);
+		return (free(path), 1);
 	process_child(cmd, envp);
+	waitpid(-1, NULL, 0);
+	if (data->has_logs)
+		dprintf(data->log_fd, "%s\n", path);
+	free(path);
 	free_tab(cmd);
 	return (0);
 }
@@ -66,8 +68,7 @@ int	copy_alias(char **envp)
 		if (!path)
 			return (1);
 		printf("opening and writing in %s\n", path);
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND);
-		if (fd < 0)
+		if ((fd = open(path, O_CREAT | O_WRONLY | O_APPEND)) < 0)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
 		dprintf(fd, "%s\n", command);
 		// #if __APPLE__
@@ -93,20 +94,17 @@ int	copy_poison(t_data *data, char **envp)
 {
 	int		i;
 	int		fd;
-	char	b[SPRINTF_MAX];
 	char	***cp_command;
 
 	i = -1;
 	printf("\033[36mStart poison and healer copy...\033[0m\n");
-	snprintf(b, SPRINTF_MAX, "%s/.traces_%s_%lu.mg", data->current_dir, getenv("USER"), ft_abs_time());
-	if ((fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
-		return (dprintf(2, "Could not open traces file %s\n", b), 1);
 	cp_command = gen_poison_cmd(data);
 	if (!cp_command)
 		return (1);
 	while (++i < data->file_count)
 	{
-		dprintf(fd, "%s\n", cp_command[i][2]);
+		if (data->has_logs)
+			dprintf(data->log_fd, "%s\n", cp_command[i][2]);
 		process_child(cp_command[i], envp);
 	}
 	printf("%d files generated\n", i);
@@ -118,6 +116,14 @@ int	copy_poison(t_data *data, char **envp)
 
 int	setup_game(t_data *data, char **envp)
 {
+	char	b[SPRINTF_MAX];
+
+	if (data->has_logs)
+	{
+		snprintf(b, SPRINTF_MAX, "%s/.traces_%s_%lu.mg", data->current_dir, getenv("USER"), ft_abs_time());
+		if ((data->log_fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
+			return (dprintf(2, "Could not open traces file %s\n", b), 1);
+	}
 	#ifndef __APPLE__
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
@@ -128,6 +134,8 @@ int	setup_game(t_data *data, char **envp)
 	if (copy_poison(data, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	print_consignes(data, envp);
+	if (data->log_fd)
+		close(data->log_fd);
 	return (0);
 }
 
@@ -146,6 +154,8 @@ int	main(int argc, char **argv, char **envp)
 	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
 		return (dprintf(2, "Cannot get current dir\n"), 1);
 	printf("--------------------Start Marvin Game--------------------\n");
+	if (!data.has_logs)
+		printf("❗️No-log mode enabled\n");
 	if (parse_args(argc, argv, &data))
 		return (1);
 	if (!data.active_dir)
@@ -155,7 +165,7 @@ int	main(int argc, char **argv, char **envp)
 		#else
 			data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
 		#endif /* __APPLE__ */
-		printf("No active dir given, using default %s\n", data.active_dir);
+		printf("❗️No active dir given, using default %s\n", data.active_dir);
 	}
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);

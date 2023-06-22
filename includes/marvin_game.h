@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:47:29 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 05:15:28 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 #endif /* __APPLE__ */
 
 typedef struct s_data {
+	int		has_logs;
+	int		log_fd;
 	int		file_count;
 	char	*active_dir;
 	char	current_dir[PATH_MAX];
