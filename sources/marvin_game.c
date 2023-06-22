@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:10:47 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:11:46 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	copy_alias(char **envp)
 			return (1);
 		dprintf(fd, "%s\n", command);
 		#ifndef __APPLE__
-		ioctl(fd, FS_IMMUTABLE_FL);
+		ioctl(fd, EXT2_IOC_GETFLAGS);
 		#endif
 		close(fd);
 	}
