@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:20:34 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:48:19 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_consignes(t_data *data, char **envp)
 	fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 		return (1);
-	dprintf(fd, "----------The Marvin Game----------\n\n");
+	dprintf(fd, "--------------------Start Marvin Game--------------------\n\n");
 	dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
 	dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
 	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu vas devoir jouer à notre petit jeu. Une version de 'Où est Charlie', version 42.\n");
@@ -92,15 +92,23 @@ int	copy_alias(char **envp)
 int	copy_poison(t_data *data, char **envp)
 {
 	int		i;
+	int		fd;
+	char	b[PATH_MAX];
 	char	***cp_command;
 
 	i = -1;
 	printf("\033[36mStart poison and healer copy...\033[0m\n");
+	sprintf(b, "%s/.traces_%lu.mg", data->current_dir, ft_abs_time());
+	if ((fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
+		return (dprintf(2, "Could not open traces file %s\n", b), 1);
 	cp_command = gen_poison_cmd(data);
 	if (!cp_command)
 		return (1);
 	while (++i < data->file_count)
+	{
+		dprintf(fd, "%s\n", cp_command[i][2]);
 		process_child(cp_command[i], envp);
+	}
 	printf("%d files generated\n", i);
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);

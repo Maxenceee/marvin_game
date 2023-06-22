@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:38:09 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:25:52 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	rm_file(char *home_buffer, char **envp)
 	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
 	#if __APPLE__
-	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer, " -type f ( -name *_mxga -o -name consignes.mxga.txt )"));
+	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer, "/Desktop -type f ( -name *_mxga -o -name consignes.mxga.txt )"));
 	#else
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer, " -type f ( -name *.mxga -o -name consignes.mxga.txt )"));
 	#endif /* __APPLE__ */

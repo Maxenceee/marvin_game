@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:00:26 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:47:29 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <time.h>
+# include <sys/time.h>
 # include <sys/wait.h>
 # include <sys/errno.h>
 # include <signal.h>
@@ -53,5 +54,10 @@ char	***gen_poison_cmd(t_data *data);
 
 /* strings */
 char	*gen_rand_name(int lenght);
+char	*gen_rand_string(int lenght);
+
+/* time */
+unsigned long	ft_current_time(unsigned long begin);
+unsigned long	ft_abs_time(void);
 
 #endif /* MARVIN_GAME_H */
