@@ -16,7 +16,7 @@
 #ifndef _LINUX_EXT2_FS_H
 #define _LINUX_EXT2_FS_H
 
-// #include <ext2fs/ext2_types.h>		/* Changed from linux/types.h */
+#include <ext2fs/ext2_types.h>		/* Changed from linux/types.h */
 #include <linux/types.h>
 #include <linux/magic.h>
 #include <linux/fs.h>
@@ -45,14 +45,14 @@
 /*
  * Special inode numbers
  */
-#define EXT2_BAD_INO		 1	/* Bad blocks inode */
-#define EXT2_ROOT_INO		 2	/* Root inode */
-#define EXT2_ACL_IDX_INO	 3	/* ACL inode */
-#define EXT2_ACL_DATA_INO	 4	/* ACL inode */
-#define EXT2_BOOT_LOADER_INO	 5	/* Boot loader inode */
-#define EXT2_UNDEL_DIR_INO	 6	/* Undelete directory inode */
-#define EXT2_RESIZE_INO		 7	/* Reserved group descriptors inode */
-#define EXT2_JOURNAL_INO	 8	/* Journal inode */
+#define EXT2_BAD_INO			1	/* Bad blocks inode */
+#define EXT2_ROOT_INO			2	/* Root inode */
+#define EXT2_ACL_IDX_INO		3	/* ACL inode */
+#define EXT2_ACL_DATA_INO		4	/* ACL inode */
+#define EXT2_BOOT_LOADER_INO	5	/* Boot loader inode */
+#define EXT2_UNDEL_DIR_INO		6	/* Undelete directory inode */
+#define EXT2_RESIZE_INO			7	/* Reserved group descriptors inode */
+#define EXT2_JOURNAL_INO		8	/* Journal inode */
 
 /* First non-reserved inode for old ext2 filesystems */
 #define EXT2_GOOD_OLD_FIRST_INO	11
@@ -262,7 +262,7 @@ struct ext2_dx_countlimit {
 #define EXT2_BTREE_FL			0x00001000 /* btree format dir */
 #define EXT2_INDEX_FL			0x00001000 /* hash-indexed directory */
 #define EXT2_IMAGIC_FL			0x00002000
-#define EXT3_JOURNAL_DATA_FL		0x00004000 /* file data should be journaled */
+#define EXT3_JOURNAL_DATA_FL	0x00004000 /* file data should be journaled */
 #define EXT2_NOTAIL_FL			0x00008000 /* file tail should not be merged */
 #define EXT2_DIRSYNC_FL 		0x00010000 /* Synchronous directory modifications */
 #define EXT2_TOPDIR_FL			0x00020000 /* Top of directory hierarchies*/
@@ -491,7 +491,7 @@ struct ext2_inode_large {
 /*
  * Behaviour when detecting errors
  */
-#define EXT2_ERRORS_CONTINUE		1	/* Continue execution */
+#define EXT2_ERRORS_CONTINUE	1	/* Continue execution */
 #define EXT2_ERRORS_RO			2	/* Remount fs read-only */
 #define EXT2_ERRORS_PANIC		3	/* Panic */
 #define EXT2_ERRORS_DEFAULT		EXT2_ERRORS_CONTINUE
@@ -625,7 +625,7 @@ struct ext2_super_block {
 #define EXT2_FEATURE_COMPAT_EXT_ATTR		0x0008
 #define EXT2_FEATURE_COMPAT_RESIZE_INODE	0x0010
 #define EXT2_FEATURE_COMPAT_DIR_INDEX		0x0020
-#define EXT2_FEATURE_COMPAT_LAZY_BG		0x0040
+#define EXT2_FEATURE_COMPAT_LAZY_BG			0x0040
 
 #define EXT2_FEATURE_RO_COMPAT_SPARSE_SUPER	0x0001
 #define EXT2_FEATURE_RO_COMPAT_LARGE_FILE	0x0002
@@ -641,8 +641,8 @@ struct ext2_super_block {
 #define EXT3_FEATURE_INCOMPAT_JOURNAL_DEV	0x0008 /* Journal device */
 #define EXT2_FEATURE_INCOMPAT_META_BG		0x0010
 #define EXT3_FEATURE_INCOMPAT_EXTENTS		0x0040
-#define EXT4_FEATURE_INCOMPAT_64BIT		0x0080
-#define EXT4_FEATURE_INCOMPAT_MMP		0x0100
+#define EXT4_FEATURE_INCOMPAT_64BIT			0x0080
+#define EXT4_FEATURE_INCOMPAT_MMP			0x0100
 
 
 #define EXT2_FEATURE_COMPAT_SUPP	0
@@ -660,12 +660,12 @@ struct ext2_super_block {
 /*
  * Default mount options
  */
-#define EXT2_DEFM_DEBUG		0x0001
-#define EXT2_DEFM_BSDGROUPS	0x0002
+#define EXT2_DEFM_DEBUG			0x0001
+#define EXT2_DEFM_BSDGROUPS		0x0002
 #define EXT2_DEFM_XATTR_USER	0x0004
-#define EXT2_DEFM_ACL		0x0008
-#define EXT2_DEFM_UID16		0x0010
-#define EXT3_DEFM_JMODE		0x0060 
+#define EXT2_DEFM_ACL			0x0008
+#define EXT2_DEFM_UID16			0x0010
+#define EXT3_DEFM_JMODE			0x0060 
 #define EXT3_DEFM_JMODE_DATA	0x0020
 #define EXT3_DEFM_JMODE_ORDERED	0x0040
 #define EXT3_DEFM_JMODE_WBACK	0x0060
@@ -702,14 +702,14 @@ struct ext2_dir_entry_2 {
  */
 #define EXT2_FT_UNKNOWN		0
 #define EXT2_FT_REG_FILE	1
-#define EXT2_FT_DIR		2
+#define EXT2_FT_DIR			2
 #define EXT2_FT_CHRDEV		3
 #define EXT2_FT_BLKDEV		4
 #define EXT2_FT_FIFO		5
 #define EXT2_FT_SOCK		6
 #define EXT2_FT_SYMLINK		7
 
-#define EXT2_FT_MAX		8
+#define EXT2_FT_MAX			8
 
 /*
  * EXT2_DIR_PAD defines the directory entries boundaries
