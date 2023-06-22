@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:47:47 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:49:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ int	copy_alias(char **envp)
 		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_RDWR | O_APPEND);
 		if (fd < 0)
-			return (1);
+			return (free(path), 1);
 		dprintf(fd, "%s\n", command);
 		#if __APPLE__
 		if (chflags(path, UF_IMMUTABLE) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		#else
 		flags |= EXT2_IMMUTABLE_FL;
-		if (ioctl(fd, EXT2_IOC_SETFLAGS, &flags) < 0)
+		if (ioctl(fd, FS_IOC_SETFLAGS, &flags) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		#endif /* __APPLE__ */
 		free(path);
