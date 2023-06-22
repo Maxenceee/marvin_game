@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:53:14 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:57:08 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	copy_poison(t_data *data, char **envp)
 
 	i = -1;
 	printf("\033[36mStart poison and healer copy...\033[0m\n");
-	sprintf(b, "%s/.traces_%lu.mg", data->current_dir, ft_abs_time());
+	snprintf(b, SPRINTF_MAX, "%s/.traces_%lu.mg", data->current_dir, ft_abs_time());
 	if ((fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
 		return (dprintf(2, "Could not open traces file %s\n", b), 1);
 	cp_command = gen_poison_cmd(data);
