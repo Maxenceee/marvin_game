@@ -10,9 +10,12 @@ Create a bunch of files on the Desktop, preventing you from using your Terminal 
 
 Params:
 ```
--c	specify the number of generated files (minimun is 2, default is 200, maximum is 🤷‍♂️)
--p	change active directory (default is Desktop)
--n --no-log disable trace file generation
+-c
+	specify the number of generated files (minimun is 2, default is 200, maximum is 🤷‍♂️)
+-p
+	change active directory (default is Desktop)
+--no-log, -n
+	disable trace file generation
 ```
 
 ### Quick start
