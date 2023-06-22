@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:01:36 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:03:13 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	copy_alias(char **envp)
 		// // if (chmod(path, 0444) < 0)
 		// 	return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		// #endif /* __APPLE__ */
-		if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0) < 0)
+		if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0, 0) < 0)
 				return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		free(path);
 		close(fd);
