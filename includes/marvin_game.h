@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:03:18 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:18:55 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # include <sys/ioctl.h>
 
 # include "../utils/process.h"
+
+#ifndef __APPLE__
+# include <linux/fs.h>
+# include <linux/ext2_fs.h>
+#endif
 
 typedef struct s_data {
 	int		file_count;
