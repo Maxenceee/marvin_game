@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:02 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:29:03 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 02:14:52 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_strjoin_free1(char *s1, char const *s2);
 char	*ft_strjoin_free2(char const *s1, char *s2);
 size_t	ft_strlen(const char *str);
 int		max(int a, int b);
+int		min(int a, int b);
 int		ft_isdigit(int num);
 int		ft_isstrdigit(char *num);
 char	*replace(char *a, char p, char r);

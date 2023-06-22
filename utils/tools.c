@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:44 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:46:20 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 02:14:36 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,6 +308,13 @@ char	*ft_strjoin_free2(char const *s1, char *s2)
 int	max(int a, int b)
 {
 	if (a < b)
+		return (b);
+	return (a);
+}
+
+int	min(int a, int b)
+{
+	if (a > b)
 		return (b);
 	return (a);
 }

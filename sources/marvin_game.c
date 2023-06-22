@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:58:31 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 02:16:26 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ int	main(int argc, char **argv, char **envp)
 	desktop_dir = NULL;
 	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
 		return (dprintf(2, "Cannot get current dir\n"), 1);
+	printf("--------------------Start Marvin Game--------------------\n");
 	if (parse_args(argc, argv, &data))
 		return (1);
-	printf("--------------------Start Marvin Game--------------------\n");
 	if (!data.active_dir)
 	{
 		#if __APPLE__
@@ -137,7 +137,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
-	printf("Params:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
+	printf("\nParams:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
 	t = setup_game(&data, envp);
 	free(data.active_dir);
 	printf("---------------------------------------------------------\n");
