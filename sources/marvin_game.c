@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:37:59 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:43:16 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	print_consignes(t_data *data, char **envp)
 	path = ft_strjoin(data->active_dir, "/consignes.mxga.txt");
 	if (!path)
 		return (1);
-	fd = open(path, O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 		return (1);
 	dprintf(fd, "----------The Marvin Game----------\n\n");
@@ -66,7 +66,7 @@ int	copy_alias(char **envp)
 		if (!path)
 			return (1);
 		printf("opening and writing in %s\n", path);
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
+		fd = open(path, O_CREAT | O_RDWR | O_APPEND);
 		free(path);
 		if (fd < 0)
 			return (1);

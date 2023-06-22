@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:38:14 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:43:31 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	copy_alias(char **envp)
 		if (!path)
 			return (1);
 		printf("opening and writing in %s\n", path);
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
+		fd = open(path, O_CREAT | O_RDWR | O_APPEND);
 		free(path);
 		if (fd < 0)
 			return (1);
