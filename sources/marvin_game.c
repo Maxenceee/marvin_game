@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:03:13 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:03:57 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,18 @@ int	copy_alias(char **envp)
 		if (fd < 0)
 			return (free(path), 1);
 		dprintf(fd, "%s\n", command);
-		// #if __APPLE__
-		// if (chflags(path, UF_IMMUTABLE) < 0)
-		// 	return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
-		// #else
+		#if __APPLE__
+		if (chflags(path, UF_IMMUTABLE) < 0)
+			// return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
+			if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0, 0) < 0)
+				return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
+		#else
 		// flags |= EXT2_IMMUTABLE_FL;
 		// if (ioctl(fd, FS_IOC_SETFLAGS, &flags) < 0)
-		// // if (chmod(path, 0444) < 0)
 		// 	return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
-		// #endif /* __APPLE__ */
-		if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0, 0) < 0)
+			if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0) < 0)
 				return (dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
+		#endif /* __APPLE__ */
 		free(path);
 		close(fd);
 	}
