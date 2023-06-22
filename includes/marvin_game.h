@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:30:53 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:03:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/errno.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 
 # include "../utils/process.h"
 

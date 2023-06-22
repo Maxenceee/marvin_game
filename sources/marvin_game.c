@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 02:16:26 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:10:47 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	copy_alias(char **envp)
 		if (fd < 0)
 			return (1);
 		dprintf(fd, "%s\n", command);
+		#ifndef __APPLE__
+		ioctl(fd, FS_IMMUTABLE_FL);
+		#endif
 		close(fd);
 	}
 	printf("--------------------\n");
@@ -95,8 +98,6 @@ int	copy_poison(t_data *data, char **envp)
 
 int	setup_game(t_data *data, char **envp)
 {
-	if (copy_poison(data, envp))
-		return (dprintf(2, "Something went wrong :(\n"), 1);
 	#ifndef __APPLE__
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
@@ -104,6 +105,8 @@ int	setup_game(t_data *data, char **envp)
 	printf("Avoiding my local shell rc corruption :)\n");
 	printf("--------------------\n");
 	#endif
+	if (copy_poison(data, envp))
+		return (dprintf(2, "Something went wrong :(\n"), 1);
 	print_consignes(data, envp);
 	return (0);
 }
