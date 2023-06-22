@@ -14,7 +14,7 @@ Params:
 -p	change active directory (default is Desktop)
 ```
 
-### Overview
+### Quick start
 
 Run `make gen` to compile and start the program. You can use params using the argument `GVAR`.
 
