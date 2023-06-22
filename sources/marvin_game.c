@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:47:51 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 01:58:31 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	print_consignes(t_data *data, char **envp)
 	if (!t_cmd)
 		return (1);
 	cmd = ft_split(t_cmd, ' ');
-	if (!cmd)
-		return (free(t_cmd), 1);
-	process_child(cmd, envp);
 	free(t_cmd);
+	if (!cmd)
+		return (1);
+	process_child(cmd, envp);
 	free_tab(cmd);
 	return (0);
 }
@@ -65,11 +65,11 @@ int	copy_alias(char **envp)
 			return (1);
 		printf("opening and writing in %s\n", path);
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND | O_RDONLY);
+		free(path);
 		if (fd < 0)
-			return (free(path), 1);
+			return (1);
 		dprintf(fd, "%s\n", command);
 		close(fd);
-		free(path);
 	}
 	printf("--------------------\n");
 	return (0);
