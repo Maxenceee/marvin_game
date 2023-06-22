@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:17:56 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:20:34 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	copy_alias(char **envp)
 		if (!path)
 			return (1);
 		printf("opening and writing in %s\n", path);
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0777);
+		fd = open(path, O_CREAT | O_WRONLY | O_APPEND);
 		if (fd < 0)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
 		dprintf(fd, "%s\n", command);
@@ -101,6 +101,7 @@ int	copy_poison(t_data *data, char **envp)
 		return (1);
 	while (++i < data->file_count)
 		process_child(cp_command[i], envp);
+	printf("%d files generated\n", i);
 	waitpid(-1, NULL, 0);
 	free_double_tab(cp_command);
 	printf("--------------------\n");
