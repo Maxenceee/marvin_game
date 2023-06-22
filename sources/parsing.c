@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:14 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:20:24 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 02:09:34 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 	int		i;
 
 	i = argc;
-	data->file_count = 50;
+	data->file_count = 200;
 	while (i-- > 0)
 	{
 		if (0 == ft_strcmp(argv[i], "-c") && argc - 1 >= i + 1

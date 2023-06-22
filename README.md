@@ -10,7 +10,7 @@ Create a bunch of files on the Desktop, preventing you from using your Terminal 
 
 Params:
 ```
--c	specify the number of generated files (minimun is 2, default is 50)
+-c	specify the number of generated files (minimun is 2, default is 200)
 -p	change active directory (default is Desktop)
 ```
 
