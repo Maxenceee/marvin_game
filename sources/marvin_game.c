@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:11:46 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:14:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
+	int			flags;
 	char		*path;
 	static char	*command = "curl parrot.live";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
+	flags = 0;
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
 	i = -1;
 	while (file_list[++i])
@@ -70,7 +72,8 @@ int	copy_alias(char **envp)
 			return (1);
 		dprintf(fd, "%s\n", command);
 		#ifndef __APPLE__
-		ioctl(fd, EXT2_IOC_GETFLAGS);
+		flags |= EXT2_IMMUTABLE_FL;
+		ioctl(fd, EXT2_IOC_GETFLAGS, &flags);
 		#endif
 		close(fd);
 	}
