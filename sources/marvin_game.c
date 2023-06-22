@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:48:19 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:51:05 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	copy_poison(t_data *data, char **envp)
 {
 	int		i;
 	int		fd;
-	char	b[PATH_MAX];
+	char	b[PATH_MAX / 4];
 	char	***cp_command;
 
 	i = -1;

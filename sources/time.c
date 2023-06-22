@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:38:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:46:09 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:50:10 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned long	ft_abs_time(void)
 	unsigned long	u;
 
 	if (gettimeofday(&tv, NULL) == -1)
-		write(2, "Error: GETTIMEOFDAY(2)\n", 28);
+		dprintf(2, "Error: GETTIMEOFDAY(2)\n");
 	s = tv.tv_sec * 1000;
 	u = tv.tv_usec / 1000;
 	return (s + u);
