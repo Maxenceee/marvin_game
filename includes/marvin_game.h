@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:36:41 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 04:00:26 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/xattr.h>
 
 # include "../utils/process.h"
 
