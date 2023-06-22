@@ -29,4 +29,4 @@ Compile the project using `make all` then compile the executables "poison" and "
 
 # ## 
 
-Made for 42 School Piscine, MacOS/Linux
+Made for `42 School Piscine`, MacOS/Linux
