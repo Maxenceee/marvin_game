@@ -12,7 +12,7 @@ Params:
 ```
 -c	specify the number of generated files (minimun is 2, default is 200, maximum is 🤷‍♂️)
 -p	change active directory (default is Desktop)
--n | --no-log desable trace file generation
+-n --no-log disable trace file generation
 ```
 
 ### Quick start
