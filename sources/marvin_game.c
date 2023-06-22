@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:32:06 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:37:59 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	copy_alias(char **envp)
 		flags |= EXT2_IMMUTABLE_FL;
 		if (ioctl(fd, EXT2_IOC_GETFLAGS, &flags) < 0)
 			return (dprintf(2, "Could not execute ioctl on file %s", path), 1);
-		#endif
+		#endif /* __APPLE__ */
 		close(fd);
 	}
 	printf("--------------------\n");
@@ -108,7 +108,7 @@ int	setup_game(t_data *data, char **envp)
 	#ifndef __APPLE__
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
-	#else
+	#else /* __APPLE__ */
 	printf("Avoiding my local shell rc corruption :)\n");
 	printf("--------------------\n");
 	#endif
@@ -125,7 +125,7 @@ int	main(int argc, char **argv, char **envp)
 	DIR		*desktop_dir;
 	#ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
-	#endif
+	#endif /* __APPLE__ */
 
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
@@ -141,7 +141,7 @@ int	main(int argc, char **argv, char **envp)
 			data.active_dir = strdup("./tmp");
 		#else
 			data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
-		#endif
+		#endif /* __APPLE__ */
 		printf("No active dir given, using default %s\n", data.active_dir);
 	}
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))

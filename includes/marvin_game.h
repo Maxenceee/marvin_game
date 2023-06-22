@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:34:57 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:36:41 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@
 #ifndef __APPLE__
 # include <linux/fs.h>
 # include "ext2_fs.h"
-// # define EXT2_IOC_GETFLAGS		_IOR('f', 1, long)
-// # define EXT2_IMMUTABLE_FL		0x00000010 /* Immutable file */
-#endif
+#endif /* __APPLE__ */
 
 typedef struct s_data {
 	int		file_count;

@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:59:48 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:38:14 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int ac, char **av, char **envp)
 	process_child(rm_cmd, envp);
 	#else
 	system("gnome-terminal");
-	#endif
+	#endif /* __APPLE__ */
 	remove(home_buffer);
 	return (0);
 }

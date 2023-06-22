@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:31 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:20:37 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:38:05 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*gen_rand_name(int lenght)
 	return (ft_strjoin_free1(res, "_mxga"));
 	#else
 	return (ft_strjoin_free1(res, ".mxga"));
-	#endif
+	#endif /* __APPLE__ */
 }

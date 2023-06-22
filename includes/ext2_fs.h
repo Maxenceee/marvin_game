@@ -16,7 +16,10 @@
 #ifndef _LINUX_EXT2_FS_H
 #define _LINUX_EXT2_FS_H
 
-#include <ext2fs/ext2_types.h>		/* Changed from linux/types.h */
+// #include <ext2fs/ext2_types.h>		/* Changed from linux/types.h */
+#include <linux/types.h>
+#include <linux/magic.h>
+#include <linux/fs.h>
 
 /*
  * The second extended filesystem constants/structures

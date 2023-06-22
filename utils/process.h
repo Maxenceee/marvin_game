@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:04 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:29:05 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:37:22 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE INT16_MAX
-# endif
+# endif /* BUFFER_SIZE */
 # define PATH_MAX 4096
 # define SPRINTF_MAX 4096
 
