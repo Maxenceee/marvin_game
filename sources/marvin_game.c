@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:00:03 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:02:51 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu vas devoir jouer à notre petit jeu. Une version de 'Où est Charlie', version 42.\n");
 	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
 	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
+	dprintf(fd, "---------------------------------------------------------\n");
 	close(fd);
 	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
 	t_cmd = ft_strjoin("open ", path);
@@ -82,7 +83,7 @@ int	copy_alias(char **envp)
 		// 	if (setxattr(path, "security.evm", "immutable", sizeof("immutable"), 0) < 0)
 		// 		return (perror("error"), fflush(NULL), dprintf(2, "Could not execute ioctl on file %s\n", path), 1);
 		// #endif /* __APPLE__ */
-		chmod(path, 0111);
+		chmod(path, 0333);
 		free(path);
 		close(fd);
 	}
