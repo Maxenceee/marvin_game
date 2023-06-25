@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:08:39 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 16:14:43 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	rm_file(char *home_buffer, char **envp)
 	if (!find_cmd)
 		return (1);
 	printf("\nRemoving all .mxga files...\n");
-	pipe(fds);
+	if (pipe(fds) < 0)
+		return (dprintf(2, "Could not create pipe"), perror(""), free_tab(find_cmd), 1);
 	process_child_fout(find_cmd, envp, fds[1]);
 	close(fds[1]);
 	waitpid(-1, NULL, 0);

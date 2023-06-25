@@ -43,7 +43,6 @@ make gen GVAR="-c 200 -p /Users/maxence/Documents"
 
 Compile the project using `make all` then compile the executables "poison" and "healer" with `make execs`. Once done start the program running `./marvin_game`, adding params if needed.
 
-
 To fix averything run `make execs && ./healer`
 
 # ## 
