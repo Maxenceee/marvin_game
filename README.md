@@ -36,7 +36,7 @@ Run `make gen` to compile and start the program. You can add params using the ar
 
 Example:
 ```sh
-make gen GVAR="-c 200 -p /Users/maxencegama/Documents"
+make gen GVAR="-c 200 -p /Users/maxence/Documents"
 ```
 
 ### Details
