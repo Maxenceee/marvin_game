@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:03:44 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:05:20 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	copy_alias(char **envp)
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
 		if (!path)
 			return (1);
+		chmod(path, 0644);
 		printf("opening and writing in %s\n", path);
 		if ((fd = open(path, O_CREAT | O_WRONLY | O_APPEND)) < 0)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
