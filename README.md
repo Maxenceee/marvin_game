@@ -20,6 +20,14 @@ Params:
 	disable trace file generation
 ```
 
+#### Linux
+
+Nothing required
+
+#### MacOS
+
+You may need to remove macro statement in some files
+
 ### Quick start
 
 Run `make gen` to compile and start the program. You can add params using the argument `GVAR`.
