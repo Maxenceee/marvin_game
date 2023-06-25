@@ -16,6 +16,8 @@ Params:
 	specify the number of generated files (minimun is 2, default is 200, maximum is 🤷‍♂️)
 --dir-path, -p
 	change active directory (default is Desktop)
+--lang, -l
+	change `consignes.mxga.txt` lang (default is FR, fr|en)
 --no-log, -n
 	disable trace file generation
 ```
@@ -40,6 +42,8 @@ make gen GVAR="-c 200 -p /Users/maxencegama/Documents"
 ### Details
 
 Compile the project using `make all` then compile the executables "poison" and "healer" with `make execs`. Once done start the program running `./marvin_game`.
+
+To fix averything run `make execs && ./healer`
 
 # ## 
 

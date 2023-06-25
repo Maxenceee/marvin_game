@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:14:26 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:37:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@
 #  include "ext2_fs.h"
 # endif /* __APPLE__ */
 
+typedef enum e_lang {
+	FR,
+	EN
+}			t_lang;
+
 typedef struct s_data {
 	int		has_logs;
 	int		log_fd;
+	t_lang	lang;
 	int		file_count;
 	char	*active_dir;
 	char	current_dir[PATH_MAX];

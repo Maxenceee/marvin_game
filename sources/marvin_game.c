@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:05:20 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:51:17 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,25 @@ int	print_consignes(t_data *data, char **envp)
 	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777)) < 0)
 		return (free(path), 1);
 	dprintf(fd, "--------------------Start Marvin Game--------------------\n\n");
-	dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
-	dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
-	dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu vas devoir jouer à notre petit jeu. Une version de 'Où est Charlie', version 42.\n");
-	dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n\n");
-	dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ;)\n");
-	dprintf(fd, "---------------------------------------------------------\n");
+	if (data->lang == FR)
+	{
+		dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
+		dprintf(fd, "Ta session était sans surveillance, quel dommage !\n\n");
+		dprintf(fd, "Pour pouvoir l'utiliser à nouveau tu vas devoir jouer à notre petit jeu. Une version de 'Où est Charlie', version 42.\n");
+		dprintf(fd, "Comme tu as pu le constater il y a quelques nouveaux fichiers sur ton bureau, seul l'un d'eux est capable de t'aider.\n");
+		dprintf(fd, "Essaie de cliquer sur l'un d'eux tu verra.🤭\n\n");
+		dprintf(fd, "Il ne te reste plus qu'à chercher. Amuse-toi bien ! 🫶\n\n");
+	}
+	else
+	{
+		dprintf(fd, "Welcome to The Marvin Game ;)\n\n");
+		dprintf(fd, "Your session was alone, what a shame!\n\n");
+		dprintf(fd, "To be able to use it again you will have to play our little game. A version of 'Where's Wally', version 42.\n");
+		dprintf(fd, "As you can see there are some new files on your desktop, only one of them is able to help you.\n");
+		dprintf(fd, "Try to click on one of them you'll see.🤭\n\n");
+		dprintf(fd, "All you have to do is search. Have fun! 🫶\n\n");
+	}
+	dprintf(fd, "---------------------------------------------------------\n");	
 	close(fd);
 	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
 	t_cmd = ft_strjoin("open ", path);
@@ -146,6 +159,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	int		t;
 	DIR		*desktop_dir;
+	char	*langs[] = {"fr", "en", NULL};
 #ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
 #endif /* __APPLE__ */
@@ -172,7 +186,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
-	printf("\nParams:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
+	printf("\nParams:\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", langs[data.lang], data.file_count, data.active_dir, data.current_dir);
 	printf("Press ENTER to continue...");
 	getchar();
 	printf("\033[A\033[K");
