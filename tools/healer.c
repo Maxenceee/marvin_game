@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:37:11 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:04:22 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	replace_line(char *path, char *pattern)
 	char	buffer[BUFFER_SIZE];
 	char	newline[] = "";
 
+	chmod(path, 0644);
 	fptr = fopen(path, "r");
 	ftemp = fopen(".replace.tmp", "w");
 	if (fptr == NULL || ftemp == NULL)
