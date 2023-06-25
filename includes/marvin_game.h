@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 05:15:28 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:24:46 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 
 # include "../utils/process.h"
 
-#ifndef __APPLE__
-# include <linux/fs.h>
-# include "ext2_fs.h"
-#endif /* __APPLE__ */
+# ifndef __APPLE__
+#  include <linux/fs.h>
+#  include "ext2_fs.h"
+# endif /* __APPLE__ */
 
 typedef struct s_data {
 	int		has_logs;
@@ -48,15 +48,15 @@ typedef struct s_data {
 }				t_data;
 
 /* parsing */
-int		parse_args(int argc, char **argv, t_data *data);
+int				parse_args(int argc, char **argv, t_data *data);
 
 /* commands */
-char	**create_poison_cmdp(char *exec_name, t_data *data, char *col);
-char	***gen_poison_cmd(t_data *data);
+char			**create_poison_cmdp(char *exec_name, t_data *data, char *col);
+char			***gen_poison_cmd(t_data *data);
 
 /* strings */
-char	*gen_rand_name(int lenght);
-char	*gen_rand_string(int lenght);
+char			*gen_rand_name(int lenght);
+char			*gen_rand_string(int lenght);
 
 /* time */
 unsigned long	ft_current_time(unsigned long begin);

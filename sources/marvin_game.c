@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 16:23:50 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:28:02 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ int	setup_game(t_data *data, char **envp)
 		if ((data->log_fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
 			return (dprintf(2, "Could not open traces file %s\n", b), 1);
 	}
-	#ifndef __APPLE__
+#ifndef __APPLE__
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
-	#else /* __APPLE__ */
+#else
 	printf("Avoiding my local shell rc corruption :)\n");
 	printf("--------------------\n");
-	#endif
+#endif /* __APPLE__ */
 	if (copy_poison(data, envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 	print_consignes(data, envp);
@@ -143,9 +143,9 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	int		t;
 	DIR		*desktop_dir;
-	#ifndef __APPLE__
+#ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
-	#endif /* __APPLE__ */
+#endif /* __APPLE__ */
 
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
@@ -159,11 +159,11 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	if (!data.active_dir)
 	{
-		#if __APPLE__
-			data.active_dir = strdup("./tmp");
-		#else
-			data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
-		#endif /* __APPLE__ */
+#if __APPLE__
+		data.active_dir = strdup("./tmp");
+#else
+		data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
+#endif /* __APPLE__ */
 		printf("❗️No active dir given, using default %s\n", data.active_dir);
 	}
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))

@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:31 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 04:44:39 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:22:47 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ char	*gen_rand_name(int length)
 	while (j < length)
 		res[j++] = randomletter[rand() % 70];
 	res[j] = '\0';
-	#if __APPLE__
+#if __APPLE__
 	return (ft_strjoin_free1(res, "_mxga"));
-	#else
+#else
 	return (ft_strjoin_free1(res, ".mxga"));
-	#endif /* __APPLE__ */
+#endif /* __APPLE__ */
 }
 
 char	*gen_rand_string(int length)
