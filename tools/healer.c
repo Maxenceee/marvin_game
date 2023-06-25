@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:22:52 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:37:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	replace_line(char *path, char *pattern)
 			fputs(buffer, ftemp);
 	}
 	close_and_rm_file(fptr, ftemp);
-	remove(path);
+	if (remove(path) < 0)
+		dprintf(2, "Could not remove file %s", path), perror("");
 	rename(".replace.tmp", path);
 	return (0);
 }
@@ -90,7 +91,8 @@ int	rm_file(char *home_buffer, char **envp)
 	while (rm_file_list[++i])
 	{
 		printf("Removing file %s\n", rm_file_list[i]);
-		remove(rm_file_list[i]);
+		if (remove(rm_file_list[i]) < 0)
+			dprintf(2, "Could not remove file %s", rm_file_list[i]), perror("");
 	}
 	printf("File removed: %d\n", i);
 	printf("--------------------\n");
@@ -124,6 +126,7 @@ int	main(int ac, char **av, char **envp)
 	usleep(10);
 	if (rm_file(home_buffer, envp))
 		return (1);
-	remove(current_file_buffer);
+	if (remove(current_file_buffer) < 0)
+		dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
 	return (0);
 }

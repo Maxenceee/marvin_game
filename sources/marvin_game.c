@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:28:02 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:47:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	setup_game(t_data *data, char **envp)
 		if ((data->log_fd = open(b, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
 			return (dprintf(2, "Could not open traces file %s\n", b), 1);
 	}
-#ifndef __APPLE__
+#ifndef __APPLE__ /* remove this statement before executing on MacOS */
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong :(\n"), 1);
 #else
@@ -172,6 +172,7 @@ int	main(int argc, char **argv, char **envp)
 	printf("\nParams:\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", data.file_count, data.active_dir, data.current_dir);
 	printf("Press ENTER to continue...");
 	getchar();
+	printf("\033[A\033[K");
 	t = setup_game(&data, envp);
 	free(data.active_dir);
 	printf("---------------------------------------------------------\n");

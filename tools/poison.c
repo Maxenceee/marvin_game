@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:22:58 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/25 14:37:33 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av, char **envp)
 #else
 	system("gnome-terminal");
 #endif /* __APPLE__ */
-	remove(home_buffer);
+	if (remove(home_buffer) < 0)
+		dprintf(2, "Could not remove file %s", home_buffer), perror("");
 	return (0);
 }
