@@ -19,7 +19,6 @@ Params:
 --no-log, -n
 	disable trace file generation
 ```
-
 #### Linux
 
 Nothing required
