@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 20:16:42 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 18:18:23 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int ac, char **av, char **envp)
 	usleep(10);
 	if (rm_file(home_buffer, envp))
 		return (1);
-	if (remove(current_file_buffer) < 0)
+	if (strcmp(av[0], "healer") == 0 && remove(current_file_buffer) < 0)
 		dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
 	return (0);
 }
