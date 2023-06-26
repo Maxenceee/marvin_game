@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:44:40 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:48:26 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,10 @@ int	main(int ac, char **av, char **envp)
 		return (dprintf(2, "Could not pipe\n"), 1);
 	print_info(fd[0], envp);
 #endif /* __APPLE__ */
+#ifndef __APPLE__
+	usleep(500 * 1000);
+	dprintf(fd[1], "%d\n", 20);
+#endif /* __APPLE__ */
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
@@ -145,9 +149,9 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
-	usleep(500 * 1000);
 #ifndef __APPLE__
-	dprintf(fd[1], "%d\n", 80);
+	usleep(500 * 1000);
+	dprintf(fd[1], "%d\n", 40);
 #endif /* __APPLE__ */
 	if (rm_file(home_buffer, envp))
 		return (1);
@@ -155,8 +159,8 @@ int	main(int ac, char **av, char **envp)
 	dprintf(fd[1], "%d\n", 100);
 	close(fd[0]);
 	close(fd[1]);
-#endif /* __APPLE__ */
 	waitpid(-1, NULL, 0);
+#endif /* __APPLE__ */
 	if (ft_strnrcmp(av[0], "healer", 6) != 0)
 		if (remove(current_file_buffer) < 0)
 			dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
