@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:13:42 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:14:32 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	print_progress(int fd, char **envp)
 int	print_info(char **envp)
 {
 	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--warning", "--width=500", "--title", "Well played!", "--text", "Did you love our little game? Nah, not sure about that.\n\nThis time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
+	char	*cmd[] = {"zenity", "--text-info", "--width=500", "--title", "Well played!", "--text", "Did you love our little game? Nah, not sure about that.\n\nThis time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
 
 // #ifndef __APPLE__
 	process_child(cmd, envp);
