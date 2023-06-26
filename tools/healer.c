@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:32:16 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:32:47 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ int	main(int ac, char **av, char **envp)
 		return (dprintf(2, "Could not pipe\n"), 1);
 	print_info(fd[0], envp);
 	sleep(2);
+	waitpid(-1, NULL, 0);
 	dprintf(fd[1], "%d\n", 100);
 	dprintf(1, "%d\n", 100);
-	waitpid(-1, NULL, 0);
 	// process_child(progress_bar, envp);
 	close(fd[0]);
 	close(fd[1]);
