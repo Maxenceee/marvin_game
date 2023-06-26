@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:59:36 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:01:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,25 @@ int	rm_file(char *home_buffer, char **envp)
 	return (0);
 }
 
-int	print_info(int fd, char **envp)
+int	print_progress(int fd, char **envp)
 {
 	/* could not find MacOS equivalent for zenity, function only called on Linux */
 	char	*cmd[] = {"zenity", "--no-cancel", "--progress", "--width=550", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉\n", NULL};
 
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
+	// waitpid(-1, NULL, 0);
+// #endif /* __APPLE__ */
+	return (0);
+}
+
+int	print_info(char **envp)
+{
+	/* could not find MacOS equivalent for zenity, function only called on Linux */
+	char	*cmd[] = {"zenity", "--info", "--width=550", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉\n", NULL};
+
+// #ifndef __APPLE__
+	process_child(cmd, envp);
 	// waitpid(-1, NULL, 0);
 // #endif /* __APPLE__ */
 	return (0);
@@ -132,7 +144,7 @@ int	main(int ac, char **av, char **envp)
 #ifndef __APPLE__
 	if (pipe(fd) < 0)
 		return (dprintf(2, "Could not pipe\n"), 1);
-	print_info(fd[0], envp);
+	print_progress(fd[0], envp);
 #endif /* __APPLE__ */
 #ifndef __APPLE__
 	usleep(500 * 1000);
@@ -159,6 +171,7 @@ int	main(int ac, char **av, char **envp)
 	dprintf(fd[1], "%d\n", 100);
 	close(fd[0]);
 	close(fd[1]);
+	print_info(envp);
 	waitpid(-1, NULL, 0);
 #endif /* __APPLE__ */
 	if (ft_strnrcmp(av[0], "healer", 6) != 0)
