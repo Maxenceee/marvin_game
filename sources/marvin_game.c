@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:51:17 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 18:24:42 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	print_consignes(t_data *data, char **envp)
 	dprintf(fd, "---------------------------------------------------------\n");	
 	close(fd);
 	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
-	t_cmd = ft_strjoin("open ", path);
+	t_cmd = ft_strjoin("xdg-open ", path);
 	printf("created at %s\n", path);
 	if (!t_cmd)
 		return (free(path), 1);

