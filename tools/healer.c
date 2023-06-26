@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:33:19 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:35:04 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	print_info(int fd, char **envp)
 	// 	return (1);
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
-	waitpid(-1, NULL, 0);
+	// waitpid(-1, NULL, 0);
 // #endif /* __APPLE__ */
 	// waitpid(-1, NULL, 0);
 	return (0);
