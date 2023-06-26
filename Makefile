@@ -14,9 +14,6 @@ HEADER_SRCS		=	marvin_game.h
 HEADERS_DIR		=	includes/
 HEADERS			=	$(addprefix $(HEADERS_DIR), $(HEADER_SRCS))
 
-# U_HEADER_SRCS	=	tools.h process.h
-# U_HEADERS_DIR	=	$(UTILS_DIR)
-# U_HEADERS		=	$(addprefix $(U_HEADERS_DIR), $(U_HEADER_SRCS))
 CC				=	cc
 RM				=	rm -f
 CFLAGS			=	#-Wall -Wextra -Werror
@@ -73,9 +70,9 @@ fclean: clean
 	@echo "$(RED)Cleaning $(HEALER_NAME)$(DEFAULT)"
 	@$(RM) $(HEALER_NAME)
 
-re:				fclean all execs
+re:		fclean all execs
 
-gen:			all execs 
-				./marvin_game $(GVAR)
+gen:	all execs 
+	./marvin_game $(GVAR)
 
 .PHONY:			all clean fclean re execs gen
