@@ -28,7 +28,7 @@ Nothing required
 
 #### MacOS
 
-You may need to remove macro statement in some files
+You may need to remove macro statement in some files and missing features.
 
 ### Quick start
 
