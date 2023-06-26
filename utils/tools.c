@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:44 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:47:54 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:49:37 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	ft_strnlcmp(const char *s1, const char *s2, unsigned int n)
+int	ft_strnrcmp(const char *s1, const char *s2, unsigned int n)
 {
 	unsigned int	i;
 

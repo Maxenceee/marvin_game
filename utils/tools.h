@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:02 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:45:26 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:49:37 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	***free_double_tab(char ***tab);
 char	**free_tab(char **tab);
 char	**ft_split(const char *str, char charset);
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_strnlcmp(const char *s1, const char *s2, unsigned int n);
+int		ft_strnrcmp(const char *s1, const char *s2, unsigned int n);
 char	*ft_strjoin_arr(int size, char **strs, char *sep);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin_free1(char *s1, char const *s2);
