@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:17:49 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:18:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 #ifndef __APPLE__
 	process_child(progress_bar, envp);
+	waitpid(-1, NULL, 0);
 #endif /* __APPLE__ */
 	if (ft_strnrcmp(av[0], "healer", 6) != 0)
 		if (remove(current_file_buffer) < 0)
