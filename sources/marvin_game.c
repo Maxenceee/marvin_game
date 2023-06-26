@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 21:39:22 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:10:31 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	print_consignes(t_data *data, char **envp)
 		dprintf(fd, "Try to click on one of them you'll see.🤭\n\n");
 		dprintf(fd, "All you have to do is search. Have fun! 🫶\n\n");
 	}
-	dprintf(fd, "---------------------------------------------------------\n");	
+	dprintf(fd, "---------------------------------------------------------\n\n");	
 	close(fd);
 	printf("\033[36mCreating consignes.mxga.txt...\033[0m\n");
 #if __APPLE__
