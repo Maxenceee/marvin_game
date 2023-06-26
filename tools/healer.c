@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:00:01 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:04:10 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,8 @@ int	print_info(char **envp)
 	char	**scmds;
 	char	cmd[BUFFER_SIZE];
 
-#if __APPLE__
-	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
-#else
-	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
+#ifndef __APPLE__
+	sprintf(cmd, "zenity --info --title \"%s\" --text \"%s\"", "Well done!", "We are currently cleaning your session, please wait.");
 #endif /* __APPLE__ */
 	scmds = ft_split(cmd, ' ');
 	if (!scmds)
