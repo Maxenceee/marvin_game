@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:14 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:30:47 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 16:45:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 	int		i;
 
 	i = argc;
-	data->file_count = 200;
+	data->file_count = 50;
 	data->has_logs = 1;
 	data->lang = FR;
 	while (i-- > 0)

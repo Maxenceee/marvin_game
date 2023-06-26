@@ -13,7 +13,7 @@ Create a bunch of files on the Desktop, preventing you from using your Terminal 
 Params:
 ```
 --file-count, -c
-	specify the number of generated files (minimun is 2, default is 200, maximum is 🤷‍♂️)
+	specify the number of generated files (minimun is 2, default is 50, maximum is 🤷‍♂️)
 --dir-path, -p
 	change active directory (default is Desktop)
 --lang, -l
