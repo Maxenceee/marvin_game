@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:43:22 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:44:03 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
-	sleep(500);
+	usleep(500);
 #ifndef __APPLE__
 	dprintf(fd[1], "%d\n", 80);
 #endif /* __APPLE__ */
