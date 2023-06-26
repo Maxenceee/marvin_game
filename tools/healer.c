@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:29:15 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:29:29 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int	main(int ac, char **av, char **envp)
 	print_info(fd[0], envp);
 	dprintf(fd[1], "%d", 100);
 	// process_child(progress_bar, envp);
+	close(fd[0]);
+	close(fd[1]);
 	waitpid(-1, NULL, 0);
 // #endif /* __APPLE__ */
 	return (0);
