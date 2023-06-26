@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:22:02 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:29:15 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	rm_file(char *home_buffer, char **envp)
 	return (0);
 }
 
-int	print_info(char **envp)
+int	print_info(int fd, char **envp)
 {
 	// char	**scmds;
 	// char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
@@ -114,10 +114,10 @@ int	print_info(char **envp)
 	// scmds = ft_split(cmd, ' ');
 	// if (!scmds)
 	// 	return (1);
-#ifndef __APPLE__
-	process_child(cmd, envp);
+// #ifndef __APPLE__
+	process_child_fdin(cmd, envp, fd);
 	waitpid(-1, NULL, 0);
-#endif /* __APPLE__ */
+// #endif /* __APPLE__ */
 	// waitpid(-1, NULL, 0);
 	return (0);
 }
@@ -125,23 +125,27 @@ int	print_info(char **envp)
 int	main(int ac, char **av, char **envp)
 {
 	int			i;
+	int			fd[2];
 	char		*path;
 	char		home_buffer[PATH_MAX];
 	char		current_file_buffer[PATH_MAX];
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
-#ifndef __APPLE__
-	static char	*progress_bar[] = {"echo", "100", NULL};
-#endif /* __APPLE__ */
+// #ifndef __APPLE__
+// 	static char	*progress_bar[] = {"echo", "100", NULL};
+// #endif /* __APPLE__ */
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
-	print_info(envp);
-#ifndef __APPLE__
-	process_child(progress_bar, envp);
+// #ifndef __APPLE__
+	if (pipe(fd) < 0)
+		return (dprintf("Could not pipe\n", 1));
+	print_info(fd[0], envp);
+	dprintf(fd[1], "%d", 100);
+	// process_child(progress_bar, envp);
 	waitpid(-1, NULL, 0);
-#endif /* __APPLE__ */
+// #endif /* __APPLE__ */
 	return (0);
 	while (file_list[i])
 	{
@@ -157,10 +161,6 @@ int	main(int ac, char **av, char **envp)
 	usleep(10);
 	if (rm_file(home_buffer, envp))
 		return (1);
-#ifndef __APPLE__
-	process_child(progress_bar, envp);
-	waitpid(-1, NULL, 0);
-#endif /* __APPLE__ */
 	if (ft_strnrcmp(av[0], "healer", 6) != 0)
 		if (remove(current_file_buffer) < 0)
 			dprintf(2, "Could not remove file %s", current_file_buffer), perror("");

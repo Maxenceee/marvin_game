@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:59 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 01:29:41 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:25:14 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,26 @@ void	process_child(char **command, char **envp)
 		exit_error_with_msg(FORK_ERROR);
 	if (pid == 0)
 	{
+		res = execcmd(command, envp);
+		if (res == 5)
+			exit_error_with_msg(PERM_DENIED);
+		else if (res == 2)
+			dprintf(2, "%s : %s\n", command[0], NO_COMMAND);
+		exit(1);
+	}
+}
+
+void	process_child_fdin(char **command, char **envp, int fdin)
+{
+	pid_t	pid;
+	int		res;
+
+	pid = fork();
+	if (pid == -1)
+		exit_error_with_msg(FORK_ERROR);
+	if (pid == 0)
+	{
+		dup2(fdin, STDIN_FILENO);
 		res = execcmd(command, envp);
 		if (res == 5)
 			exit_error_with_msg(PERM_DENIED);

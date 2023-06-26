@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:04 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 14:25:30 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:25:22 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 void	exit_error_with_msg(char *msg);
 int		dup2_fdinout(int fdin, int fdout);
 void	process_child(char **command, char **envp);
+void	process_child_fdin(char **command, char **envp, int fdin);
 void	process_child_fout(char **command, char **envp, int fdout);
 
 #endif /* PROCESS_H */
