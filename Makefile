@@ -25,6 +25,10 @@ NAME			=	marvin_game
 POISON_NAME		=	poison
 HEALER_NAME		=	healer
 
+# ifeq ($(shell uname), Darwin)
+#     CFLAGS += -framework Cocoa
+# endif
+
 GREEN			=	\033[1;32m
 BLUE			=	\033[1;34m
 RED				=	\033[1;31m
