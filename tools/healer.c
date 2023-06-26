@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:37:14 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:37:52 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ int	main(int ac, char **av, char **envp)
 		return (dprintf(2, "Could not pipe\n"), 1);
 	print_info(fd[0], envp);
 #endif /* __APPLE__ */
-	return (0);
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
