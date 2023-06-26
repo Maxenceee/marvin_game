@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:08:23 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:08:55 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	rm_file(char *home_buffer, char **envp)
 int	print_progress(int fd, char **envp)
 {
 	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=400", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n", NULL};
+	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=550", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n", NULL};
 
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
