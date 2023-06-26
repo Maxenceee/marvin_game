@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:52:38 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 21:59:04 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,14 @@ int	print_info(char **envp)
 	char	*cmd[] = {"zenity", "--info", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
 
 // #ifndef __APPLE__
-// 	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
+	// sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
 // #endif /* __APPLE__ */
 	// scmds = ft_split(cmd, ' ');
 	// if (!scmds)
 	// 	return (1);
+#ifndef __APPLE__
 	process_child(cmd, envp);
+#endif /* __APPLE__ */
 	// waitpid(-1, NULL, 0);
 	return (0);
 }

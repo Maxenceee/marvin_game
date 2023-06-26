@@ -26,7 +26,7 @@ POISON_NAME		=	poison
 HEALER_NAME		=	healer
 
 # ifeq ($(shell uname), Darwin)
-#     CFLAGS += -framework Cocoa
+#     CFLAGS += -framework CoreFoundation -framework CoreGraphics
 # endif
 
 GREEN			=	\033[1;32m
