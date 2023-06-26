@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:14:51 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:22:44 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	close_and_rm_file(FILE *f1, FILE *f2)
 		fclose(f2);
 }
 
-int	replace_line(char *path, char *pattern)
+int	replace_line(char *path)
 {
 	FILE	*fptr;
 	FILE	*ftemp;
@@ -60,7 +60,6 @@ int	rm_file(char *home_buffer, char **envp)
 	char	**rm_file_list;
 	int		fds[2];
 	char	rm_buffer[BUFFER_SIZE];
-	char	*rm_cmd[] = {"xargs", "rm", NULL};
 
 #if __APPLE__
 	commands = ft_strjoin_free2("find ", ft_strjoin(home_buffer, "/Desktop -type f ( -name *_mxga -o -name consignes.mxga.txt )"));
@@ -104,8 +103,8 @@ int	rm_file(char *home_buffer, char **envp)
 
 int	print_progress(int fd, char **envp)
 {
-	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=600", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n", NULL};
+	/* could not find the equivalent of zenity for macOS, function called only under Linux */
+	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=600", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything, don't panic.\n", NULL};
 
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
@@ -116,8 +115,8 @@ int	print_progress(int fd, char **envp)
 
 int	print_info(char **envp)
 {
-	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Well played!", "--text", "Did you love our little game? Nah, not sure about that.\n\nThis time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
+	/* could not find the equivalent of zenity for macOS, function called only under Linux */
+	char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Little reminder", "--text", "Did you love our little game? Nah, not sure about that.\n\nThis time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
 
 // #ifndef __APPLE__
 	process_child(cmd, envp);
@@ -128,6 +127,7 @@ int	print_info(char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
+	/* could not find easily usable MacOS zenity equivalent, on Mac no popup until I find an alternative */
 	int			i;
 #ifndef __APPLE__
 	int			fd[2];
@@ -137,6 +137,7 @@ int	main(int ac, char **av, char **envp)
 	char		current_file_buffer[PATH_MAX];
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
+	(void)(ac);
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
@@ -156,7 +157,7 @@ int	main(int ac, char **av, char **envp)
 		if (!path)
 			return (1);
 		printf("\nopening %s\n", path);
-		if (replace_line(path, "curl parrot.live"))
+		if (replace_line(path))
 			return (free(path), 1);
 		free(path);
 		i++;

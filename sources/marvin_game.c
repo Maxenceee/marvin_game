@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:10:31 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:23:42 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	copy_alias(char **envp)
 {
 	int			i;
 	int			fd;
-	int			flags;
+	// int			flags;
 	char		*path;
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
-	flags = 0;
+	// flags = 0;
 	printf("\033[36mStart shell rc modifications...\033[0m\n");
 	i = -1;
 	while (file_list[++i])
@@ -112,7 +112,6 @@ int	copy_alias(char **envp)
 int	copy_poison(t_data *data, char **envp)
 {
 	int		i;
-	int		fd;
 	char	***cp_command;
 
 	i = -1;

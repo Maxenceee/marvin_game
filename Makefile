@@ -19,7 +19,7 @@ HEADERS			=	$(addprefix $(HEADERS_DIR), $(HEADER_SRCS))
 # U_HEADERS		=	$(addprefix $(U_HEADERS_DIR), $(U_HEADER_SRCS))
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-g3 # -Wall -Wextra -Werror
+CFLAGS			=	#-Wall -Wextra -Werror
 LIBS			=	-lpthread 
 NAME			=	marvin_game
 POISON_NAME		=	poison
@@ -56,9 +56,9 @@ $(NAME): $(OBJS) $(OBJS_UTILS)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
 
 execs: $(OBJS_UTILS) $(EXECS_DIR)/poison.c $(EXECS_DIR)/healer.c
-	@$(CC) $(OBJS_UTILS) $(EXECS_DIR)/poison.c -o $(POISON_NAME)
+	@$(CC) $(CFLAGS) $(OBJS_UTILS) $(EXECS_DIR)/poison.c -o $(POISON_NAME)
 	@echo "$(GREEN)$(POISON_NAME) compiled!$(DEFAULT)"
-	@$(CC) $(OBJS_UTILS) $(EXECS_DIR)/healer.c -o $(HEALER_NAME)
+	@$(CC) $(CFLAGS) $(OBJS_UTILS) $(EXECS_DIR)/healer.c -o $(HEALER_NAME)
 	@echo "$(GREEN)$(HEALER_NAME) compiled!$(DEFAULT)"
 
 clean:
