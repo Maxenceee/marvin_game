@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 18:24:42 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:37:26 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,10 +170,10 @@ int	main(int argc, char **argv, char **envp)
 	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
 		return (dprintf(2, "Cannot get current dir\n"), 1);
 	printf("--------------------Start Marvin Game--------------------\n");
-	if (!data.has_logs)
-		printf("❗️No-log mode enabled\n");
 	if (parse_args(argc, argv, &data))
 		return (1);
+	if (!data.has_logs)
+		printf("❗️No-log mode enabled\n");
 	if (!data.active_dir)
 	{
 #if __APPLE__
