@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:17:08 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:17:49 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int	rm_file(char *home_buffer, char **envp)
 int	print_info(char **envp)
 {
 	// char	**scmds;
-	char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
+	// char	*cmd[] = {"zenity", "--info", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
+	char	*cmd[] = {"zenity", "--progress", "--width=500", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n\nNext time lock your session 😉", NULL};
 
 // #ifndef __APPLE__
 	// sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
