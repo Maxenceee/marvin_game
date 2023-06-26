@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:39:38 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:45:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int	main(int ac, char **av, char **envp)
 	printf("home path %s\n", home_buffer);
 
 
-	char	*cmd[] = {"zenity", "--info", "--title", av[0], NULL};
-	printf("%d %s\n", strcmp(av[0], "healer"), av[0]);
-	process_child(cmd, envp);
+	// char	*cmd[] = {"zenity", "--info", "--title", av[0], NULL};
+	printf("%d %s\n", ft_strnlcmp(av[0], "healer", 6), av[0]);
+	// process_child(cmd, envp);
 
 	
 	while (file_list[i])

@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:44 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/22 02:14:36 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:46:49 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,21 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+int	ft_strnlcmp(const char *s1, const char *s2, unsigned int n)
+{
+	unsigned int	i;
+
+	i = min(ft_strlen(s1), ft_strlen(s2));
+	printf("%d %c %c \n", i, (char)s1[i], (char)s2[n - 1]);
+	while ((char)s1[i] == (char)s2[n - 1] \
+		&& (char)s1[i] != '\0' && (char)s2[n - 1] != '\0' && n > 0)
+	{
+		printf("%d %c %c \n", i, (char)s1[i], (char)s2[n - 1]);
+		i--, n--;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[n]);
 }
 
 static int	ft_str_length(char *str)
