@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:35:04 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:37:14 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,18 +138,11 @@ int	main(int ac, char **av, char **envp)
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
-// #ifndef __APPLE__
+#ifndef __APPLE__
 	if (pipe(fd) < 0)
 		return (dprintf(2, "Could not pipe\n"), 1);
 	print_info(fd[0], envp);
-	sleep(2);
-	dprintf(fd[1], "%d\n", 100);
-	dprintf(1, "%d\n", 100);
-	// process_child(progress_bar, envp);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(-1, NULL, 0);
-// #endif /* __APPLE__ */
+#endif /* __APPLE__ */
 	return (0);
 	while (file_list[i])
 	{
@@ -163,8 +156,17 @@ int	main(int ac, char **av, char **envp)
 		i++;
 	}
 	usleep(10);
+#ifndef __APPLE__
+	dprintf(fd[1], "%d\n", 80);
+#endif /* __APPLE__ */
 	if (rm_file(home_buffer, envp))
 		return (1);
+#ifndef __APPLE__
+	dprintf(fd[1], "%d\n", 100);
+	close(fd[0]);
+	close(fd[1]);
+#endif /* __APPLE__ */
+	waitpid(-1, NULL, 0);
 	if (ft_strnrcmp(av[0], "healer", 6) != 0)
 		if (remove(current_file_buffer) < 0)
 			dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
