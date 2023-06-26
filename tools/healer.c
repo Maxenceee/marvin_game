@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:07:54 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 23:08:23 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	rm_file(char *home_buffer, char **envp)
 int	print_progress(int fd, char **envp)
 {
 	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=550", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n", NULL};
+	char	*cmd[] = {"zenity", "--no-cancel", "--auto-close", "--progress", "--width=400", "--title", "Well done!", "--text", "You found the good one!\nWe are currently cleaning your session, it might take some time to repair everything don't panic.\n", NULL};
 
 // #ifndef __APPLE__
 	process_child_fdin(cmd, envp, fd);
@@ -117,7 +117,7 @@ int	print_progress(int fd, char **envp)
 int	print_info(char **envp)
 {
 	/* could not find MacOS equivalent for zenity, function only called on Linux */
-	char	*cmd[] = {"zenity", "--info", "--width=550", "--title", "Well played!", "--text", "Did you love our little game? Nah, not sure about that. This time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
+	char	*cmd[] = {"zenity", "--info", "--width=400", "--title", "Well played!", "--text", "Did you love our little game? Nah, not sure about that. This time it was easy and soft, not everyone is nice so next time lock your session 😉\n", NULL};
 
 // #ifndef __APPLE__
 	process_child(cmd, envp);
