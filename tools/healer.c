@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:04:10 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 20:07:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,16 @@ int	rm_file(char *home_buffer, char **envp)
 
 int	print_info(char **envp)
 {
-	char	**scmds;
-	char	cmd[BUFFER_SIZE];
+	// char	**scmds;
+	char	*cmd[] = {"zenity", "--info", "--title", "Well done!", "--text", "We are currently cleaning your session, please wait.", NULL};
 
-#ifndef __APPLE__
-	sprintf(cmd, "zenity --info --title \"%s\" --text \"%s\"", "Well done!", "We are currently cleaning your session, please wait.");
-#endif /* __APPLE__ */
-	scmds = ft_split(cmd, ' ');
-	if (!scmds)
-		return (1);
-	process_child(scmds, envp);
+// #ifndef __APPLE__
+// 	sprintf(cmd, "zenity --info --title %s --text %s", "Well done!", "We are currently cleaning your session, please wait.");
+// #endif /* __APPLE__ */
+	// scmds = ft_split(cmd, ' ');
+	// if (!scmds)
+	// 	return (1);
+	process_child(cmd, envp);
 	waitpid(-1, NULL, 0);
 }
 
