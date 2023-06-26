@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 22:30:59 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 22:31:31 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,12 @@ int	main(int ac, char **av, char **envp)
 	if (pipe(fd) < 0)
 		return (dprintf(2, "Could not pipe\n"), 1);
 	print_info(fd[0], envp);
+	waitpid(-1, NULL, 0);
+	sleep(2);
 	dprintf(fd[1], "%d\n", 100);
 	// process_child(progress_bar, envp);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(-1, NULL, 0);
 // #endif /* __APPLE__ */
 	return (0);
 	while (file_list[i])
