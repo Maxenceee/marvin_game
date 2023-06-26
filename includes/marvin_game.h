@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/25 15:37:53 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/26 16:46:56 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # ifndef __APPLE__
 #  include <linux/fs.h>
-#  include "ext2_fs.h"
+// #  include "ext2_fs.h"
 # endif /* __APPLE__ */
 
 typedef enum e_lang {
