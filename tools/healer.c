@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:22:44 by mgama            ###   ########.fr       */
+/*   Updated: 2023/06/27 19:36:25 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	replace_line(char *path)
 	while ((fgets(buffer, BUFFER_SIZE, fptr)) != NULL)
 	{
 		i++;
-		if (strncmp(buffer, "curl parrot.live", 16) == 0 || strncmp(buffer, "GMVRA=", 6) == 0)
+		if (strncmp(buffer, "curl parrot.live", 16) == 0
+			|| strncmp(buffer, "curl rand-1.maxencegama.dev -L", 30) == 0
+			|| strncmp(buffer, "GMVRA=", 6) == 0)
 		{
 			printf("replacing line %d %s\a\n", i, buffer);
 			fputs(newline, ftemp);
