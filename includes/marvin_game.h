@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:06 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 21:59:08 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/05 17:04:37 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 
+# include <sys/utsname.h>
+
 # include "../utils/process.h"
 # include "../utils/time.h"
 
-# ifndef __APPLE__
-#  include <linux/fs.h>
-// #  include "ext2_fs.h"
-# else
-// #  include <Cocoa/Cocoa.h>
-# endif /* __APPLE__ */
+// # ifndef __APPLE__
+// #  include <linux/fs.h>
+// // #  include "ext2_fs.h"
+// # else
+// // #  include <Cocoa/Cocoa.h>
+// # endif /* __APPLE__ */
 
 typedef enum e_lang {
 	FR,

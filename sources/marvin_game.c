@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/27 19:26:22 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/05 16:57:51 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	int		t;
 	DIR		*desktop_dir;
+	struct utsname	uts;
 	char	*langs[] = {"fr", "en", NULL};
 #ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
@@ -190,8 +191,10 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
-	printf("\nParams:\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", langs[data.lang], data.file_count, data.active_dir, data.current_dir);
-	printf("Press ENTER to continue...");
+	if (uname(&uts))
+		return (dprintf(2, "Could not get uname\n"), free(data.active_dir), 1);
+	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", uts.sysname, langs[data.lang], data.file_count, data.active_dir, data.current_dir);
+	printf("(Press ENTER to continue...)");
 	getchar();
 	printf("\033[A\033[K");
 	t = setup_game(&data, envp);
