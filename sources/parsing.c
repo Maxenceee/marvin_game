@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:14 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 23:23:10 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/05 17:34:56 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	parse_args(int argc, char **argv, t_data *data)
 				data->lang = FR;
 			else if (0 == ft_strcmp(argv[i + 1], "en"))
 				data->lang = EN;
+			else
+				printf("❗️Invalid lang, using default `%s`\n", data->lang_list[data->lang]);
 		}
 		else if (0 == ft_strcmp(argv[i], "--no-log") || 0 == ft_strcmp(argv[i], "-n"))
 		{

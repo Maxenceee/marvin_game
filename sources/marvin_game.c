@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/05 16:57:51 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/05 17:35:46 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,13 +145,13 @@ int	setup_game(t_data *data, char **envp)
 	}
 #ifndef __APPLE__ /* remove this statement before executing on MacOS */
 	if (copy_alias(envp))
-		return (dprintf(2, "Something went wrong :(\n"), 1);
+		return (dprintf(2, "Something went wrong, exit program :(\n"), 1);
 #else
 	printf("Avoiding my local shell rc corruption :)\n");
 	printf("--------------------\n");
 #endif /* __APPLE__ */
 	if (copy_poison(data, envp))
-		return (dprintf(2, "Something went wrong :(\n"), 1);
+		return (dprintf(2, "Something went wrong, exit program :(\n"), 1);
 	print_consignes(data, envp);
 	if (data->log_fd)
 		close(data->log_fd);
@@ -164,7 +164,6 @@ int	main(int argc, char **argv, char **envp)
 	int		t;
 	DIR		*desktop_dir;
 	struct utsname	uts;
-	char	*langs[] = {"fr", "en", NULL};
 #ifndef __APPLE__
 	char	home_buffer[PATH_MAX];
 #endif /* __APPLE__ */
@@ -175,8 +174,11 @@ int	main(int argc, char **argv, char **envp)
 	if (!getcwd(data.current_dir, sizeof(data.current_dir)))
 		return (dprintf(2, "Cannot get current dir\n"), 1);
 	printf("--------------------Start Marvin Game--------------------\n");
-	if (parse_args(argc, argv, &data))
+	data.lang_list = ft_split("fr en", ' ');
+	if (!data.lang_list)
 		return (1);
+	if (parse_args(argc, argv, &data))
+		return (free_tab(data.lang_list), 1);
 	if (!data.has_logs)
 		printf("❗️No-log mode enabled\n");
 	if (!data.active_dir)
@@ -189,16 +191,17 @@ int	main(int argc, char **argv, char **envp)
 		printf("❗️No active dir given, using default %s\n", data.active_dir);
 	}
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
-		return (data.active_dir && (free(data.active_dir), 1), dprintf(2, "Cannot access active dir\n"), 1);
+		return (data.active_dir && (free(data.active_dir), 1), free_tab(data.lang_list), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
 	if (uname(&uts))
-		return (dprintf(2, "Could not get uname\n"), free(data.active_dir), 1);
-	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", uts.sysname, langs[data.lang], data.file_count, data.active_dir, data.current_dir);
+		return (free(data.active_dir), free_tab(data.lang_list), dprintf(2, "Could not get uname\n"), 1);
+	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", uts.sysname, data.lang_list[data.lang], data.file_count, data.active_dir, data.current_dir);
 	printf("(Press ENTER to continue...)");
 	getchar();
 	printf("\033[A\033[K");
 	t = setup_game(&data, envp);
 	free(data.active_dir);
+	free_tab(data.lang_list);
 	printf("---------------------------------------------------------\n");
 	return (t);
 }
