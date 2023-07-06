@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/05 16:39:54 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 10:52:22 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	copy_alias(char **envp)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
 		dprintf(fd, "GMVRA=\"%lu\"; echo '\e(0'; %s\n", ft_abs_time(), command);
 		// dprintf(fd, "%s\n", command);
+		chmod(path, 0444);
 		free(path);
 		close(fd);
-		chmod(path, 0444);
 	}
 	printf("--------------------\n");
 	return (0);
