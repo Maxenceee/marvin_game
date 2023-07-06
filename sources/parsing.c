@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:14 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/05 17:34:56 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 11:09:21 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	parse_args(int argc, char **argv, t_data *data)
 {
 	int		i;
+	char	tmp_path[PATH_MAX];
 
 	i = argc;
 	data->file_count = 50;
@@ -31,7 +32,7 @@ int	parse_args(int argc, char **argv, t_data *data)
 		}
 		else if ((0 == ft_strcmp(argv[i], "-p") || 0 == ft_strcmp(argv[i], "--dir-path")) && argc - 1 >= i + 1)
 		{
-			data->active_dir = strdup(argv[i + 1]);
+			data->active_dir = strdup(realpath(argv[i + 1], NULL));
 		}
 		else if (0 == ft_strcmp(argv[i], "--lang") || (0 == ft_strcmp(argv[i], "-l") && argc - 1 >= i + 1))
 		{

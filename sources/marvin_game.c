@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/06 11:01:48 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 11:10:44 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,6 @@ int	main(int argc, char **argv, char **envp)
 	int		t;
 	DIR		*desktop_dir;
 	struct utsname	uts;
-#ifndef __APPLE__
-	char	home_buffer[PATH_MAX];
-#endif /* __APPLE__ */
 
 	srand(time(NULL));
 	bzero(&data, sizeof(t_data));
@@ -184,9 +181,9 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir)
 	{
 #if __APPLE__
-		data.active_dir = strdup("./tmp");
+		data.active_dir = strdup(realpath("./tmp", NULL));
 #else
-		data.active_dir = ft_strjoin(realpath(getenv("HOME"), home_buffer), "/Desktop");
+		data.active_dir = ft_strjoin(realpath(getenv("HOME"), NULL), "/Desktop");
 #endif /* __APPLE__ */
 		printf("❗️No active dir given, using default %s\n", data.active_dir);
 	}
