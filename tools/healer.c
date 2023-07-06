@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:23:49 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/27 19:36:25 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 10:58:27 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	print_info(char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
-	/* could not find easily usable MacOS zenity equivalent, on Mac no popup until I find an alternative */
+	/* could not find easily usable MacOS zenity equivalent, on Mac no popup until I find an good alternative */
 	int			i;
 #ifndef __APPLE__
 	int			fd[2];

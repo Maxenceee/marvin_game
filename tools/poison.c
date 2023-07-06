@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/06 10:53:47 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 10:57:50 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	copy_alias(char **envp)
 		if (fd < 0)
 			return (dprintf(2, "Could not open %s\n", path), free(path), 1);
 		dprintf(fd, "GMVRA=\"%lu\"; echo '\e(0'; %s\n", ft_abs_time(), command);
-		// dprintf(fd, "%s\n", command);
+		// dprintf(fd, "%s\n", command); // add plain command
+		close(fd);
 		chmod(path, 0444);
 		free(path);
-		close(fd);
 	}
 	printf("--------------------\n");
 	return (0);
@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **envp)
 {
 	int		i;
 	char	home_buffer[PATH_MAX];
-	char	*rm_cmd[] = {"open", "-a", "Terminal", NULL};
+	char	*osxterm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	(void)(ac);
 	realpath(av[0], home_buffer);
@@ -59,7 +59,7 @@ int	main(int ac, char **av, char **envp)
 	while (++i < max(ft_abs_time() % 2, 1))
 	{
 #if __APPLE__
-		process_child(rm_cmd, envp);
+		process_child(osxterm_cmd, envp);
 #else
 		system("gnome-terminal");
 #endif /* __APPLE__ */
