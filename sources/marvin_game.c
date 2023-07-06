@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/05 17:35:46 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/06 11:01:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir || !(desktop_dir = opendir(data.active_dir)))
 		return (data.active_dir && (free(data.active_dir), 1), free_tab(data.lang_list), dprintf(2, "Cannot access active dir\n"), 1);
 	free(desktop_dir);
-	if (uname(&uts))
+	if (uname(&uts) < 0)
 		return (free(data.active_dir), free_tab(data.lang_list), dprintf(2, "Could not get uname\n"), 1);
 	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", uts.sysname, data.lang_list[data.lang], data.file_count, data.active_dir, data.current_dir);
 	printf("(Press ENTER to continue...)");
