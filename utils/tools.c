@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:29:44 by mgama             #+#    #+#             */
-/*   Updated: 2023/06/26 20:49:37 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/10 13:59:28 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,15 +146,29 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+// int	ft_strnrcmp(const char *s1, const char *s2, unsigned int n)
+// {
+// 	unsigned int	i;
+
+// 	i = max(ft_strlen(s1), ft_strlen(s2));
+// 	while ((char)s1[i] == (char)s2[n - 1] \
+// 		&& (char)s1[i] != '\0' && (char)s2[n - 1] != '\0' && n > 0)
+// 	{
+// 		i--, n--;
+// 	}
+// 	return ((unsigned char)s1[i] - (unsigned char)s2[n]);
+// }
+
 int	ft_strnrcmp(const char *s1, const char *s2, unsigned int n)
 {
 	unsigned int	i;
 
-	i = max(ft_strlen(s1), ft_strlen(s2));
-	while ((char)s1[i] == (char)s2[n - 1] \
-		&& (char)s1[i] != '\0' && (char)s2[n - 1] != '\0' && n > 0)
+	i = max(ft_strlen(s1), ft_strlen(s2)) - 1;
+	while (n > 0 && i > 0 && (char)s1[i] == (char)s2[n - 1])
 	{
 		i--, n--;
+		if (n == 0)
+			return (0);
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[n]);
 }

@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/06 11:21:28 by mgama            ###   ########.fr       */
+/*   Updated: 2023/07/10 14:15:51 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!data.active_dir)
 	{
 #if __APPLE__
-		data.active_dir = strdup(realpath("./tmp", NULL));
+		data.active_dir = strdup("./tmp");
 #else
 		data.active_dir = ft_strjoin(realpath(getenv("HOME"), NULL), "/Desktop");
 #endif /* __APPLE__ */
