@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/08/26 15:44:47 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/26 15:49:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	print_consignes(t_data *data, char **envp)
 		return (1);
 	if ((fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777)) < 0)
 		return (free(path), 1);
-	dprintf(fd, "--------------------Marvin Game--------------------\n\n");
+	dprintf(fd, "-----------------------Marvin Game-----------------------\n\n");
 	if (data->lang == FR)
 	{
 		dprintf(fd, "Bienvenue dans The Marvin Game ;)\n\n");
