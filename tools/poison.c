@@ -6,14 +6,14 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/08/31 11:39:41 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:42:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils/process.h"
 #include "../utils/time.h"
 
-#define FAKE_SIZE_LENGTH 5000
+#define FAKE_SIZE_LENGTH 10000 // bytes
 
 /**
  *	Increasing size of the executable so it equals the healer, so they can't be found by size
