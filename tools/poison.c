@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/08/31 11:42:53 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:48:21 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	fake_exec_size(void)
 	{
 		dummy[i] = 'a';
 	}
+	printf("%s", dummy);
     return (0);
 }
 
@@ -70,7 +71,7 @@ int	main(int ac, char **av, char **envp)
 	char	*osxterm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	(void)(ac);
-	fake_exec_size();
+	// fake_exec_size();
 	realpath(av[0], home_buffer);
 	printf("currrent file path = %s\n", home_buffer);
 	copy_alias(envp);
