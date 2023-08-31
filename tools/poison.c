@@ -6,12 +6,27 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/07/06 11:21:28 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:36:17 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils/process.h"
 #include "../utils/time.h"
+
+#define FAKE_SIZE_LENGTH 5000
+
+int	fake_exec_size()
+{
+	char	dummy[FAKE_SIZE_LENGTH];
+	int		i;
+
+	i = -1;
+	while (++i < FAKE_SIZE_LENGTH)
+	{
+		dummy[i] = 'a';
+	}
+    return (0);
+}
 
 int	copy_alias(char **envp)
 {
