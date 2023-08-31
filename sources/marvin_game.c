@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:20:52 by mgama             #+#    #+#             */
-/*   Updated: 2023/08/26 15:49:48 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:07:54 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int	setup_game(t_data *data, char **envp)
 	if (copy_alias(envp))
 		return (dprintf(2, "Something went wrong, exit program :(\n"), 1);
 #else
+ 	/* remove this part before executing on MacOS */
 	printf("Avoiding my local shell rc corruption :)\n");
 	printf("--------------------\n");
 #endif /* __APPLE__ */
@@ -183,6 +184,7 @@ int	main(int argc, char **argv, char **envp)
 #if __APPLE__  /* remove this statement before executing on MacOS */
 		data.active_dir = strdup("./tmp");
 #else
+		/* remove this part before executing on MacOS */
 		data.active_dir = ft_strjoin(realpath(getenv("HOME"), NULL), "/Desktop");
 #endif /* __APPLE__ */
 		printf("❗️No active dir given, using default %s\n", data.active_dir);
@@ -192,7 +194,8 @@ int	main(int argc, char **argv, char **envp)
 	free(desktop_dir);
 	if (uname(&uts) < 0)
 		return (free(data.active_dir), free_tab(data.lang_list), dprintf(2, "Could not get uname\n"), 1);
-	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n", uts.sysname, data.lang_list[data.lang], data.file_count, data.active_dir, data.current_dir);
+	printf("\nRecap:\nPlatform = %s\nOutput lang = %s\nFile count = %d\nActive dir = %s\nCurrent dir = %s\n--------------------\n",
+		uts.sysname, data.lang_list[data.lang], data.file_count, data.active_dir, data.current_dir);
 	printf("(Press ENTER to continue...)");
 	getchar();
 	printf("\033[A\033[K");
