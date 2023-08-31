@@ -54,8 +54,10 @@ $(NAME): $(OBJS) $(OBJS_UTILS)
 
 execs: $(OBJS_UTILS) $(EXECS_DIR)/poison.c $(EXECS_DIR)/healer.c
 	@$(CC) $(CFLAGS) $(OBJS_UTILS) $(EXECS_DIR)/poison.c -o $(POISON_NAME)
+	@dd if=/dev/null of=$(POISON_NAME) bs=1024 count=1 seek=524288000
 	@echo "$(GREEN)$(POISON_NAME) compiled!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(OBJS_UTILS) $(EXECS_DIR)/healer.c -o $(HEALER_NAME)
+	@dd if=/dev/null of=$(HEALER_NAME) bs=1024 count=1 seek=524288000
 	@echo "$(GREEN)$(HEALER_NAME) compiled!$(DEFAULT)"
 
 clean:
