@@ -39,6 +39,11 @@ Example:
 make gen GVAR="-c 200 -p /Users/maxence/Documents"
 ```
 
+Clone and install:
+```sh
+https://github.com/Maxenceee/marvin_game.git && make gen
+```
+
 ### Details
 
 Compile the project using `make all` then compile the executables "poison" and "healer" with `make execs`. Once done start the program running `./marvin_game`, adding params if needed.
