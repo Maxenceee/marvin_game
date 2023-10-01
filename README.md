@@ -39,7 +39,7 @@ Example:
 make gen GVAR="-c 200 -p /Users/maxence/Documents"
 ```
 
-Clone and install:
+Clone and start:
 ```sh
 https://github.com/Maxenceee/marvin_game.git && make gen
 ```
