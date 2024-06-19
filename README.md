@@ -1,6 +1,6 @@
 # Marvin Game
 
-How's Marvin? 42!
+> How's Marvin? 42!
 
 ## The Game
 
