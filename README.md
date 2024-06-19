@@ -38,6 +38,10 @@ Example:
 ```sh
 make gen GVAR="-c 200 -p /Users/maxence/Documents"
 ```
+or
+```
+make gen
+```
 
 Clone and start:
 ```sh
