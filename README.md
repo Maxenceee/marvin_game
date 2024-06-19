@@ -28,7 +28,7 @@ Nothing required
 
 #### MacOS
 
-You may need to remove macro statement in some files and there's missing features.
+You may need to remove macro statements in some files and there are missing features.
 
 ### Quick start
 
@@ -48,8 +48,8 @@ git clone https://github.com/Maxenceee/marvin_game.git && cd marvin_game && make
 
 Compile the project using `make all` then compile the executables "poison" and "healer" with `make execs`. Once done start the program running `./marvin_game`, adding params if needed.
 
-To fix averything run `make execs && ./healer`
+To fix everything run `make execs && ./healer`
 
 # ## 
 
-Made for `42 School Piscine`, MacOS/Linux
+Made for 2023 `42 School Piscine`, MacOS/Linux
